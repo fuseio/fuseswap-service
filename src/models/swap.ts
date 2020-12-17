@@ -1,4 +1,11 @@
-import { Currency, CurrencyAmount, Percent, Trade } from '@fuseio/fuse-swap-sdk'
+import {
+  Currency,
+  CurrencyAmount,
+  Percent,
+  Trade,
+  Router,
+  SwapParameters,
+} from '@fuseio/fuse-swap-sdk'
 import getPairs from '../utils/getPairs'
 
 export default class Swap {
@@ -9,6 +16,7 @@ export default class Swap {
   readonly deadline: number
   readonly recipient: string
 
+  // TODO: Add defaults deadline, slippageTolerance
   constructor(
     inputCurrency: Currency,
     outputCurrency: Currency,
@@ -34,5 +42,16 @@ export default class Swap {
       this.outputCurrency,
       { maxHops: 3, maxNumResults: 1 }
     )[0]
+  }
+
+  async getSwapCallParameters(): Promise<SwapParameters> {
+    const trade = await this.getBestTradeExactIn()
+
+    return Router.swapCallParameters(trade, {
+      feeOnTransfer: false,
+      allowedSlippage: this.slippageTolerance,
+      recipient: this.recipient,
+      ttl: this.deadline,
+    })
   }
 }
