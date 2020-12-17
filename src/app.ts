@@ -11,12 +11,12 @@ import RequestError from './models/requestError'
 
 const logger = morgan('combined')
 
-async function init () {
+async function init() {
   console.log(util.inspect(config, { depth: null }))
 
-  var isProduction = process.env.NODE_ENV === 'production'
+  const isProduction = process.env.NODE_ENV === 'production'
 
-  var app = express()
+  const app = express()
 
   if (config.get('api.allowCors')) {
     const corsHandler = cors()
@@ -32,34 +32,38 @@ async function init () {
 
   // catch 404 and forward to error handler
   app.use(function (req: Request, res: Response, next: NextFunction) {
-    var err = new RequestError(404, 'Not Found')
+    const err = new RequestError(404, 'Not Found')
     next(err)
   })
 
   /// error handlers
   if (!isProduction) {
-    app.use(function (err: RequestError, req: Request, res: Response, next: NextFunction) {
+    app.use(function (err: RequestError, req: Request, res: Response) {
       console.log(err.stack)
 
       res.status(err.status || 500)
 
-      res.json({ 'errors': {
-        message: err.message,
-        error: err
-      } })
+      res.json({
+        errors: {
+          message: err.message,
+          error: err,
+        },
+      })
     })
   } else {
-    app.use(function (err: RequestError, req: Request, res: Response, next: NextFunction) {
+    app.use(function (err: RequestError, req: Request, res: Response) {
       res.status(err.status || 500)
-      res.json({ 'errors': {
-        message: err.message,
-        error: {}
-      } })
+      res.json({
+        errors: {
+          message: err.message,
+          error: {},
+        },
+      })
     })
   }
 
   // finally, let's start our server...
-  var server = app.listen(config.get('api.port') || 8080, function () {
+  const server = app.listen(config.get('api.port') || 8080, function () {
     const address: any = server && server.address()
     console.log('Listening on port ' + address.port)
   })

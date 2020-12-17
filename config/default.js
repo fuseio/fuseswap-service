@@ -13,5 +13,6 @@ module.exports = {
     sendgrid: {
       templates: {}
     }
-  }
+  },
+  rpc_url: 'https://rpc.fuse.io'
 }
