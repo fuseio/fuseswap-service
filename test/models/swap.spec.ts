@@ -36,7 +36,7 @@ describe('Swap', () => {
 
       expect(trade).toBeInstanceOf(Trade)
       expect(trade.route.input).toEqual(DAI)
-      expect(trade.route.output).toEqual(WETH)
+      expect(trade.route.output).toEqual(WETH[CHAIN_ID])
     })
 
     test('given fuse and token should return trade', async () => {
