@@ -1,7 +1,18 @@
-import { Percent, Trade, Router, SwapParameters } from '@fuseio/fuse-swap-sdk'
+import {
+  Percent,
+  Trade,
+  Router,
+  SwapParameters,
+  JSBI,
+} from '@fuseio/fuse-swap-sdk'
 import getPairs from '../utils/getPairs'
 import getToken from '../utils/token/getToken'
 import parseAmount from '../utils/parseAmount'
+import {
+  INITIAL_ALLOWED_SLIPPAGE,
+  BIPS_BASE,
+  DEFAULT_DEADLINE_FROM_NOW,
+} from '../constants'
 
 export default class SwapService {
   static async getBestTradeExactIn(
@@ -32,10 +43,9 @@ export default class SwapService {
     outputCurrencyAddress: string,
     inputAmountIn: string,
     recipient: string,
-    slippageTolerance: string,
-    deadline: number
+    slippageTolerance = INITIAL_ALLOWED_SLIPPAGE,
+    deadline = DEFAULT_DEADLINE_FROM_NOW
   ): Promise<SwapParameters> {
-    const slippage = new Percent(slippageTolerance, '1000')
     const trade = await this.getBestTradeExactIn(
       inputCurrencyAddress,
       outputCurrencyAddress,
@@ -44,7 +54,7 @@ export default class SwapService {
 
     return Router.swapCallParameters(trade, {
       feeOnTransfer: false,
-      allowedSlippage: slippage,
+      allowedSlippage: new Percent(JSBI.BigInt(slippageTolerance), BIPS_BASE),
       recipient: recipient,
       ttl: deadline,
     })

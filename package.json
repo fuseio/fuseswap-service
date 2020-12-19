@@ -4,7 +4,7 @@
   "description": "node-skeleton",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/app.ts",
+    "start": "nodemon ./src/server.ts",
     "debug": "node --inspect-brk --trace-warnings ./src/app.js",
     "start-prod": "node ./src/app.js",
     "doc": "apidoc -i src -o docs/api && apidoc-markdown -p docs/api -o docs/api.md",

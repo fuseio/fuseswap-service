@@ -7,7 +7,7 @@ type SwapCallBody = {
   inputCurrency: string
   outputCurrency: string
   inputAmount: string
-  allowedSlippage: string
+  allowedSlippage: number
   ttl: number
   recipient: string
 }
@@ -31,7 +31,7 @@ const SwapController = {
         return
       }
 
-      const swapParameters = SwapService.getSwapCallParameters(
+      const swapParameters = await SwapService.getSwapCallParameters(
         inputCurrency,
         outputCurrency,
         inputAmount,

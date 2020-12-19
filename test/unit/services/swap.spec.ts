@@ -4,7 +4,7 @@ import { DAI, WETH } from '../../../src/constants'
 
 describe('SwapService', () => {
   const recipient = '0x5670d7076E7b3604ceb07c003ff0920490756587'
-  const slippage = '50'
+  const slippage = 50
   let deadline: number
 
   beforeEach(() => {

@@ -1,8 +1,14 @@
-import { Token, ChainId, WETH as WFUSE_MAP } from '@fuseio/fuse-swap-sdk'
+import { Token, ChainId, WETH as WFUSE_MAP, JSBI } from '@fuseio/fuse-swap-sdk'
 
 export const CHAIN_ID = 122
 
 export const MULTICALL_ADDRESS = '0x3CE6158b7278Bf6792e014FA7B4f3c6c46fe9410'
+// 20 minutes from now in seconds
+export const DEFAULT_DEADLINE_FROM_NOW = 60 * 20
+
+export const INITIAL_ALLOWED_SLIPPAGE = 50
+
+export const BIPS_BASE = JSBI.BigInt(10000)
 
 export const WFUSE = WFUSE_MAP[CHAIN_ID]
 
