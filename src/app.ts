@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import 'module-alias/register'
 import 'express-async-errors'
 import express, { Request, Response, NextFunction } from 'express'

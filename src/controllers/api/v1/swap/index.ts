@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express'
+import { Container } from 'typedi'
 import { validationResult } from 'express-validator'
 import SwapService from '../../../../services/swap'
 
 type SwapCallBody = {
-  inputCurrency: string
-  outputCurrency: string
-  inputAmount: string
+  currencyIn: string
+  currencyOut: string
+  amountIn: string
   allowedSlippage: number
   ttl: number
   recipient: string
@@ -15,9 +16,9 @@ type SwapCallBody = {
 const SwapController = {
   async swapCallParameters(req: Request, res: Response, next: NextFunction) {
     const {
-      inputCurrency,
-      outputCurrency,
-      inputAmount,
+      currencyIn,
+      currencyOut,
+      amountIn,
       allowedSlippage,
       ttl,
       recipient,
@@ -31,10 +32,12 @@ const SwapController = {
         return
       }
 
-      const swapParameters = await SwapService.getSwapCallParameters(
-        inputCurrency,
-        outputCurrency,
-        inputAmount,
+      const swapService = Container.get(SwapService)
+
+      const swapParameters = await swapService.getSwapCallParameters(
+        currencyIn,
+        currencyOut,
+        amountIn,
         recipient,
         allowedSlippage,
         ttl

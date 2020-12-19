@@ -8,9 +8,9 @@ describe('/swap', () => {
       const { status, body } = await request(app)
         .post('/api/v1/swap/swapcallparameters')
         .send({
-          inputCurrency: DAI.address,
-          outputCurrency: USDC.address,
-          inputAmount: '1',
+          currencyIn: DAI.address,
+          currencyOut: USDC.address,
+          amountIn: '1',
           allowedSlippage: 1,
           ttl: Math.floor(Date.now() / 1000) + 60 * 20,
           recipient: '0x5670d7076E7b3604ceb07c003ff0920490756587',
