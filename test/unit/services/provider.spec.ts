@@ -1,4 +1,4 @@
-import ProviderService from '../../src/services/provider'
+import ProviderService from '../../../src/services/provider'
 import { JsonRpcProvider } from '@ethersproject/providers'
 
 describe('ProviderService', () => {

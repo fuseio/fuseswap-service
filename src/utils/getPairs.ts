@@ -3,6 +3,7 @@ import wrapCurrency from './wrapCurrency'
 import { CHAIN_ID } from '../constants'
 import getAllPairCombinations from './getAllPairCombinations'
 import getPairReserves from './getPairReserves'
+import uniqBy from 'lodash.uniqby'
 
 export default async function getPairs(
   inputToken: Currency,
@@ -23,27 +24,30 @@ export default async function getPairs(
 
   const pairReserves = await getPairReserves(tokens)
 
-  return pairReserves
-    .map((result: any, i: any) => {
-      const reserves = result
+  return uniqBy(
+    pairReserves
+      .map((result: any, i: any) => {
+        const reserves = result
 
-      const tokenA = tokens[i][0]
-      const tokenB = tokens[i][1]
+        const tokenA = tokens[i][0]
+        const tokenB = tokens[i][1]
 
-      if (!tokenA || !tokenB || tokenA.equals(tokenB)) return undefined
+        if (!tokenA || !tokenB || tokenA.equals(tokenB)) return undefined
 
-      if (!reserves) return undefined
+        if (!reserves) return undefined
 
-      const { reserve0, reserve1 } = reserves
+        const { reserve0, reserve1 } = reserves
 
-      const [token0, token1] = tokenA.sortsBefore(tokenB)
-        ? [tokenA, tokenB]
-        : [tokenB, tokenA]
+        const [token0, token1] = tokenA.sortsBefore(tokenB)
+          ? [tokenA, tokenB]
+          : [tokenB, tokenA]
 
-      return new Pair(
-        new TokenAmount(token0, reserve0.toString()),
-        new TokenAmount(token1, reserve1.toString())
-      )
-    })
-    .filter((x: any): x is Pair => Boolean(x))
+        return new Pair(
+          new TokenAmount(token0, reserve0.toString()),
+          new TokenAmount(token1, reserve1.toString())
+        )
+      })
+      .filter((x: any): x is Pair => Boolean(x)),
+    'liquidityToken.address'
+  )
 }

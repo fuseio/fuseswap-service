@@ -1,5 +1,5 @@
 import { ETHER, CurrencyAmount } from '@fuseio/fuse-swap-sdk'
-import parseAmount from '../../src/utils/parseAmount'
+import parseAmount from '../../../src/utils/parseAmount'
 
 describe('parseAmount', () => {
   test('should return instance of CurrencyAmount', () => {

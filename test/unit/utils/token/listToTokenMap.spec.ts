@@ -1,6 +1,6 @@
 import listToTokenMap, {
   EMPTY_LIST,
-} from '../../../src/utils/token/listToTokenMap'
+} from '../../../../src/utils/token/listToTokenMap'
 
 describe('listToTokenMap', () => {
   test('should return empty list when list not provided', () => {

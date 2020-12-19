@@ -1,20 +1,22 @@
 import getTokens from './getTokens'
-import { isAddress } from '@ethersproject/address'
-import { Token, ChainId } from '@fuseio/fuse-swap-sdk'
+import { Token, ETHER as FUSE, Currency } from '@fuseio/fuse-swap-sdk'
 import getTokenContract from '../contract/getTokenContract'
 import ProviderService from '../../services/provider'
+import { CHAIN_ID } from '../../constants'
 
-export default async function getToken(tokenAddress: string): Promise<any> {
+export default async function getToken(
+  tokenAddress: string
+): Promise<Currency | undefined> {
+  if (!tokenAddress) return
+
+  if (tokenAddress === FUSE.symbol) return FUSE
+
   const tokens = getTokens()
-
-  if (!isAddress(tokenAddress) || !tokenAddress) return
-
   const token: Token | undefined = tokens[tokenAddress]
 
   if (token) {
     return token
   } else {
-    const chainId = ChainId.FUSE
     const tokenContract = getTokenContract(
       tokenAddress,
       ProviderService.getProvider()
@@ -24,6 +26,6 @@ export default async function getToken(tokenAddress: string): Promise<any> {
     const decimals = await tokenContract.callStatic.decimals()
     const symbol = await tokenContract.callStatic.symbol()
 
-    return new Token(chainId, tokenAddress, decimals, symbol, name)
+    return new Token(CHAIN_ID, tokenAddress, decimals, symbol, name)
   }
 }

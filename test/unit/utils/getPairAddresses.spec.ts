@@ -1,6 +1,6 @@
 import { WETH } from '@fuseio/fuse-swap-sdk'
-import { DAI, CHAIN_ID, USDC } from '../../src/constants'
-import getPairAddresses from '../../src/utils/getPairAddresses'
+import { DAI, CHAIN_ID, USDC } from '../../../src/constants'
+import getPairAddresses from '../../../src/utils/getPairAddresses'
 
 describe('#getPairAddresses', () => {
   test('returns pair addresses', () => {

@@ -1,5 +1,5 @@
 import { Token } from '@fuseio/fuse-swap-sdk'
-import getToken from '../../../src/utils/token/getToken'
+import getToken from '../../../../src/utils/token/getToken'
 
 describe('getToken', () => {
   test('given address should return token', async () => {

@@ -11,62 +11,54 @@ import RequestError from './models/requestError'
 
 const logger = morgan('combined')
 
-async function init() {
-  console.log(util.inspect(config, { depth: null }))
+console.log(util.inspect(config, { depth: null }))
 
-  const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === 'production'
 
-  const app = express()
+const app = express()
 
-  if (config.get('api.allowCors')) {
-    const corsHandler = cors()
-    app.use(corsHandler)
-  }
+if (config.get('api.allowCors')) {
+  const corsHandler = cors()
+  app.use(corsHandler)
+}
 
-  app.use(logger)
+app.use(logger)
 
-  app.use(bodyParser.urlencoded({ extended: false }))
-  app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-  app.use(routes)
+app.use(routes)
 
-  // catch 404 and forward to error handler
-  app.use(function (req: Request, res: Response, next: NextFunction) {
-    const err = new RequestError(404, 'Not Found')
-    next(err)
+// catch 404 and forward to error handler
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  const err = new RequestError(404, 'Not Found')
+  next(err)
+})
+
+/// error handlers
+if (!isProduction) {
+  app.use(function (err: RequestError, req: Request, res: Response) {
+    console.log(err.stack)
+
+    res.status(err.status || 500)
+
+    res.json({
+      errors: {
+        message: err.message,
+        error: err,
+      },
+    })
   })
-
-  /// error handlers
-  if (!isProduction) {
-    app.use(function (err: RequestError, req: Request, res: Response) {
-      console.log(err.stack)
-
-      res.status(err.status || 500)
-
-      res.json({
-        errors: {
-          message: err.message,
-          error: err,
-        },
-      })
+} else {
+  app.use(function (err: RequestError, req: Request, res: Response) {
+    res.status(err.status || 500)
+    res.json({
+      errors: {
+        message: err.message,
+        error: {},
+      },
     })
-  } else {
-    app.use(function (err: RequestError, req: Request, res: Response) {
-      res.status(err.status || 500)
-      res.json({
-        errors: {
-          message: err.message,
-          error: {},
-        },
-      })
-    })
-  }
-
-  // finally, let's start our server...
-  const server = app.listen(config.get('api.port') || 8080, function () {
-    const address: any = server && server.address()
-    console.log('Listening on port ' + address.port)
   })
 }
 
-init()
+export default app
