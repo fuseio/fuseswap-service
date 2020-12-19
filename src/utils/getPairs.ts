@@ -24,6 +24,7 @@ export default async function getPairs(
 
   const pairReserves = await getPairReserves(tokens)
 
+  // TODO: Refactor this
   return uniqBy(
     pairReserves
       .map((result: any, i: any) => {
