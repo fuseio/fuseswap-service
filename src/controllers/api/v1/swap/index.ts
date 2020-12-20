@@ -14,14 +14,14 @@ type SwapCallBody = {
 }
 
 const SwapController = {
-  async swapCallParameters(req: Request, res: Response, next: NextFunction) {
+  async swapCallParameters (req: Request, res: Response, next: NextFunction) {
     const {
       currencyIn,
       currencyOut,
       amountIn,
       allowedSlippage,
       ttl,
-      recipient,
+      recipient
     }: SwapCallBody = req.body
 
     try {
@@ -43,11 +43,16 @@ const SwapController = {
         ttl
       )
 
+      if (!swapParameters) {
+        res.status(200).json({ message: 'No liquidity for trade' })
+        return
+      }
+
       res.send(swapParameters)
     } catch (e) {
       next(e)
     }
-  },
+  }
 }
 
 export default SwapController

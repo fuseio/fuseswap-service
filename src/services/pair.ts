@@ -10,19 +10,19 @@ import MulticallService from './multcall'
 
 @Service()
 export default class PairService {
-  constructor(private multicallService: MulticallService) {}
+  constructor (private multicallService: MulticallService) {}
 
-  getBases(): Token[] {
+  getBases (): Token[] {
     return BASES_TO_CHECK_TRADES_AGAINST[CHAIN_ID]
   }
 
-  getBasePairs(): [Token, Token][] {
+  getBasePairs (): [Token, Token][] {
     return flatMap(this.getBases(), (base): [Token, Token][] =>
       this.getBases().map((otherBase) => [base, otherBase])
     ).filter(([t0, t1]) => t0.address !== t1.address)
   }
 
-  getPairAddresses(tokens: (Token | undefined)[][]): (string | undefined)[] {
+  getPairAddresses (tokens: (Token | undefined)[][]): (string | undefined)[] {
     return tokens.map(([tokenA, tokenB]) => {
       return tokenA && tokenB && !tokenA.equals(tokenB)
         ? Pair.getAddress(tokenA, tokenB)
@@ -30,7 +30,7 @@ export default class PairService {
     })
   }
 
-  getPairCombinations(
+  getPairCombinations (
     tokenA: Token | undefined,
     tokenB: Token | undefined
   ): [Token, Token][] {
@@ -42,7 +42,7 @@ export default class PairService {
 
           ...this.getBases().map((base): [Token, Token] => [tokenB, base]),
 
-          ...this.getBasePairs(),
+          ...this.getBasePairs()
         ]
           .filter((tokens): tokens is [Token, Token] =>
             Boolean(tokens[0] && tokens[1])
@@ -51,7 +51,7 @@ export default class PairService {
       : []
   }
 
-  async getPairReserves(tokens: (Token | undefined)[][]): Promise<any> {
+  async getPairReserves (tokens: (Token | undefined)[][]): Promise<any> {
     const reserves = await this.multicallService.call(
       this.getPairAddresses(tokens),
       IUniswapV2PairABI,
@@ -60,7 +60,7 @@ export default class PairService {
     return reserves
   }
 
-  getPairsWithReserves(
+  getPairsWithReserves (
     tokens: (Token | undefined)[][],
     pairReserves: any[]
   ): any {
@@ -87,10 +87,10 @@ export default class PairService {
     })
   }
 
-  async getPairs(currencyIn: Currency, currencyOut: Currency): Promise<any> {
+  async getPairs (currencyIn: Currency, currencyOut: Currency): Promise<any> {
     const [tokenA, tokenB] = [
       wrapCurrency(currencyIn, CHAIN_ID),
-      wrapCurrency(currencyOut, CHAIN_ID),
+      wrapCurrency(currencyOut, CHAIN_ID)
     ]
 
     const tokens = this.getPairCombinations(
@@ -98,7 +98,7 @@ export default class PairService {
       tokenB
     ).map(([tokenA, tokenB]) => [
       wrapCurrency(tokenA, CHAIN_ID),
-      wrapCurrency(tokenB, CHAIN_ID),
+      wrapCurrency(tokenB, CHAIN_ID)
     ])
 
     const pairReserves = await this.getPairReserves(tokens)

@@ -6,12 +6,12 @@ const secret: string = config.get('api.secret')
 const auth = {
   required: jwt({
     secret: secret,
-    credentialsRequired: true,
+    credentialsRequired: true
   }),
   optional: jwt({
     secret: secret,
-    credentialsRequired: false,
-  }),
+    credentialsRequired: false
+  })
 }
 
 module.exports = auth

@@ -3,11 +3,11 @@ import {
   TokenAmount,
   JSBI,
   CurrencyAmount,
-  Token,
+  Token
 } from '@fuseio/fuse-swap-sdk'
 import { parseUnits } from '@ethersproject/units'
 
-export default function parseAmount(
+export default function parseAmount (
   value: string,
   currency: Currency
 ): CurrencyAmount | undefined {

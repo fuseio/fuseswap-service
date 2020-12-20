@@ -6,9 +6,9 @@ import { Interface } from '@ethersproject/abi'
 
 @Service()
 export default class MulticallService {
-  constructor(private contractService: ContractService) {}
+  constructor (private contractService: ContractService) {}
 
-  async call(
+  async call (
     addresses: (string | undefined)[],
     ABI: any,
     methodName: string
@@ -22,7 +22,7 @@ export default class MulticallService {
             return address && callData
               ? {
                   address,
-                  callData,
+                  callData
                 }
               : undefined
           })

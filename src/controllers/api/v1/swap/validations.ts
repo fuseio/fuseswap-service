@@ -6,5 +6,5 @@ export const swapCallParametersValidation = [
   body('currencyIn').exists().isString().custom(isCurrencyOrAddress),
   body('currencyOut').exists().isString().custom(isCurrencyOrAddress),
   body('amountIn').exists().isString(),
-  body('recipient').exists().isString().custom(isAddress),
+  body('recipient').exists().isString().custom(isAddress)
 ]

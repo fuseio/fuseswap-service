@@ -46,8 +46,8 @@ if (!isProduction) {
     res.json({
       errors: {
         message: err.message,
-        error: err,
-      },
+        error: err
+      }
     })
   })
 } else {
@@ -56,8 +56,8 @@ if (!isProduction) {
     res.json({
       errors: {
         message: err.message,
-        error: {},
-      },
+        error: {}
+      }
     })
   })
 }

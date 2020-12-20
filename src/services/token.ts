@@ -7,9 +7,9 @@ import ContractService from './contract'
 
 @Service()
 export default class TokenService {
-  constructor(private contractService: ContractService) {}
+  constructor (private contractService: ContractService) {}
 
-  async getToken(tokenAddress: string): Promise<Currency | undefined> {
+  async getToken (tokenAddress: string): Promise<Currency | undefined> {
     if (!tokenAddress) return
 
     if (tokenAddress === FUSE.symbol) return FUSE

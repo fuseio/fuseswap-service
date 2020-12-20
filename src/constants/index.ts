@@ -2,6 +2,8 @@ import { Token, ChainId, WETH as WFUSE_MAP, JSBI } from '@fuseio/fuse-swap-sdk'
 
 export const CHAIN_ID = 122
 
+export const ROUTER_ADDRESS = '0xFB76e9E7d88E308aB530330eD90e84a952570319'
+
 export const MULTICALL_ADDRESS = '0x3CE6158b7278Bf6792e014FA7B4f3c6c46fe9410'
 // 20 minutes from now in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 20
@@ -49,5 +51,5 @@ export const WETH = new Token(
 )
 
 export const BASES_TO_CHECK_TRADES_AGAINST = {
-  [ChainId.FUSE]: [WFUSE, DAI, USDC, USDT, WBTC, WETH],
+  [ChainId.FUSE]: [WFUSE, DAI, USDC, USDT, WBTC, WETH]
 }

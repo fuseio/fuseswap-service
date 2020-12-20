@@ -4,6 +4,7 @@ import WrappedTokenData, { TagInfo } from '@models/wrappedTokenData'
 
 export type TokenAddressMap = Readonly<
   {
+    // eslint-disable-next-line no-unused-vars
     [chainId in ChainId]: Readonly<{ [tokenAddress: string]: WrappedTokenData }>
   }
 >
@@ -14,12 +15,12 @@ export const EMPTY_LIST: TokenAddressMap = {
   [ChainId.ROPSTEN]: {},
   [ChainId.GÖRLI]: {},
   [ChainId.MAINNET]: {},
-  [ChainId.FUSE]: {},
+  [ChainId.FUSE]: {}
 }
 
 const cache = new WeakMap<TokenList, TokenAddressMap>()
 
-function getTokenTags(list: TokenList, tokenInfo: TokenInfo) {
+function getTokenTags (list: TokenList, tokenInfo: TokenInfo) {
   return (
     tokenInfo.tags
       ?.map((tagId) => {
@@ -31,7 +32,7 @@ function getTokenTags(list: TokenList, tokenInfo: TokenInfo) {
   )
 }
 
-export function getTokenAddressMap(list: TokenList): TokenAddressMap {
+export function getTokenAddressMap (list: TokenList): TokenAddressMap {
   return list?.tokens.reduce<TokenAddressMap>(
     (tokenMap, tokenInfo) => {
       const tags: TagInfo[] = getTokenTags(list, tokenInfo)
@@ -45,15 +46,15 @@ export function getTokenAddressMap(list: TokenList): TokenAddressMap {
         ...tokenMap,
         [token.chainId]: {
           ...tokenMap[token.chainId],
-          [token.address]: token,
-        },
+          [token.address]: token
+        }
       }
     },
     { ...EMPTY_LIST }
   )
 }
 
-export default function listToTokenMap(list?: TokenList): TokenAddressMap {
+export default function listToTokenMap (list?: TokenList): TokenAddressMap {
   if (!list) return { ...EMPTY_LIST }
 
   const cachedList = cache.get(list)

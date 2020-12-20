@@ -3,16 +3,16 @@ import {
   ChainId,
   ETHER as FUSE,
   WETH,
-  Token,
+  Token
 } from '@fuseio/fuse-swap-sdk'
 
-export default function wrapCurrency(
+export default function wrapCurrency (
   currency: Currency,
   chainId: ChainId
 ): Token | undefined {
   return chainId && currency === FUSE
     ? WETH[chainId]
     : currency instanceof Token
-    ? currency
-    : undefined
+      ? currency
+      : undefined
 }

@@ -11,7 +11,7 @@ export default class WrappedTokenData extends Token {
   public readonly tokenInfo: TokenInfo
   public readonly tags: TagInfo[]
 
-  constructor(tokenInfo: TokenInfo, tags: TagInfo[]) {
+  constructor (tokenInfo: TokenInfo, tags: TagInfo[]) {
     super(
       tokenInfo.chainId,
       tokenInfo.address,

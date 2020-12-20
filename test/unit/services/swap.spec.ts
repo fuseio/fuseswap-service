@@ -11,6 +11,8 @@ import MulticallService from '../../../src/services/multcall'
 describe('SwapService', () => {
   let tokenService: TokenService
   let pairService: PairService
+  let contractService: ContractService
+
   let deadline: number
 
   const recipient = '0x5670d7076E7b3604ceb07c003ff0920490756587'
@@ -19,8 +21,8 @@ describe('SwapService', () => {
 
   beforeEach(() => {
     deadline = Math.floor(Date.now() / 1000) + 60 * 20
+    contractService = new ContractService()
 
-    const contractService = new ContractService()
     const multicallService = new MulticallService(contractService)
     tokenService = new TokenService(contractService)
     pairService = new PairService(multicallService)
@@ -36,8 +38,11 @@ describe('SwapService', () => {
         .resolves(WETH)
 
       sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WETH)])
-
-      const swapService = new SwapService(tokenService, pairService)
+      const swapService = new SwapService(
+        tokenService,
+        pairService,
+        contractService
+      )
 
       const trade = await swapService.getBestTradeExactIn(
         DAI.address,
@@ -60,7 +65,11 @@ describe('SwapService', () => {
 
       sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WFUSE)])
 
-      const swapService = new SwapService(tokenService, pairService)
+      const swapService = new SwapService(
+        tokenService,
+        pairService,
+        contractService
+      )
       const trade = await swapService.getBestTradeExactIn(
         DAI.address,
         FUSE_SYMBOL,
@@ -84,7 +93,11 @@ describe('SwapService', () => {
 
       sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WETH)])
 
-      const swapService = new SwapService(tokenService, pairService)
+      const swapService = new SwapService(
+        tokenService,
+        pairService,
+        contractService
+      )
       const swapParameters = await swapService.getSwapCallParameters(
         DAI.address,
         WETH.address,
@@ -112,7 +125,11 @@ describe('SwapService', () => {
 
       sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WFUSE)])
 
-      const swapService = new SwapService(tokenService, pairService)
+      const swapService = new SwapService(
+        tokenService,
+        pairService,
+        contractService
+      )
       const swapParameters = await swapService.getSwapCallParameters(
         DAI.address,
         FUSE_SYMBOL,
@@ -142,7 +159,11 @@ describe('SwapService', () => {
           ),
         ])
 
-      const swapService = new SwapService(tokenService, pairService)
+      const swapService = new SwapService(
+        tokenService,
+        pairService,
+        contractService
+      )
       const swapParameters = await swapService.getSwapCallParameters(
         FUSE_SYMBOL,
         WETH.address,

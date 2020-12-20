@@ -25,5 +25,20 @@ describe('/swap', () => {
         .send({})
       expect(status).toEqual(400)
     })
+
+    test('given params when no liquidity returns 400 and message', async () => {
+      const { status, body } = await request(app)
+        .post('/api/v1/swap/swapcallparameters')
+        .send({
+          currencyIn: '0x495d133B938596C9984d462F007B676bDc57eCEC',
+          currencyOut: '0xbf0718762B7951D56C52Cc7f75e4fa665a7FF0E5',
+          amountIn: '1',
+          allowedSlippage: 1,
+          ttl: 60 * 20,
+          recipient: '0x5670d7076E7b3604ceb07c003ff0920490756587',
+        })
+      expect(status).toEqual(200)
+      expect(body.message).toBe('No liquidity for trade')
+    })
   })
 })
