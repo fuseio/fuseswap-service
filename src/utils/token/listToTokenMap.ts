@@ -1,6 +1,6 @@
 import { ChainId } from '@fuseio/fuse-swap-sdk'
 import { TokenList, TokenInfo } from '@uniswap/token-lists'
-import WrappedTokenData, { TagInfo } from '../../models/wrappedTokenData'
+import WrappedTokenData, { TagInfo } from '@models/wrappedTokenData'
 
 export type TokenAddressMap = Readonly<
   {

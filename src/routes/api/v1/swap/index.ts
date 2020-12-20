@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import SwapController from '../../../../controllers/api/v1/swap'
-import { swapCallParametersValidation } from '../../../../controllers/api/v1/swap/validations'
+import SwapController from '@controllers/api/v1/swap'
+import { swapCallParametersValidation } from '@controllers/api/v1/swap/validations'
 
 const router = Router()
 

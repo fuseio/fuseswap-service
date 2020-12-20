@@ -3,16 +3,16 @@ module.exports = {
     allowCors: true,
     secret: 'secret',
     tokenExpiresIn: '7d',
-    port: 3000
+    port: 3000,
   },
   mongo: {
     debug: true,
-    uri: 'mongodb://localhost/test'
+    uri: 'mongodb://localhost/test',
   },
   mail: {
     sendgrid: {
-      templates: {}
-    }
+      templates: {},
+    },
   },
-  rpc_url: 'https://rpc.fuse.io'
+  rpcUrl: 'https://rpc.fuse.io',
 }

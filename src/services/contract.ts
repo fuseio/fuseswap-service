@@ -2,8 +2,8 @@ import { Service } from 'typedi'
 import { Provider } from '@ethersproject/providers'
 import { isAddress } from '@ethersproject/address'
 import { Contract } from '@ethersproject/contracts'
-import ERC20_ABI from '../constants/abis/erc20.json'
-import MULTICALL_ABI from '../constants/abis/multicall.json'
+import ERC20_ABI from '@constants/abis/erc20.json'
+import MULTICALL_ABI from '@constants/abis/multicall.json'
 
 @Service()
 export default class ContractService {

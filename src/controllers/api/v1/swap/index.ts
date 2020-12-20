@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { Container } from 'typedi'
 import { validationResult } from 'express-validator'
-import SwapService from '../../../../services/swap'
+import SwapService from '@services/swap'
 
 type SwapCallBody = {
   currencyIn: string

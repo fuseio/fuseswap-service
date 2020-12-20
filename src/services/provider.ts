@@ -9,7 +9,7 @@ export default class ProviderService {
 
   public static getProvider(): Provider {
     if (!ProviderService.instance) {
-      ProviderService.instance = new JsonRpcProvider(config.get('rpc_url'))
+      ProviderService.instance = new JsonRpcProvider(config.get('rpcUrl'))
     }
 
     return ProviderService.instance

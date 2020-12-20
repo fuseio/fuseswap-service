@@ -8,7 +8,7 @@ import util from 'util'
 import config from 'config'
 import cors from 'cors'
 import routes from './routes'
-import RequestError from './models/requestError'
+import RequestError from '@models/requestError'
 
 const logger = morgan('combined')
 

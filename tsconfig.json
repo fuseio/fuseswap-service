@@ -9,9 +9,15 @@
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@controllers/*": ["controllers/*"],
+      "@constants/*": ["constants/*"],
+      "@models/*": ["models/*"]
+    }
   },
-  "exclude": [
-    "test"
-  ]
+  "exclude": ["test"]
 }

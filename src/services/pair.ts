@@ -1,11 +1,11 @@
 import { Currency, Pair, TokenAmount, Token } from '@fuseio/fuse-swap-sdk'
-import wrapCurrency from '../utils/wrapCurrency'
-import { CHAIN_ID, BASES_TO_CHECK_TRADES_AGAINST } from '../constants'
+import wrapCurrency from '@utils/wrapCurrency'
+import { CHAIN_ID, BASES_TO_CHECK_TRADES_AGAINST } from '@constants/index'
 import uniqBy from 'lodash.uniqby'
 import compact from 'lodash.compact'
 import { Service } from 'typedi'
 import flatMap from 'lodash.flatmap'
-import { abi as IUniswapV2PairABI } from '../constants/abis/IUniswapV2Pair.json'
+import { abi as IUniswapV2PairABI } from '@constants/abis/IUniswapV2Pair.json'
 import MulticallService from './multcall'
 
 @Service()

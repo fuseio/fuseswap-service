@@ -1,8 +1,8 @@
 import { Service } from 'typedi'
 import { ETHER as FUSE, Token, Currency } from '@fuseio/fuse-swap-sdk'
-import getTokens from '../utils/token/getTokens'
+import getTokens from '@utils/token/getTokens'
 import ProviderService from './provider'
-import { CHAIN_ID } from '../constants'
+import { CHAIN_ID } from '@constants/index'
 import ContractService from './contract'
 
 @Service()

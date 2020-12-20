@@ -1,6 +1,6 @@
 import { Service } from 'typedi'
 import ContractService from './contract'
-import { MULTICALL_ADDRESS } from '../constants'
+import { MULTICALL_ADDRESS } from '@constants/index'
 import ProviderService from './provider'
 import { Interface } from '@ethersproject/abi'
 

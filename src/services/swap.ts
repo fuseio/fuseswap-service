@@ -6,12 +6,12 @@ import {
   JSBI,
 } from '@fuseio/fuse-swap-sdk'
 import { Service } from 'typedi'
-import parseAmount from '../utils/parseAmount'
+import parseAmount from '@utils/parseAmount'
 import {
   INITIAL_ALLOWED_SLIPPAGE,
   BIPS_BASE,
   DEFAULT_DEADLINE_FROM_NOW,
-} from '../constants'
+} from '@constants/index'
 import TokenService from './token'
 import PairService from './pair'
 
