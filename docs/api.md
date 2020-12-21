@@ -25,8 +25,8 @@ POST /swap/swapcallparameters
 | currencyOut | `String` | <p>The desired currency out address</p> |
 | inputAmount | `String` | <p>The desired amount to spend</p> |
 | recipient | `string` | <p>The address that should receive the output of the swap</p> |
-| allowedSlippage | `Number` | <p>How much the execution price is allowed to move unfavorably from the trade execution price</p> |
-| ttl | `Number` | <p>How long the swap is valid until it expires</p> |
+| allowedSlippage | `Number` | **optional**<p>How much the execution price is allowed to move unfavorably from the trade execution price in Basis Points(BIPS)</p>_Default value: 50_<br> |
+| ttl | `Number` | **optional**<p>How long the swap is valid until it expires in seconds</p>_Default value: 1200_<br> |
 
 ### Success Response
 Success-Response:
@@ -45,7 +45,7 @@ Success-Response:
          "0x5fdf7e43"
      ],
      "value": "0xde0b6b3a7640000",
-     "rawTx": {
+     "rawTxn": {
          "data": "0x7ff36ab5000000000000000000000000000000000000000000000000008f1573df661b2f00000000000000000000000000000000000000000000000000000000000000800000000000000000000000005670d7076e7b3604ceb07c003ff0920490756587000000000000000000000000000000000000000000000000000000005fdf7e4300000000000000000000000000000000000000000000000000000000000000030000000000000000000000000be9e53fd7edac9f859882afdda116645287c629000000000000000000000000fadbbf8ce7d5b7041be672561bba99f79c532e1000000000000000000000000094ba7a27c7a95863d1bdc7645ac2951e0cca06ba",
          "to": "0xFB76e9E7d88E308aB530330eD90e84a952570319",
          "value": {

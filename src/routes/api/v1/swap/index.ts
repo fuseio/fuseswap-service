@@ -13,9 +13,9 @@ const router = Router()
  * @apiParam {String} currencyOut The desired currency out address
  * @apiParam {String} inputAmount The desired amount to spend
  * @apiParam {string} recipient The address that should receive the output of the swap
- * @apiParam {Number} allowedSlippage How much the execution price is allowed to move unfavorably
- *  from the trade execution price
- * @apiParam {Number} ttl How long the swap is valid until it expires
+ * @apiParam {Number} [allowedSlippage=50] How much the execution price is allowed to move unfavorably
+ *  from the trade execution price in Basis Points(BIPS)
+ * @apiParam {Number} [ttl=1200] How long the swap is valid until it expires in seconds
  *
  * @apiSuccess {String} methodName The method to call on Fuseswap RouterV2
  * @apiSuccess {String[]} args The arguments to pass to the method, all hex encoded
