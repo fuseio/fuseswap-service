@@ -10,7 +10,9 @@
     "doc": "apidoc -i src/routes -o docs/api && apidoc-markdown -p docs/api -o docs/api.md",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
-    "test": "jest"
+    "test": "jest",
+    "test-unit": "jest ./test/unit",
+    "test-integration": "jest ./test/integration"
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,7 @@
     "@babel/runtime": "^7.4.4",
     "@ethersproject/abi": "^5.0.9",
     "@ethersproject/address": "^5.0.8",
+    "@ethersproject/bignumber": "^5.0.12",
     "@ethersproject/contracts": "^5.0.8",
     "@ethersproject/providers": "^5.0.17",
     "@ethersproject/solidity": "^5.0.7",

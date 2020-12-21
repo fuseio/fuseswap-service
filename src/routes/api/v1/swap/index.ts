@@ -1,6 +1,9 @@
 import { Router } from 'express'
 import SwapController from '@controllers/api/v1/swap'
-import { swapCallParametersValidation } from '@controllers/api/v1/swap/validations'
+import {
+  swapCallParametersValidation,
+  tradeValidation
+} from '@controllers/api/v1/swap/validations'
 
 const router = Router()
 
@@ -53,5 +56,18 @@ router.post(
   swapCallParametersValidation,
   SwapController.swapCallParameters
 )
+
+/**
+ * @api {post} /swap/trade Create a trade for a token pair
+ * @apiName PostTrade
+ * @apiGroup Swap
+ *
+ * @apiParam {String} currencyIn The currency to spend
+ * @apiParam {String} currencyOut The desired currency out address
+ * @apiParam {String} inputAmount The desired amount to spend
+ *
+ * @apiSuccess {Object} trade The trade object containing information about the trade e.g price
+ */
+router.post('/trade', tradeValidation, SwapController.trade)
 
 export default router

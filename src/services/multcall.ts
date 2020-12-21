@@ -28,12 +28,12 @@ export default class MulticallService {
           })
         : []
 
-    const multiCallContract = this.contractService.getMulticallContract(
+    const contract = this.contractService.getMulticallContract(
       MULTICALL_ADDRESS,
       ProviderService.getProvider()
     )
 
-    const [, results] = await multiCallContract.aggregate(
+    const [, results] = await contract.aggregate(
       calls.map((obj) => [obj?.address, obj?.callData])
     )
 

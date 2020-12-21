@@ -8,3 +8,9 @@ export const swapCallParametersValidation = [
   body('amountIn').exists().isString(),
   body('recipient').exists().isString().custom(isAddress)
 ]
+
+export const tradeValidation = [
+  body('currencyIn').exists().isString().custom(isCurrencyOrAddress),
+  body('currencyOut').exists().isString().custom(isCurrencyOrAddress),
+  body('amountIn').exists().isString()
+]

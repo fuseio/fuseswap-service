@@ -13,7 +13,13 @@ type SwapCallBody = {
   recipient: string
 }
 
-const SwapController = {
+type TradeBody = {
+  currencyIn: string
+  currencyOut: string
+  amountIn: string
+}
+
+class SwapController {
   async swapCallParameters (req: Request, res: Response, next: NextFunction) {
     const {
       currencyIn,
@@ -53,6 +59,30 @@ const SwapController = {
       next(e)
     }
   }
+
+  async trade (req: Request, res: Response, next: NextFunction) {
+    const { currencyIn, currencyOut, amountIn }: TradeBody = req.body
+    try {
+      const errors = validationResult(req)
+
+      if (!errors.isEmpty()) {
+        res.status(400).json({ error: errors.mapped() })
+        return
+      }
+
+      const swapService = Container.get(SwapService)
+
+      const trade = await swapService.getBestTradeExactIn(
+        currencyIn,
+        currencyOut,
+        amountIn
+      )
+
+      res.send(trade)
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
-export default SwapController
+export default new SwapController()
