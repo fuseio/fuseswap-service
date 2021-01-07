@@ -1,12 +1,12 @@
 {
-  "name": "node-skeleton",
+  "name": "Fuseswap Backend API",
   "version": "0.1.0",
-  "description": "",
-  "title": "",
-  "url" : "",
+  "description": "The Fuseswap Backend REST API is used for generating trading data for frontend clients",
+  "title": "Fuseswap Backend REST API",
+  "url": "",
   "sampleUrl": "",
   "template": {
-  	"withCompare": true,
-  	"withGenerator": true
+    "withCompare": true,
+    "withGenerator": true
   }
 }

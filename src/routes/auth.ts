@@ -1,9 +1,9 @@
-const jwt = require('express-jwt')
-const config = require('config')
+import jwt from 'express-jwt'
+import config from 'config'
 
-const secret = config.get('api.secret')
+const secret: string = config.get('api.secret')
 
-var auth = {
+const auth = {
   required: jwt({
     secret: secret,
     credentialsRequired: true
