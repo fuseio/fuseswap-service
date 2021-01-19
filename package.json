@@ -1,12 +1,12 @@
 {
-  "name": "node-skeleton",
+  "name": "fuseswap-service",
   "version": "0.1.0",
   "description": "node-skeleton",
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./src/server.ts",
     "debug": "node --inspect-brk --trace-warnings ./src/app.js",
-    "start-prod": "node ./src/app.js",
+    "start-prod": "NODE_ENV=production ts-node-transpile-only ./src/server.ts",
     "doc": "apidoc -i src/routes -o docs/api && apidoc-markdown -p docs/api -o docs/api.md",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
