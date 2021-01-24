@@ -5,6 +5,7 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 
 - [Swap](#Swap)
 	- [Create swap parameters for a Trade](#Create-swap-parameters-for-a-Trade)
+	- [Create a trade for a token pair](#Create-a-trade-for-a-token-pair)
 	
 
 # <a name='Swap'></a> Swap
@@ -63,3 +64,24 @@ Success-Response:
 | args | `String[]` | <p>The arguments to pass to the method, all hex encoded</p> |
 | value | `String` | <p>The amount of wei to send in hex</p> |
 | rawTxn | `Object` | <p>Unsigned transaction which represents the transaction that needs to be signed and submitted to the network</p> |
+## <a name='Create-a-trade-for-a-token-pair'></a> Create a trade for a token pair
+[Back to top](#top)
+
+
+
+```
+POST /swap/trade
+```
+
+### Parameter Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| currencyIn | `String` | <p>The currency to spend</p> |
+| currencyOut | `String` | <p>The desired currency out address</p> |
+| inputAmount | `String` | <p>The desired amount to spend</p> |
+
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| trade | `Object` | <p>The trade object containing information about the trade e.g price</p> |
