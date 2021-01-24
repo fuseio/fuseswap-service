@@ -504,4 +504,4 @@ Success-Response:
 ### Success 200
 | Name     | Type       | Description                           |
 |:---------|:-----------|:--------------------------------------|
-| trade | `Object` | <p>The trade object containing information about the trade e.g price</p> |
+| trade | `Object` | <p>The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price</p> |
