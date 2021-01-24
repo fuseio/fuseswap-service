@@ -66,7 +66,7 @@ router.post(
  * @apiParam {String} currencyOut The desired currency out address
  * @apiParam {String} inputAmount The desired amount to spend
  *
- * @apiSuccess {Object} trade The trade object containing information about the trade e.g price
+ * @apiSuccess {Object} trade The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price
  *
  * @apiSuccessExample {json} Success-Response:
  *
