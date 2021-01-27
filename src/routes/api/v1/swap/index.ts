@@ -66,424 +66,442 @@ router.post(
  * @apiParam {String} currencyOut The desired currency out address
  * @apiParam {String} inputAmount The desired amount to spend
  *
+ * @apiSuccess {Object} info Simplied trade object containing information about the trade
  * @apiSuccess {Object} trade The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price
  *
  * @apiSuccessExample {json} Success-Response:
  *
- * {
-    "route": {
-        "pairs": [
-            {
-                "liquidityToken": {
-                    "decimals": 18,
-                    "symbol": "UNI-V2",
-                    "name": "Uniswap V2",
-                    "chainId": 122,
-                    "address": "0x20a680D69a5aE2677B8CF43aBF63aAD6D8d5119A"
-                },
-                "tokenAmounts": [
+ *{
+    "data": {
+        "info": {
+            "inputAmount": "1",
+            "outputAmount": "965.616",
+            "route": [
+                "WETH",
+                "USDC"
+            ],
+            "inputToken": "WETH",
+            "outputToken": "USDC",
+            "executionPrice": "965.617",
+            "nextMidPrice": "722.082",
+            "priceImpact": "25.612"
+        },
+        "trade": {
+            "route": {
+                "pairs": [
                     {
-                        "numerator": [
-                            -413243924
-                        ],
-                        "denominator": [
-                            1000000
-                        ],
-                        "currency": {
-                            "decimals": 6,
-                            "symbol": "USDC",
-                            "name": "USD Coin on Fuse",
+                        "liquidityToken": {
+                            "decimals": 18,
+                            "symbol": "UNI-V2",
+                            "name": "Uniswap V2",
                             "chainId": 122,
-                            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                            "tokenInfo": {
-                                "name": "USD Coin on Fuse",
-                                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                                "symbol": "USDC",
-                                "decimals": 6,
-                                "chainId": 122,
-                                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-                            },
-                            "tags": []
+                            "address": "0x20a680D69a5aE2677B8CF43aBF63aAD6D8d5119A"
                         },
-                        "token": {
-                            "decimals": 6,
-                            "symbol": "USDC",
-                            "name": "USD Coin on Fuse",
-                            "chainId": 122,
-                            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                            "tokenInfo": {
-                                "name": "USD Coin on Fuse",
-                                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                                "symbol": "USDC",
-                                "decimals": 6,
-                                "chainId": 122,
-                                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                        "tokenAmounts": [
+                            {
+                                "numerator": [
+                                    -491531807
+                                ],
+                                "denominator": [
+                                    1000000
+                                ],
+                                "currency": {
+                                    "decimals": 6,
+                                    "symbol": "USDC",
+                                    "name": "USD Coin on Fuse",
+                                    "chainId": 122,
+                                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                                    "tokenInfo": {
+                                        "name": "USD Coin on Fuse",
+                                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                                        "symbol": "USDC",
+                                        "decimals": 6,
+                                        "chainId": 122,
+                                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                                    },
+                                    "tags": []
+                                },
+                                "token": {
+                                    "decimals": 6,
+                                    "symbol": "USDC",
+                                    "name": "USD Coin on Fuse",
+                                    "chainId": 122,
+                                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                                    "tokenInfo": {
+                                        "name": "USD Coin on Fuse",
+                                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                                        "symbol": "USDC",
+                                        "decimals": 6,
+                                        "chainId": 122,
+                                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                                    },
+                                    "tags": []
+                                }
                             },
-                            "tags": []
-                        }
+                            {
+                                "numerator": [
+                                    -2070596893,
+                                    682205361
+                                ],
+                                "denominator": [
+                                    -1486618624,
+                                    232830643
+                                ],
+                                "currency": {
+                                    "decimals": 18,
+                                    "symbol": "WETH",
+                                    "name": "Wrapped Ether on Fuse",
+                                    "chainId": 122,
+                                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                                    "tokenInfo": {
+                                        "name": "Wrapped Ether on Fuse",
+                                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                                        "symbol": "WETH",
+                                        "decimals": 18,
+                                        "chainId": 122,
+                                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                                    },
+                                    "tags": []
+                                },
+                                "token": {
+                                    "decimals": 18,
+                                    "symbol": "WETH",
+                                    "name": "Wrapped Ether on Fuse",
+                                    "chainId": 122,
+                                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                                    "tokenInfo": {
+                                        "name": "Wrapped Ether on Fuse",
+                                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                                        "symbol": "WETH",
+                                        "decimals": 18,
+                                        "chainId": 122,
+                                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                                    },
+                                    "tags": []
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "path": [
+                    {
+                        "decimals": 18,
+                        "symbol": "WETH",
+                        "name": "Wrapped Ether on Fuse",
+                        "chainId": 122,
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "tokenInfo": {
+                            "name": "Wrapped Ether on Fuse",
+                            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                            "symbol": "WETH",
+                            "decimals": 18,
+                            "chainId": 122,
+                            "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                        },
+                        "tags": []
                     },
                     {
+                        "decimals": 6,
+                        "symbol": "USDC",
+                        "name": "USD Coin on Fuse",
+                        "chainId": 122,
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "tokenInfo": {
+                            "name": "USD Coin on Fuse",
+                            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                            "symbol": "USDC",
+                            "decimals": 6,
+                            "chainId": 122,
+                            "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                        },
+                        "tags": []
+                    }
+                ],
+                "midPrice": {
+                    "numerator": [
+                        -491531807
+                    ],
+                    "denominator": [
+                        -2070596893,
+                        682205361
+                    ],
+                    "baseCurrency": {
+                        "decimals": 18,
+                        "symbol": "WETH",
+                        "name": "Wrapped Ether on Fuse",
+                        "chainId": 122,
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "tokenInfo": {
+                            "name": "Wrapped Ether on Fuse",
+                            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                            "symbol": "WETH",
+                            "decimals": 18,
+                            "chainId": 122,
+                            "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                        },
+                        "tags": []
+                    },
+                    "quoteCurrency": {
+                        "decimals": 6,
+                        "symbol": "USDC",
+                        "name": "USD Coin on Fuse",
+                        "chainId": 122,
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "tokenInfo": {
+                            "name": "USD Coin on Fuse",
+                            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                            "symbol": "USDC",
+                            "decimals": 6,
+                            "chainId": 122,
+                            "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                        },
+                        "tags": []
+                    },
+                    "scalar": {
                         "numerator": [
-                            -1644245954,
-                            667956554
-                        ],
-                        "denominator": [
                             -1486618624,
                             232830643
                         ],
-                        "currency": {
-                            "decimals": 18,
-                            "symbol": "WETH",
-                            "name": "Wrapped Ether on Fuse",
-                            "chainId": 122,
-                            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                            "tokenInfo": {
-                                "name": "Wrapped Ether on Fuse",
-                                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                                "symbol": "WETH",
-                                "decimals": 18,
-                                "chainId": 122,
-                                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-                            },
-                            "tags": []
-                        },
-                        "token": {
-                            "decimals": 18,
-                            "symbol": "WETH",
-                            "name": "Wrapped Ether on Fuse",
-                            "chainId": 122,
-                            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                            "tokenInfo": {
-                                "name": "Wrapped Ether on Fuse",
-                                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                                "symbol": "WETH",
-                                "decimals": 18,
-                                "chainId": 122,
-                                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-                            },
-                            "tags": []
-                        }
+                        "denominator": [
+                            1000000
+                        ]
                     }
-                ]
-            }
-        ],
-        "path": [
-            {
-                "decimals": 18,
-                "symbol": "WETH",
-                "name": "Wrapped Ether on Fuse",
-                "chainId": 122,
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "tokenInfo": {
-                    "name": "Wrapped Ether on Fuse",
-                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                    "symbol": "WETH",
+                },
+                "input": {
                     "decimals": 18,
-                    "chainId": 122,
-                    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-                },
-                "tags": []
-            },
-            {
-                "decimals": 6,
-                "symbol": "USDC",
-                "name": "USD Coin on Fuse",
-                "chainId": 122,
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "tokenInfo": {
-                    "name": "USD Coin on Fuse",
-                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                    "symbol": "USDC",
-                    "decimals": 6,
-                    "chainId": 122,
-                    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-                },
-                "tags": []
-            }
-        ],
-        "midPrice": {
-            "numerator": [
-                -413243924
-            ],
-            "denominator": [
-                -1644245954,
-                667956554
-            ],
-            "baseCurrency": {
-                "decimals": 18,
-                "symbol": "WETH",
-                "name": "Wrapped Ether on Fuse",
-                "chainId": 122,
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "tokenInfo": {
-                    "name": "Wrapped Ether on Fuse",
-                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
                     "symbol": "WETH",
-                    "decimals": 18,
+                    "name": "Wrapped Ether on Fuse",
                     "chainId": 122,
-                    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                    "tokenInfo": {
+                        "name": "Wrapped Ether on Fuse",
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "symbol": "WETH",
+                        "decimals": 18,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    },
+                    "tags": []
                 },
-                "tags": []
-            },
-            "quoteCurrency": {
-                "decimals": 6,
-                "symbol": "USDC",
-                "name": "USD Coin on Fuse",
-                "chainId": 122,
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "tokenInfo": {
-                    "name": "USD Coin on Fuse",
-                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                    "symbol": "USDC",
+                "output": {
                     "decimals": 6,
+                    "symbol": "USDC",
+                    "name": "USD Coin on Fuse",
                     "chainId": 122,
-                    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-                },
-                "tags": []
+                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                    "tokenInfo": {
+                        "name": "USD Coin on Fuse",
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "symbol": "USDC",
+                        "decimals": 6,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    },
+                    "tags": []
+                }
             },
-            "scalar": {
+            "tradeType": 0,
+            "inputAmount": {
                 "numerator": [
                     -1486618624,
                     232830643
                 ],
                 "denominator": [
+                    -1486618624,
+                    232830643
+                ],
+                "currency": {
+                    "decimals": 18,
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether on Fuse",
+                    "chainId": 122,
+                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                    "tokenInfo": {
+                        "name": "Wrapped Ether on Fuse",
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "symbol": "WETH",
+                        "decimals": 18,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    },
+                    "tags": []
+                },
+                "token": {
+                    "decimals": 18,
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether on Fuse",
+                    "chainId": 122,
+                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                    "tokenInfo": {
+                        "name": "Wrapped Ether on Fuse",
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "symbol": "WETH",
+                        "decimals": 18,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    },
+                    "tags": []
+                }
+            },
+            "outputAmount": {
+                "numerator": [
+                    965616800
+                ],
+                "denominator": [
                     1000000
+                ],
+                "currency": {
+                    "decimals": 6,
+                    "symbol": "USDC",
+                    "name": "USD Coin on Fuse",
+                    "chainId": 122,
+                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                    "tokenInfo": {
+                        "name": "USD Coin on Fuse",
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "symbol": "USDC",
+                        "decimals": 6,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    },
+                    "tags": []
+                },
+                "token": {
+                    "decimals": 6,
+                    "symbol": "USDC",
+                    "name": "USD Coin on Fuse",
+                    "chainId": 122,
+                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                    "tokenInfo": {
+                        "name": "USD Coin on Fuse",
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "symbol": "USDC",
+                        "decimals": 6,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    },
+                    "tags": []
+                }
+            },
+            "executionPrice": {
+                "numerator": [
+                    965616800
+                ],
+                "denominator": [
+                    -1486618624,
+                    232830643
+                ],
+                "baseCurrency": {
+                    "decimals": 18,
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether on Fuse",
+                    "chainId": 122,
+                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                    "tokenInfo": {
+                        "name": "Wrapped Ether on Fuse",
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "symbol": "WETH",
+                        "decimals": 18,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    },
+                    "tags": []
+                },
+                "quoteCurrency": {
+                    "decimals": 6,
+                    "symbol": "USDC",
+                    "name": "USD Coin on Fuse",
+                    "chainId": 122,
+                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                    "tokenInfo": {
+                        "name": "USD Coin on Fuse",
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "symbol": "USDC",
+                        "decimals": 6,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    },
+                    "tags": []
+                },
+                "scalar": {
+                    "numerator": [
+                        -1486618624,
+                        232830643
+                    ],
+                    "denominator": [
+                        1000000
+                    ]
+                }
+            },
+            "nextMidPrice": {
+                "numerator": [
+                    -1457148607
+                ],
+                "denominator": [
+                    737751779,
+                    915036005
+                ],
+                "baseCurrency": {
+                    "decimals": 18,
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether on Fuse",
+                    "chainId": 122,
+                    "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                    "tokenInfo": {
+                        "name": "Wrapped Ether on Fuse",
+                        "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
+                        "symbol": "WETH",
+                        "decimals": 18,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+                    },
+                    "tags": []
+                },
+                "quoteCurrency": {
+                    "decimals": 6,
+                    "symbol": "USDC",
+                    "name": "USD Coin on Fuse",
+                    "chainId": 122,
+                    "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                    "tokenInfo": {
+                        "name": "USD Coin on Fuse",
+                        "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
+                        "symbol": "USDC",
+                        "decimals": 6,
+                        "chainId": 122,
+                        "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+                    },
+                    "tags": []
+                },
+                "scalar": {
+                    "numerator": [
+                        -1486618624,
+                        232830643
+                    ],
+                    "denominator": [
+                        1000000
+                    ]
+                }
+            },
+            "priceImpact": {
+                "numerator": [
+                    856059488,
+                    1380480455,
+                    -336661329,
+                    549156708,
+                    8387887
+                ],
+                "denominator": [
+                    1479278592,
+                    1664736159,
+                    977444823,
+                    944423004,
+                    32750022
                 ]
             }
-        },
-        "input": {
-            "decimals": 18,
-            "symbol": "WETH",
-            "name": "Wrapped Ether on Fuse",
-            "chainId": 122,
-            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-            "tokenInfo": {
-                "name": "Wrapped Ether on Fuse",
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-            },
-            "tags": []
-        },
-        "output": {
-            "decimals": 6,
-            "symbol": "USDC",
-            "name": "USD Coin on Fuse",
-            "chainId": 122,
-            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-            "tokenInfo": {
-                "name": "USD Coin on Fuse",
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-            },
-            "tags": []
         }
-    },
-    "tradeType": 0,
-    "inputAmount": {
-        "numerator": [
-            -1486618624,
-            232830643
-        ],
-        "denominator": [
-            -1486618624,
-            232830643
-        ],
-        "currency": {
-            "decimals": 18,
-            "symbol": "WETH",
-            "name": "Wrapped Ether on Fuse",
-            "chainId": 122,
-            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-            "tokenInfo": {
-                "name": "Wrapped Ether on Fuse",
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-            },
-            "tags": []
-        },
-        "token": {
-            "decimals": 18,
-            "symbol": "WETH",
-            "name": "Wrapped Ether on Fuse",
-            "chainId": 122,
-            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-            "tokenInfo": {
-                "name": "Wrapped Ether on Fuse",
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-            },
-            "tags": []
-        }
-    },
-    "outputAmount": {
-        "numerator": [
-            1001093328
-        ],
-        "denominator": [
-            1000000
-        ],
-        "currency": {
-            "decimals": 6,
-            "symbol": "USDC",
-            "name": "USD Coin on Fuse",
-            "chainId": 122,
-            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-            "tokenInfo": {
-                "name": "USD Coin on Fuse",
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-            },
-            "tags": []
-        },
-        "token": {
-            "decimals": 6,
-            "symbol": "USDC",
-            "name": "USD Coin on Fuse",
-            "chainId": 122,
-            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-            "tokenInfo": {
-                "name": "USD Coin on Fuse",
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-            },
-            "tags": []
-        }
-    },
-    "executionPrice": {
-        "numerator": [
-            1001093328
-        ],
-        "denominator": [
-            -1486618624,
-            232830643
-        ],
-        "baseCurrency": {
-            "decimals": 18,
-            "symbol": "WETH",
-            "name": "Wrapped Ether on Fuse",
-            "chainId": 122,
-            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-            "tokenInfo": {
-                "name": "Wrapped Ether on Fuse",
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-            },
-            "tags": []
-        },
-        "quoteCurrency": {
-            "decimals": 6,
-            "symbol": "USDC",
-            "name": "USD Coin on Fuse",
-            "chainId": 122,
-            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-            "tokenInfo": {
-                "name": "USD Coin on Fuse",
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-            },
-            "tags": []
-        },
-        "scalar": {
-            "numerator": [
-                -1486618624,
-                232830643
-            ],
-            "denominator": [
-                1000000
-            ]
-        }
-    },
-    "nextMidPrice": {
-        "numerator": [
-            -1414337252
-        ],
-        "denominator": [
-            1164102718,
-            900787198
-        ],
-        "baseCurrency": {
-            "decimals": 18,
-            "symbol": "WETH",
-            "name": "Wrapped Ether on Fuse",
-            "chainId": 122,
-            "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-            "tokenInfo": {
-                "name": "Wrapped Ether on Fuse",
-                "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670",
-                "symbol": "WETH",
-                "decimals": 18,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
-            },
-            "tags": []
-        },
-        "quoteCurrency": {
-            "decimals": 6,
-            "symbol": "USDC",
-            "name": "USD Coin on Fuse",
-            "chainId": 122,
-            "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-            "tokenInfo": {
-                "name": "USD Coin on Fuse",
-                "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5",
-                "symbol": "USDC",
-                "decimals": 6,
-                "chainId": 122,
-                "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-            },
-            "tags": []
-        },
-        "scalar": {
-            "numerator": [
-                -1486618624,
-                232830643
-            ],
-            "denominator": [
-                1000000
-            ]
-        }
-    },
-    "priceImpact": {
-        "numerator": [
-            731180224,
-            -2127546268,
-            -2107425010,
-            -1492134489,
-            8512872
-        ],
-        "denominator": [
-            -1012924416,
-            1657637221,
-            -1913630915,
-            -1080045884,
-            32726021
-        ]
     }
-  }
+}
  */
 router.post('/trade', tradeValidation, SwapController.trade)
 

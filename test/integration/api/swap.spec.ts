@@ -42,7 +42,7 @@ describe('/swap', () => {
         })
 
       expect(status).toEqual(200)
-      expect(body.message).toBe('No liquidity for trade')
+      expect(body.message).toBe('No Liquidity For Trade')
     })
 
     test('given required params and no optionals params should return 200 and data', async () => {

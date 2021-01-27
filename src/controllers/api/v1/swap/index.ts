@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from 'express'
 import { Container } from 'typedi'
 import { validationResult } from 'express-validator'
 import SwapService from '@services/swap'
+import TradeInfo from '@models/tradeInfo'
+import { SWAP_FAILED_CREATE_TRADE, SWAP_FAILED_NO_LIQUIDITY } from '@constants/text'
 
 type SwapCallBody = {
   currencyIn: string
@@ -50,7 +52,7 @@ class SwapController {
       )
 
       if (!swapParameters) {
-        res.status(200).json({ message: 'No liquidity for trade' })
+        res.status(200).json({ message: SWAP_FAILED_NO_LIQUIDITY })
         return
       }
 
@@ -78,7 +80,15 @@ class SwapController {
         amountIn
       )
 
-      res.send(trade)
+      let data
+
+      if (trade) {
+        data = { info: TradeInfo.fromTrade(trade), trade }
+      } else {
+        data = { error: SWAP_FAILED_CREATE_TRADE }
+      }
+
+      res.send({ data })
     } catch (e) {
       next(e)
     }
