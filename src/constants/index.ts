@@ -16,6 +16,10 @@ export const BUNDLE_ID = 1
 
 export const WFUSE = WFUSE_MAP[CHAIN_ID]
 
+export const WFUSE_ADDRESSS = WFUSE.address
+
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+
 export const DAI = new Token(
   CHAIN_ID,
   '0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA',

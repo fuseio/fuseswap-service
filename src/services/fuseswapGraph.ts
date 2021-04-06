@@ -1,29 +1,21 @@
-import 'isomorphic-fetch'
-import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
-import { getTokenPriceQuery } from '../apollo/queries'
 import { Service } from 'typedi'
+import { getTokenPriceQuery } from '../apollo/queries'
+import { fuseswapClient } from '../apollo/client'
 
 @Service()
 export default class FuseswapGraphService {
     private readonly client: ApolloClient<any>
 
     constructor () {
-      this.client = new ApolloClient({
-        link: new HttpLink({
-          uri: 'https://graph.fuse.io/subgraphs/name/fuseio/fuseswap'
-        }),
-        cache: new InMemoryCache()
-      })
+      this.client = fuseswapClient
     }
 
     async getTokenPrice (tokenAdress: string) {
       const normalizedAddress = tokenAdress.toLowerCase()
 
       const result = await this.client.query({
-        query: getTokenPriceQuery(normalizedAddress),
-        fetchPolicy: 'cache-first'
+        query: getTokenPriceQuery(normalizedAddress)
       })
 
       const fusePrice = Number(result?.data?.bundle?.ethPrice)
