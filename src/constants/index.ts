@@ -12,7 +12,13 @@ export const INITIAL_ALLOWED_SLIPPAGE = 50
 
 export const BIPS_BASE = JSBI.BigInt(10000)
 
+export const BUNDLE_ID = 1
+
 export const WFUSE = WFUSE_MAP[CHAIN_ID]
+
+export const WFUSE_ADDRESSS = WFUSE.address
+
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 export const DAI = new Token(
   CHAIN_ID,

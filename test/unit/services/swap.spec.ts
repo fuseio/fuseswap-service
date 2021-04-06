@@ -7,6 +7,7 @@ import PairService from '../../../src/services/pair'
 import ContractService from '../../../src/services/contract'
 import { generatePair } from '../../helpers'
 import MulticallService from '../../../src/services/multcall'
+import FuseswapGraphService from '../../../src/services/fuseswapGraph'
 
 describe('SwapService', () => {
   let tokenService: TokenService
@@ -24,7 +25,8 @@ describe('SwapService', () => {
     contractService = new ContractService()
 
     const multicallService = new MulticallService(contractService)
-    tokenService = new TokenService(contractService)
+    const fuseswapGraphService = new FuseswapGraphService()
+    tokenService = new TokenService(contractService, fuseswapGraphService)
     pairService = new PairService(multicallService)
   })
 
