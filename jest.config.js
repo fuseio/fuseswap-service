@@ -7,7 +7,7 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
-  testTimeout: 30000,
+  testTimeout: 40000,
   moduleNameMapper: {
     '^@services/(.*)$': '<rootDir>/src/services/$1',
     '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
