@@ -6,27 +6,25 @@ import { Interface } from '@ethersproject/abi'
 
 @Service()
 export default class MulticallService {
-  constructor (private contractService: ContractService) {}
+  constructor (private readonly contractService: ContractService) {}
 
   async call (
-    addresses: (string | undefined)[],
+    addresses: Array<string | undefined>,
     ABI: any,
     methodName: string
   ): Promise<any> {
     const contractInterface = new Interface(ABI)
     const fragment = contractInterface.getFunction(methodName)
     const callData = fragment && contractInterface.encodeFunctionData(fragment)
-    const calls =
-      fragment && addresses && addresses.length > 0
-        ? addresses.map((address) => {
-            return address && callData
-              ? {
-                  address,
-                  callData
-                }
-              : undefined
-          })
-        : []
+    const calls = fragment && addresses && addresses.length > 0
+      ? addresses.map((address) => address && callData
+        ? {
+            address,
+            callData
+          }
+        : undefined
+      )
+      : []
 
     const contract = this.contractService.getMulticallContract(
       MULTICALL_ADDRESS,
