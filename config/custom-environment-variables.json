@@ -1,25 +1,26 @@
 {
   "api": {
-    "allowCors": "COMMUNITY_API_ALLOW_CORS",
-    "secret": "COMMUNITY_API_SECRET",
-    "tokenExpiresIn": "COMMUNITY_TOKEN_EXPIRES_IN",
-    "port": "PORT"
+    "allowCors": "FUSESWAP_API_ALLOW_CORS",
+    "secret": "FUSESWAP_API_SECRET",
+    "tokenExpiresIn": "FUSESWAP_TOKEN_EXPIRES_IN",
+    "port": "FUSESWAP_PORT"
   },
   "aws": {
     "secrets": {
-      "secretId": "COMMUNITY_AWS_SECRET_ID",
+      "secretId": "FUSESWAP_AWS_SECRET_ID",
        "manager": {
-        "region": "COMMUNITY_AWS_SECRET_MANAGER_REGION"
+        "region": "FUSESWAP_AWS_SECRET_MANAGER_REGION"
       }
     }
   },
   "mongo": {
-    "uri": "COMMUNITY_MONGO_URI",
-    "debug": "COMMUNITY_MONGO_DEBUG"
+    "uri": "FUSESWAP_MONGO_URI",
+    "debug": "FUSESWAP_MONGO_DEBUG"
   },
   "secrets": {
     "accounts": {
-      "seed": "COMMUNITY_SECRETS_ACCOUNTS_SEED"
+      "seed": "FUSESWAP_SECRETS_ACCOUNTS_SEED"
     }
-  }
+  },
+  "rpcUrl": "FUSESWAP_RPC_URL"
 }
