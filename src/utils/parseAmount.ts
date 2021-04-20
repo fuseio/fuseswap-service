@@ -9,7 +9,7 @@ import { parseUnits } from '@ethersproject/units'
 
 export default function parseAmount (
   value: string,
-  currency: Currency
+  currency?: Currency
 ): CurrencyAmount | undefined {
   if (!value || !currency) {
     return undefined

@@ -10,7 +10,7 @@ describe('/price', () => {
             .get('/api/v1/price/' + DAI.address)
              
           expect(status).toEqual(200)
-          expect(body).toBeDefined()
+          expect(body).toHaveProperty('data.price')
       })
   })
 })

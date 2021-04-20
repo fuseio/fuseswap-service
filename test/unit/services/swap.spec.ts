@@ -1,7 +1,7 @@
 import { ETHER as FUSE, Trade, Pair, TokenAmount } from '@fuseio/fuse-swap-sdk'
 import sinon from 'sinon'
 import SwapService from '../../../src/services/swap'
-import { DAI, WETH, WFUSE } from '../../../src/constants'
+import { DAI, FUSD, USDC, WETH, WFUSE } from '../../../src/constants'
 import TokenService from '../../../src/services/token'
 import PairService from '../../../src/services/pair'
 import ContractService from '../../../src/services/contract'
@@ -42,8 +42,7 @@ describe('SwapService', () => {
       sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WETH)])
       const swapService = new SwapService(
         tokenService,
-        pairService,
-        contractService
+        pairService
       )
 
       const trade = await swapService.getBestTradeExactIn(
@@ -53,8 +52,8 @@ describe('SwapService', () => {
       )
 
       expect(trade).toBeInstanceOf(Trade)
-      expect(trade.route.input.symbol).toEqual(DAI.symbol)
-      expect(trade.route.output.symbol).toEqual(WETH.symbol)
+      expect(trade?.route.input.symbol).toEqual(DAI.symbol)
+      expect(trade?.route.output.symbol).toEqual(WETH.symbol)
     })
 
     test('given fuse and token should return trade', async () => {
@@ -70,7 +69,6 @@ describe('SwapService', () => {
       const swapService = new SwapService(
         tokenService,
         pairService,
-        contractService
       )
       const trade = await swapService.getBestTradeExactIn(
         DAI.address,
@@ -79,109 +77,153 @@ describe('SwapService', () => {
       )
 
       expect(trade).toBeInstanceOf(Trade)
-      expect(trade.route.input.symbol).toEqual(DAI.symbol)
-      expect(trade.route.output.symbol).toEqual(FUSE.symbol)
+      expect(trade?.route.input.symbol).toEqual(DAI.symbol)
+      expect(trade?.route.output.symbol).toEqual(FUSE.symbol)
     })
   })
 
-  describe('#swapCallParameters', () => {
-    test('returns parameters for tokens to tokens trade', async () => {
-      sinon
-        .stub(tokenService, 'getToken')
-        .withArgs(DAI.address)
-        .resolves(DAI)
-        .withArgs(WETH.address)
-        .resolves(WETH)
-
-      sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WETH)])
-
-      const swapService = new SwapService(
-        tokenService,
-        pairService,
-        contractService
-      )
-      const swapParameters = await swapService.getSwapCallParameters(
-        DAI.address,
-        WETH.address,
-        '1',
-        recipient,
-        slippage,
-        deadline
-      )
-
-      const { methodName, args } = swapParameters
-      const [amountIn, , , to] = args
-
-      expect(methodName).toEqual('swapExactTokensForTokens')
-      expect(amountIn).toBe('0xde0b6b3a7640000')
-      expect(to).toBe(recipient)
+  describe('#getSwapCallData', () => {
+    describe('basicSwap', () => {
+      test('returns parameters for tokens to tokens trade', async () => {
+        sinon
+          .stub(tokenService, 'getToken')
+          .withArgs(DAI.address)
+          .resolves(DAI)
+          .withArgs(WETH.address)
+          .resolves(WETH)
+  
+        sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WETH)])
+  
+        const swapService = new SwapService(
+          tokenService,
+          pairService
+        )
+        const swapParameters = await swapService.getSwapCallData(
+          DAI.address,
+          WETH.address,
+          '1',
+          recipient,
+          slippage,
+          deadline
+        )
+  
+        const { methodName, args } = swapParameters
+        const [amountIn, , , to] = args
+  
+        expect(methodName).toEqual('swapExactTokensForTokens')
+        expect(amountIn).toBe('0xde0b6b3a7640000')
+        expect(to).toBe(recipient)
+      })
+  
+      test('returns parameters for tokens to fuse trade', async () => {
+        sinon
+          .stub(tokenService, 'getToken')
+          .withArgs(DAI.address)
+          .resolves(DAI)
+          .withArgs(FUSE_SYMBOL)
+          .resolves(FUSE)
+  
+        sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WFUSE)])
+  
+        const swapService = new SwapService(
+          tokenService,
+          pairService
+        )
+        const swapParameters = await swapService.getSwapCallData(
+          DAI.address,
+          FUSE_SYMBOL,
+          '1',
+          recipient,
+          slippage,
+          deadline
+        )
+  
+        expect(swapParameters.methodName).toEqual('swapExactTokensForETH')
+      })
+  
+      test('returns paramters for fuse to tokens trade', async () => {
+        sinon
+          .stub(tokenService, 'getToken')
+          .withArgs(FUSE_SYMBOL)
+          .resolves(FUSE)
+          .withArgs(WETH.address)
+          .resolves(WETH)
+  
+        sinon
+          .stub(pairService, 'getPairs')
+          .resolves([
+            new Pair(
+              new TokenAmount(WFUSE, '60000000000000000000'),
+              new TokenAmount(WETH, '70000000000000000000')
+            ),
+          ])
+  
+        const swapService = new SwapService(
+          tokenService,
+          pairService
+        )
+        const swapParameters = await swapService.getSwapCallData(
+          FUSE_SYMBOL,
+          WETH.address,
+          '1',
+          recipient,
+          slippage,
+          deadline
+        )
+  
+        const { methodName, args, value } = swapParameters
+        const [, , to] = args
+  
+        expect(methodName).toEqual('swapExactETHForTokens')
+        expect(value).toBe('0xde0b6b3a7640000')
+        expect(to).toBe(recipient)
+      })
     })
 
-    test('returns parameters for tokens to fuse trade', async () => {
-      sinon
-        .stub(tokenService, 'getToken')
-        .withArgs(DAI.address)
-        .resolves(DAI)
-        .withArgs(FUSE_SYMBOL)
-        .resolves(FUSE)
+    describe('pegSwap', () => {
+      test('returns swapCallData for fusd', async () => {
+        const swapService = new SwapService(
+          tokenService,
+          pairService
+        )
 
-      sinon.stub(pairService, 'getPairs').resolves([generatePair(DAI, WFUSE)])
+        const data = await swapService.getSwapCallData(
+          FUSD.address,
+          USDC.address,
+          '1',
+          recipient,
+          slippage,
+          deadline
+        )
 
-      const swapService = new SwapService(
-        tokenService,
-        pairService,
-        contractService
-      )
-      const swapParameters = await swapService.getSwapCallParameters(
-        DAI.address,
-        FUSE_SYMBOL,
-        '1',
-        recipient,
-        slippage,
-        deadline
-      )
+        const { methodName, args } = data
+        const [amount] = args
 
-      expect(swapParameters.methodName).toEqual('swapExactTokensForETH')
-    })
+        expect(methodName).toEqual('swap')
+        expect(amount).toBe('0xde0b6b3a7640000')  
+      })
 
-    test('returns paramters for fuse to tokens trade', async () => {
-      sinon
-        .stub(tokenService, 'getToken')
-        .withArgs(FUSE_SYMBOL)
-        .resolves(FUSE)
-        .withArgs(WETH.address)
-        .resolves(WETH)
+      test('returns swapCallData for usdc', async () => {
+        const swapService = new SwapService(
+          tokenService,
+          pairService
+        )
 
-      sinon
-        .stub(pairService, 'getPairs')
-        .resolves([
-          new Pair(
-            new TokenAmount(WFUSE, '60000000000000000000'),
-            new TokenAmount(WETH, '70000000000000000000')
-          ),
-        ])
+        const data = await swapService.getSwapCallData(
+          USDC.address,
+          FUSD.address,
+          '1',
+          recipient,
+          slippage,
+          deadline
+        )
 
-      const swapService = new SwapService(
-        tokenService,
-        pairService,
-        contractService
-      )
-      const swapParameters = await swapService.getSwapCallParameters(
-        FUSE_SYMBOL,
-        WETH.address,
-        '1',
-        recipient,
-        slippage,
-        deadline
-      )
+        const { methodName, args } = data
+        const [amount] = args
 
-      const { methodName, args, value } = swapParameters
-      const [, , to] = args
-
-      expect(methodName).toEqual('swapExactETHForTokens')
-      expect(value).toBe('0xde0b6b3a7640000')
-      expect(to).toBe(recipient)
-      expect(swapParameters.methodName).toEqual('swapExactETHForTokens')
+        expect(methodName).toEqual('swap')
+        expect(amount).toBe('0xf4240')  
+      })
     })
   })
 })

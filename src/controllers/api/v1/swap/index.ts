@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Request, Response, NextFunction } from 'express'
 import { Container } from 'typedi'
-import { validationResult } from 'express-validator'
 import SwapService from '@services/swap'
 import TradeInfo from '@models/tradeInfo'
 import { SWAP_FAILED_CREATE_TRADE, SWAP_FAILED_NO_LIQUIDITY } from '@constants/text'
@@ -33,16 +32,9 @@ class SwapController {
     }: SwapCallBody = req.body
 
     try {
-      const errors = validationResult(req)
-
-      if (!errors.isEmpty()) {
-        res.status(400).json({ error: errors.mapped() })
-        return
-      }
-
       const swapService = Container.get(SwapService)
 
-      const swapParameters = await swapService.getSwapCallParameters(
+      const swapCallData = await swapService.getSwapCallData(
         currencyIn,
         currencyOut,
         amountIn,
@@ -51,12 +43,12 @@ class SwapController {
         ttl
       )
 
-      if (!swapParameters) {
+      if (!swapCallData) {
         res.status(200).json({ message: SWAP_FAILED_NO_LIQUIDITY })
         return
       }
 
-      res.send(swapParameters)
+      res.send(swapCallData)
     } catch (e) {
       next(e)
     }
@@ -65,13 +57,6 @@ class SwapController {
   async trade (req: Request, res: Response, next: NextFunction) {
     const { currencyIn, currencyOut, amountIn }: TradeBody = req.body
     try {
-      const errors = validationResult(req)
-
-      if (!errors.isEmpty()) {
-        res.status(400).json({ error: errors.mapped() })
-        return
-      }
-
       const swapService = Container.get(SwapService)
 
       const trade = await swapService.getBestTradeExactIn(

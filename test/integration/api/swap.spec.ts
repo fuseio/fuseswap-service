@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 import request from 'supertest'
 import app from '../../../src/app'
-import { DAI, USDC } from '../../../src/constants'
+import { DAI, FUSD, USDC } from '../../../src/constants'
 
 describe('/swap', () => {
   describe('POST /swapcallparameters', () => {
-    test('given params when successful returns 200 and data', async () => {
+    test('given params when successful returns 200 and expected response', async () => {
       const { status, body } = await request(app)
         .post('/api/v1/swap/swapcallparameters')
         .send({
@@ -18,7 +18,10 @@ describe('/swap', () => {
         })
 
       expect(status).toEqual(200)
-      expect(body).toBeDefined()
+      expect(body).toHaveProperty('methodName')
+      expect(body).toHaveProperty('args')
+      expect(body).toHaveProperty('rawTxn')
+      expect(body).toHaveProperty('value')
     })
 
     test('when params not provided should return 400', async () => {
@@ -45,33 +48,54 @@ describe('/swap', () => {
       expect(body.message).toBe('No Liquidity For Trade')
     })
 
-    test('given required params and no optionals params should return 200 and data', async () => {
+    test('given required params and no optionals params should return 200 and expected response', async () => {
       const { status, body } = await request(app)
         .post('/api/v1/swap/swapcallparameters')
         .send({
-          currencyIn: '0x495d133B938596C9984d462F007B676bDc57eCEC',
-          currencyOut: '0xbf0718762B7951D56C52Cc7f75e4fa665a7FF0E5',
+          currencyIn: DAI.address,
+          currencyOut: USDC.address,
           amountIn: '1',
           recipient: '0x5670d7076E7b3604ceb07c003ff0920490756587',
         })
 
       expect(status).toEqual(200)
-      expect(body).toBeDefined()
+      expect(body).toHaveProperty('methodName')
+      expect(body).toHaveProperty('args')
+      expect(body).toHaveProperty('rawTxn')
+      expect(body).toHaveProperty('value')
+    })
+
+    test('given peg tokens should return 200 and expected response', async () => {
+      const { status, body } = await request(app)
+        .post('/api/v1/swap/swapcallparameters')
+        .send({
+          currencyIn: FUSD.address,
+          currencyOut: USDC.address,
+          amountIn: '1',
+          recipient: '0x5670d7076E7b3604ceb07c003ff0920490756587',
+        })
+
+      expect(status).toEqual(200)
+      expect(body).toHaveProperty('methodName')
+      expect(body).toHaveProperty('args')
+      expect(body).toHaveProperty('rawTxn')
+      expect(body).toHaveProperty('value')
     })
   })
 
   describe('POST /trade', () => {
-    test('given params should return 200 and trade data', async () => {
+    test('given params should return 200 and expected response', async () => {
       const { status, body } = await request(app)
         .post('/api/v1/swap/trade')
         .send({
-          currencyIn: '0x495d133B938596C9984d462F007B676bDc57eCEC',
-          currencyOut: '0xbf0718762B7951D56C52Cc7f75e4fa665a7FF0E5',
+          currencyIn: DAI.address,
+          currencyOut: USDC.address,
           amountIn: '1',
         })
 
       expect(status).toEqual(200)
-      expect(body).toBeDefined()
+      expect(body).toHaveProperty('data.info')
+      expect(body).toHaveProperty('data.trade')
     })
 
     test('given params when not provided then return 400', async () => {

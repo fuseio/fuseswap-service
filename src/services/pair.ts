@@ -87,7 +87,9 @@ export default class PairService {
     })
   }
 
-  async getPairs (currencyIn: Currency, currencyOut: Currency): Promise<any> {
+  async getPairs (currencyIn?: Currency, currencyOut?: Currency): Promise<any> {
+    if (!currencyIn || !currencyOut) return
+
     const [tokenA, tokenB] = [
       wrapCurrency(currencyIn, CHAIN_ID),
       wrapCurrency(currencyOut, CHAIN_ID)
