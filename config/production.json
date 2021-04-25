@@ -1,6 +1,7 @@
 {
   "api": {
-    "allowCors": true
+    "allowCors": true,
+    "port": 8080
   },
   "mongo": {
     "debug": false
