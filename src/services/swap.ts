@@ -9,7 +9,7 @@ import PairService from './pair'
 import { isFusdUsdcPair } from '@utils/isPair'
 import BaseSwap from '@models/swap/baseSwap'
 import PegSwap from '@models/swap/pegSwap'
-import BasicSwap from '@models/swap/basicSwap'
+import FuseSwap from '@models/swap/fuseSwap'
 import { Trade } from '@fuseio/fuse-swap-sdk'
 
 enum SwapType {
@@ -66,7 +66,7 @@ export default class SwapService {
         swap = new PegSwap(currencyIn, currencyOut, parsedAmount, recipient)
         break
       case SwapType.BASIC_SWAP:
-        swap = new BasicSwap(
+        swap = new FuseSwap(
           currencyIn,
           currencyOut,
           parsedAmount,

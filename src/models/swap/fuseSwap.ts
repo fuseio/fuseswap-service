@@ -6,7 +6,7 @@ import BaseSwap from './baseSwap'
 import { ROUTER_ADDRESS, BIPS_BASE } from '@constants/index'
 import { Currency, CurrencyAmount, JSBI, Percent, Router, Trade } from '@fuseio/fuse-swap-sdk'
 
-export default class BasicSwap extends BaseSwap {
+export default class FuseSwap extends BaseSwap {
     private readonly slippageTolerance: Percent
     private readonly deadline: number
     private readonly pairs: any

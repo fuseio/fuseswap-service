@@ -83,7 +83,7 @@ describe('SwapService', () => {
   })
 
   describe('#getSwapCallData', () => {
-    describe('basicSwap', () => {
+    describe('fuseSwap', () => {
       test('returns parameters for tokens to tokens trade', async () => {
         sinon
           .stub(tokenService, 'getToken')
