@@ -22,14 +22,9 @@ export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries: 
     const queryString = `
         query {
             tokenDayDatas(where: { token: "${tokenAddress}", }, first: ${numberOfEntries}, orderBy: date, orderDirection: desc) {
-                address: id
+                id
                 date
                 priceUSD
-                totalLiquidityToken
-                totalLiquidityUSD
-                totalLiquidityETH
-                dailyVolumeETH
-                dailyVolumeToken
                 dailyVolumeUSD
             }
         }

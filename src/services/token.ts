@@ -5,11 +5,31 @@ import ProviderService from './provider'
 import { CHAIN_ID, WFUSE_ADDRESSS } from '@constants/index'
 import ContractService from './contract'
 import FuseswapGraphService from './fuseswapGraph'
-import isZeroAddress from '@utils/isZeroAddress'
+import { ZERO_ADDRESS } from '@constants/index'
+import get from 'lodash.get'
+
+class TokenStat {
+  date: Date;
+
+  constructor(public address: string, public price: string, public volume: string, public timestamp: number) {
+    this.date = new Date(timestamp * 1000)
+  }
+
+}
+
+
+const tokensMapping = {
+  [ZERO_ADDRESS]: WFUSE_ADDRESSS,
+  '0x249be57637d8b013ad64785404b24aebae9b098b': '0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5'
+}
 
 @Service()
 export default class TokenService {
   constructor (private contractService: ContractService, private fuseswapGraphService: FuseswapGraphService) {}
+
+  static getTokenAddressForAnalytics(tokenAddress: string): string {
+    return get(tokensMapping, tokenAddress.toLowerCase(), tokenAddress.toLowerCase())
+  }
 
   async getToken (tokenAddress: string): Promise<Currency | undefined> {
     if (!tokenAddress) return
@@ -36,16 +56,16 @@ export default class TokenService {
   }
 
   async getTokenPrice (tokenAddress: string): Promise<number | undefined> {
-    // FIXME: Add WFUSE<->ZERO Address mapping to token map
-    const address = isZeroAddress(tokenAddress) ? WFUSE_ADDRESSS : tokenAddress
+    const address = TokenService.getTokenAddressForAnalytics(tokenAddress)
     const price = await this.fuseswapGraphService.getTokenPrice(address)
     return price
   }
 
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
-    // FIXME: Add WFUSE<->ZERO Address mapping to token map
-    const address = isZeroAddress(tokenAddress) ? WFUSE_ADDRESSS : tokenAddress
-    const stats = await this.fuseswapGraphService.getTokenStats(address, limit)
+    const address = TokenService.getTokenAddressForAnalytics(tokenAddress)
+    const response = await this.fuseswapGraphService.getTokenStats(address, limit)
+    const stats = response.map((stat: { address: string; priceUSD: string; dailyVolumeUSD: string; date: number }) =>
+      new TokenStat(tokenAddress, stat.priceUSD, stat.dailyVolumeUSD, stat.date))
     return stats
   }
 }
