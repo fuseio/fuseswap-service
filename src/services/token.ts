@@ -64,7 +64,7 @@ export default class TokenService {
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
     const address = TokenService.getTokenAddressForAnalytics(tokenAddress)
     const response = await this.fuseswapGraphService.getTokenStats(address, limit)
-    const stats = response.map((stat: { address: string; priceUSD: string; dailyVolumeUSD: string; date: number }) =>
+    const stats = response.map((stat: { priceUSD: string; dailyVolumeUSD: string; date: number }) =>
       new TokenStat(tokenAddress, stat.priceUSD, stat.dailyVolumeUSD, stat.date))
     return stats
   }

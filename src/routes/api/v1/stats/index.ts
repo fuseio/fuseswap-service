@@ -5,21 +5,27 @@ import { getTokenStatsValidation } from '@controllers/api/v1/stats/validations'
 const router = Router()
 
 /**
- * @api {get} /stats Get historical statistics of the token
+ * @api {get} /stats/:tokenAddress?=limit={limit} Get historical statistics of the token
  * @apiName GetTokenStats
  * @apiGroup Stats
  *
  * @apiParam {String} tokenAddress The currency address
+ * @apiParam {String} limit The number of days to return statistics for (query param)
  *
- * @apiSuccess {Number} price The price of the token
+ * @apiSuccess [{TokenStat[]] arry of token objects, see example below
  *
  * @apiSuccessExample {json} Success-Response:
  *
  * {
- *  "data": {
- *      "price":1.009884197756788
- *   }
- * }
+ *  "data": [
+ *       {
+ *           "address": "0xa722c13135930332eb3d749b2f0906559d2c5b99",
+ *           "price": "2389.74779405372110747871079158035",
+ *           "volume": "3343.67560523501352604818272285103",
+ *           "timestamp": 1619395200,
+ *           "date": "2021-04-26T00:00:00.000Z"
+ *       }
+ * ]
  *
  *
  *
