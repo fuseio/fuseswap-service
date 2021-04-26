@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-client'
 import { Service } from 'typedi'
-import { getTokenPriceQuery } from '../apollo/queries'
+import { getTokenPriceQuery, getTokenDailyStatsQuery } from '../apollo/queries'
 import { fuseswapClient } from '../apollo/client'
 
 @Service()
@@ -22,5 +22,15 @@ export default class FuseswapGraphService {
       const derivedFuse = Number(result?.data?.token?.derivedETH)
 
       return fusePrice * derivedFuse
+    }
+
+    async getTokenStats (tokenAdress: string, limit: number) {
+      const normalizedAddress = tokenAdress.toLowerCase()
+
+      const result = await this.client.query({
+        query: getTokenDailyStatsQuery(normalizedAddress, limit)
+      })
+
+      return result?.data?.tokenDayDatas
     }
 }

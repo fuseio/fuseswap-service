@@ -16,3 +16,17 @@ export function getTokenPriceQuery (tokenAddress: string) {
     `
   return gql(queryString)
 }
+
+export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries = 7) {
+  const queryString = `
+        query {
+            tokenDayDatas(where: { token: "${tokenAddress}", }, first: ${numberOfEntries}, orderBy: date, orderDirection: desc) {
+                id
+                date
+                priceUSD
+                dailyVolumeUSD
+            }
+        }
+      `
+  return gql(queryString)
+}
