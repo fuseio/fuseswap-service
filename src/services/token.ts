@@ -41,4 +41,11 @@ export default class TokenService {
     const price = await this.fuseswapGraphService.getTokenPrice(address)
     return price
   }
+
+  async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
+    // FIXME: Add WFUSE<->ZERO Address mapping to token map
+    const address = isZeroAddress(tokenAddress) ? WFUSE_ADDRESSS : tokenAddress
+    const stats = await this.fuseswapGraphService.getTokenStats(address, limit)
+    return stats
+  }
 }
