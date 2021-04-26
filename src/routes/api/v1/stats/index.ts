@@ -11,8 +11,8 @@ const router = Router()
  *
  * @apiParam {String} tokenAddress The currency address
  * @apiParam {String} limit The number of days to return statistics for (query param)
- *
- * @apiSuccess [{TokenStat[]] arry of token objects, see example below
+ *  
+ * @apiSuccess {Object[]} array of token stats objects, see example below
  *
  * @apiSuccessExample {json} Success-Response:
  *
