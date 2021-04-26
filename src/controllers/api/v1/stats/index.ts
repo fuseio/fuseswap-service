@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express'
 import Container from 'typedi'
 import TokenService from '@services/token'
 
-
 export default {
   async getStats (req: Request, res: Response, next: NextFunction) {
     try {

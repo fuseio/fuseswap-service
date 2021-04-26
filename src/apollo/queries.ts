@@ -17,9 +17,8 @@ export function getTokenPriceQuery (tokenAddress: string) {
   return gql(queryString)
 }
 
-
-export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries: number = 7) {
-    const queryString = `
+export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries = 7) {
+  const queryString = `
         query {
             tokenDayDatas(where: { token: "${tokenAddress}", }, first: ${numberOfEntries}, orderBy: date, orderDirection: desc) {
                 id
@@ -29,5 +28,5 @@ export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries: 
             }
         }
       `
-    return gql(queryString)
-  }
+  return gql(queryString)
+}

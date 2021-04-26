@@ -9,6 +9,6 @@ export const getTokenStatsValidation = (
 ) => {
   handleValidations([
     param('tokenAddress').exists().isEthereumAddress(),
-    query('limit').exists().isString(),
+    query('limit').exists().isString()
   ], req, res, next)
 }

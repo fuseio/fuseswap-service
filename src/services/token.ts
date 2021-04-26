@@ -2,10 +2,9 @@ import { Service } from 'typedi'
 import { ETHER as FUSE, Token, Currency } from '@fuseio/fuse-swap-sdk'
 import getTokens from '@utils/token/getTokens'
 import ProviderService from './provider'
-import { CHAIN_ID, WFUSE_ADDRESSS } from '@constants/index'
+import { CHAIN_ID, WFUSE_ADDRESSS, ZERO_ADDRESS } from '@constants/index'
 import ContractService from './contract'
 import FuseswapGraphService from './fuseswapGraph'
-import { ZERO_ADDRESS } from '@constants/index'
 import get from 'lodash.get'
 
 class TokenStat {
