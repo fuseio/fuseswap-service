@@ -54,10 +54,24 @@ export default class TokenService {
     }
   }
 
-  async getTokenPrice (tokenAddress: string): Promise<number | undefined> {
+  async getTokenPrice (tokenAddress: string): Promise<string | undefined> {
     const address = TokenService.getTokenAddressForAnalytics(tokenAddress)
     const price = await this.fuseswapGraphService.getTokenPrice(address)
-    return price
+    return price.toString()
+  }
+
+  async getTokenPriceChange (tokenAddress: string): Promise<any> {
+    const currentPrice = await this.getTokenPrice(tokenAddress)
+    if (!currentPrice) {
+      return  null
+    }
+    const openingStat = await this.getTokenStats(tokenAddress, 1)
+    if (openingStat.length == 0) {
+      return null
+    }
+    const openingPrice = openingStat[0].price
+    const priceChange = ((Number(currentPrice) - Number(openingPrice)) / Number(openingPrice)).toString()
+    return {priceChange, currentPrice, openingStat}
   }
 
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
