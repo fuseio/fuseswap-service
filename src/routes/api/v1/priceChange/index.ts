@@ -11,7 +11,7 @@ const router = Router()
  *
  * @apiParam {String} tokenAddress The currency address
  *
- * @apiSuccess {String} priceChange The price change ratio of the token 
+ * @apiSuccess {String} priceChange The price change ratio of the token
  * @apiSuccess {String} currentPrice The current price of the token
  * @apiSuccess {Object} openingStat the historic opening stat of the token (see stats endpoint)
  *
