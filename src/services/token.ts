@@ -64,7 +64,7 @@ export default class TokenService {
       return null
     }
     const openingStat = await this.getTokenStats(tokenAddress, 1)
-    if (openingStat.length == 0) {
+    if (openingStat.length === 0) {
       return null
     }
     const openingPrice = openingStat[0].price
