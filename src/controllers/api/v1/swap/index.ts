@@ -5,22 +5,7 @@ import SwapService from '@services/swap'
 import TradeInfo from '@models/tradeInfo'
 import { SWAP_FAILED_CREATE_TRADE, SWAP_FAILED_NO_LIQUIDITY } from '@constants/text'
 
-type SwapCallBody = {
-  currencyIn: string
-  currencyOut: string
-  amountIn: string
-  allowedSlippage: number
-  ttl: number
-  recipient: string
-}
-
-type TradeBody = {
-  currencyIn: string
-  currencyOut: string
-  amountIn: string
-}
-
-class SwapController {
+export default {
   async swapCallParameters (req: Request, res: Response, next: NextFunction) {
     const {
       currencyIn,
@@ -29,7 +14,7 @@ class SwapController {
       allowedSlippage,
       ttl,
       recipient
-    }: SwapCallBody = req.body
+    } = req.body
 
     try {
       const swapService = Container.get(SwapService)
@@ -52,10 +37,10 @@ class SwapController {
     } catch (e) {
       next(e)
     }
-  }
+  },
 
   async trade (req: Request, res: Response, next: NextFunction) {
-    const { currencyIn, currencyOut, amountIn }: TradeBody = req.body
+    const { currencyIn, currencyOut, amountIn } = req.body
     try {
       const swapService = Container.get(SwapService)
 
@@ -79,5 +64,3 @@ class SwapController {
     }
   }
 }
-
-export default new SwapController()
