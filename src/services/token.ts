@@ -10,12 +10,10 @@ import get from 'lodash.get'
 class TokenStat {
   date: Date;
 
-  constructor(public address: string, public price: string, public volume: string, public timestamp: number) {
+  constructor (public address: string, public price: string, public volume: string, public timestamp: number) {
     this.date = new Date(timestamp * 1000)
   }
-
 }
-
 
 const tokensMapping = {
   [ZERO_ADDRESS]: WFUSE_ADDRESSS,
@@ -26,7 +24,7 @@ const tokensMapping = {
 export default class TokenService {
   constructor (private contractService: ContractService, private fuseswapGraphService: FuseswapGraphService) {}
 
-  static getTokenAddressForAnalytics(tokenAddress: string): string {
+  static getTokenAddressForAnalytics (tokenAddress: string): string {
     return get(tokensMapping, tokenAddress.toLowerCase(), tokenAddress.toLowerCase())
   }
 
@@ -54,10 +52,24 @@ export default class TokenService {
     }
   }
 
-  async getTokenPrice (tokenAddress: string): Promise<number | undefined> {
+  async getTokenPrice (tokenAddress: string): Promise<string | undefined> {
     const address = TokenService.getTokenAddressForAnalytics(tokenAddress)
     const price = await this.fuseswapGraphService.getTokenPrice(address)
-    return price
+    return price.toString()
+  }
+
+  async getTokenPriceChange (tokenAddress: string): Promise<any> {
+    const currentPrice = await this.getTokenPrice(tokenAddress)
+    if (!currentPrice) {
+      return null
+    }
+    const openingStat = await this.getTokenStats(tokenAddress, 1)
+    if (openingStat.length === 0) {
+      return null
+    }
+    const openingPrice = openingStat[0].price
+    const priceChange = ((Number(currentPrice) - Number(openingPrice)) / Number(openingPrice)).toString()
+    return { priceChange, currentPrice, openingStat }
   }
 
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {

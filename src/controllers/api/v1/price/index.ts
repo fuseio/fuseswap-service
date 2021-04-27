@@ -15,5 +15,19 @@ export default {
     } catch (e) {
       next(e)
     }
+  },
+
+  async getPriceChange (req: Request, res: Response, next: NextFunction) {
+    try {
+      const { tokenAddress } = req.params
+
+      const tokenService = Container.get(TokenService)
+
+      const priceChange = await tokenService.getTokenPriceChange(tokenAddress)
+
+      res.send({ data: priceChange })
+    } catch (e) {
+      next(e)
+    }
   }
 }
