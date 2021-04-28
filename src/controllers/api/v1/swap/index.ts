@@ -2,7 +2,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { Container } from 'typedi'
 import SwapService from '@services/swap'
-import TradeInfo from '@models/tradeInfo'
 import { SWAP_FAILED_CREATE_TRADE, SWAP_FAILED_NO_LIQUIDITY } from '@constants/text'
 
 export default {
@@ -44,7 +43,7 @@ export default {
     try {
       const swapService = Container.get(SwapService)
 
-      const trade = await swapService.getBestTradeExactIn(
+      const trade = await swapService.getTrade(
         currencyIn,
         currencyOut,
         amountIn
@@ -53,7 +52,7 @@ export default {
       let data
 
       if (trade) {
-        data = { info: TradeInfo.fromTrade(trade), trade }
+        data = { ...trade }
       } else {
         data = { error: SWAP_FAILED_CREATE_TRADE }
       }

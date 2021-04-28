@@ -5,10 +5,11 @@ import { abi as ROUTERV2_ABI } from '@constants/abis/IUniswapV2Router02.json'
 import BaseSwap from './baseSwap'
 import { ROUTER_ADDRESS, BIPS_BASE } from '@constants/index'
 import { Currency, CurrencyAmount, JSBI, Percent, Router, Trade } from '@fuseio/fuse-swap-sdk'
+import TradeInfo from '@models/tradeInfo'
 
 export default class FuseSwap extends BaseSwap {
     private readonly slippageTolerance: Percent
-    private readonly deadline: number
+    private readonly deadline?: number
     private readonly pairs: any
 
     swapContractName = 'UniswapV2Router'
@@ -17,13 +18,13 @@ export default class FuseSwap extends BaseSwap {
       currencyIn: Currency,
       currencyOut: Currency,
       amountIn: CurrencyAmount,
-      recipient: string,
-      slippageTolerance: number,
-      deadline: number,
-      pairs: any
+      pairs: any,
+      recipient?: string,
+      slippageTolerance?: number,
+      deadline?: number
     ) {
       super(currencyIn, currencyOut, amountIn, recipient)
-      this.slippageTolerance = new Percent(JSBI.BigInt(slippageTolerance), BIPS_BASE)
+      this.slippageTolerance = new Percent(JSBI.BigInt(slippageTolerance ?? 0), BIPS_BASE)
       this.deadline = deadline
       this.pairs = pairs
     }
@@ -41,8 +42,8 @@ export default class FuseSwap extends BaseSwap {
     }
 
     getParams () {
-      const trade = this.getTrade()
-      if (!trade) return
+      const trade = this.getTradeExactIn()
+      if (!trade || !this.recipient || !this.deadline) return
 
       return Router.swapCallParameters(trade, {
         feeOnTransfer: false,
@@ -66,7 +67,17 @@ export default class FuseSwap extends BaseSwap {
       return txn
     }
 
-    private getTrade () {
+    async getTrade () {
+      const trade = this.getTradeExactIn()
+      if (!trade) return
+
+      return {
+        info: TradeInfo.fromTrade(trade),
+        trade
+      }
+    }
+
+    private getTradeExactIn () {
       return Trade.bestTradeExactIn(this.pairs, this.amountIn, this.currencyOut, {
         maxHops: 3,
         maxNumResults: 1

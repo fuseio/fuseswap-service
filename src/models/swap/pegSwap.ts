@@ -6,6 +6,8 @@ import Provider from '@services/provider'
 import BaseSwap from './baseSwap'
 import { Token } from '@fuseio/fuse-swap-sdk'
 import toHex from '@utils/toHex'
+import TradeInfo from '@models/tradeInfo'
+import { formatUnits } from '@ethersproject/units'
 
 export default class PegSwap extends BaseSwap {
   swapContractName = 'PegSwap'
@@ -46,5 +48,43 @@ export default class PegSwap extends BaseSwap {
     const txn = await contract.populateTransaction[methodName](...args)
 
     return txn
+  }
+
+  get formattedAmountIn () {
+    return formatUnits(this.amountIn.raw.toString(), this.currencyIn.decimals)
+  }
+
+  async getSwappableAmount () {
+    if (!(this.currencyIn instanceof Token) || !(this.currencyOut instanceof Token)) {
+      throw new Error('Expected instance of Token')
+    }
+
+    const contract = this.getSwapContract()
+
+    const amount = await contract.getSwappableAmount(this.currencyIn.address, this.currencyOut.address)
+    return formatUnits(amount, this.currencyOut.decimals)
+  }
+
+  async getTrade () {
+    const maxAmount = await this.getSwappableAmount()
+    console.log(maxAmount, this.formattedAmountIn)
+    if (Number(this.formattedAmountIn) > Number(maxAmount)) {
+      return
+    }
+
+    return {
+      info: new TradeInfo(
+        this.formattedAmountIn,
+        this.formattedAmountIn,
+        [this.currencyIn.symbol, this.currencyOut.symbol],
+        this.currencyIn.symbol,
+        this.currencyOut.symbol,
+        this.formattedAmountIn,
+        this.formattedAmountIn,
+        '0'
+      ),
+      // empty object for compatibility
+      trade: {}
+    }
   }
 }

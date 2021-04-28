@@ -183,6 +183,20 @@ describe('/swap', () => {
       expect(body).toHaveProperty('data.trade')
     })
 
+    test('given peg tokens should return 200 and expected response (1-1)', async () => {
+      const { status, body } = await request(app)
+        .post('/api/v1/swap/trade')
+        .send({
+          currencyIn: USDC.address.toLowerCase(),
+          currencyOut: FUSD.address.toLowerCase(),
+          amountIn: '1',
+        })
+
+      expect(status).toEqual(200)
+      expect(body).toHaveProperty('data.info')
+      expect(body).toHaveProperty('data.trade')
+    })
+
     test('given params when not provided then return 400', async () => {
       const { status } = await request(app)
         .post('/api/v1/swap/trade')

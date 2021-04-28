@@ -5,7 +5,7 @@ export default abstract class BaseSwap {
     protected readonly currencyIn: Currency
     protected readonly currencyOut: Currency
     protected readonly amountIn: CurrencyAmount
-    protected readonly recipient: string
+    protected readonly recipient?: string
 
     protected readonly swapContractName?: string
 
@@ -13,7 +13,7 @@ export default abstract class BaseSwap {
       currencyIn: Currency,
       currencyOut: Currency,
       amountIn: CurrencyAmount,
-      recipient: string
+      recipient?: string
     ) {
       this.currencyIn = currencyIn
       this.currencyOut = currencyOut
@@ -30,4 +30,6 @@ export default abstract class BaseSwap {
     abstract getParams(): any
 
     abstract getUnsignedTransaction(): Promise<PopulatedTransaction|undefined>
+
+    abstract getTrade(): any
 }
