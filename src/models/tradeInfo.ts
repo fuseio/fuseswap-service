@@ -10,18 +10,36 @@ export default class TradeInfo {
   readonly nextMidPrice: string
   readonly priceImpact: string
 
-  constructor (trade: Trade) {
-    this.inputAmount = trade.inputAmount.toSignificant()
-    this.outputAmount = trade.outputAmount.toSignificant()
-    this.route = trade.route.path.map(token => token.symbol)
-    this.inputToken = trade.route.input.symbol
-    this.outputToken = trade.route.output.symbol
-    this.executionPrice = trade.executionPrice.toSignificant()
-    this.nextMidPrice = trade.nextMidPrice.toSignificant()
-    this.priceImpact = trade.priceImpact.toSignificant()
+  constructor (
+    inputAmount: string,
+    outputAmount: string,
+    route: Array<string | undefined>,
+    inputToken: string | undefined,
+    outputToken: string | undefined,
+    executionPrice: string,
+    nextMidPrice: string,
+    priceImpact: string
+  ) {
+    this.inputAmount = inputAmount
+    this.outputAmount = outputAmount
+    this.route = route
+    this.inputToken = inputToken
+    this.outputToken = outputToken
+    this.executionPrice = executionPrice
+    this.nextMidPrice = nextMidPrice
+    this.priceImpact = priceImpact
   }
 
   static fromTrade (trade: Trade) {
-    return new TradeInfo(trade)
+    return new TradeInfo(
+      trade.inputAmount.toSignificant(),
+      trade.outputAmount.toSignificant(),
+      trade.route.path.map(token => token.symbol),
+      trade.route.input.symbol,
+      trade.route.output.symbol,
+      trade.executionPrice.toSignificant(),
+      trade.nextMidPrice.toSignificant(),
+      trade.priceImpact.toSignificant()
+    )
   }
 }

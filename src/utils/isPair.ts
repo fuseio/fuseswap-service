@@ -1,5 +1,6 @@
 import { Currency, Token } from '@fuseio/fuse-swap-sdk'
 import { USDC, FUSD } from '@constants/index'
+import isStringEqual from './isStringEqual'
 
 export function isFusdUsdcPair (currencyInAddress: string, currencyOutAddress: string) {
   return isPair(currencyInAddress, currencyOutAddress, USDC, FUSD)
@@ -14,7 +15,7 @@ export default function isPair (
   if (!(currencyA instanceof Token) || !(currencyB instanceof Token)) return
 
   return (
-    (currencyA.address === currencyInAddress && currencyB.address === currencyOutAddress) ||
-    (currencyB.address === currencyInAddress && currencyA.address === currencyOutAddress)
+    (isStringEqual(currencyA.address, currencyInAddress) && isStringEqual(currencyB.address, currencyOutAddress)) ||
+    (isStringEqual(currencyB.address, currencyInAddress) && isStringEqual(currencyA.address, currencyOutAddress))
   )
 }

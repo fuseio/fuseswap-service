@@ -10,7 +10,7 @@ export default {
 
       const tokenService = Container.get(TokenService)
 
-      const stats = await tokenService.getTokenStats(tokenAddress.toLowerCase(), parseInt(limit))
+      const stats = await tokenService.getTokenStats(tokenAddress, parseInt(limit))
 
       res.send({ data: stats })
     } catch (e) {

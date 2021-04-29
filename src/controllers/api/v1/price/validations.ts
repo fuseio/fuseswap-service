@@ -8,6 +8,6 @@ export const getTokenPriceValidation = (
   next: NextFunction
 ) => {
   handleValidations([
-    param('tokenAddress').exists().isEthereumAddress()
+    param('tokenAddress').exists().isEthereumAddress().toLowerCase()
   ], req, res, next)
 }

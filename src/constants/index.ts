@@ -22,6 +22,8 @@ export const WFUSE_ADDRESSS = WFUSE.address
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
+export const FUSE_ADDRESS = ZERO_ADDRESS
+
 export const DAI = new Token(
   CHAIN_ID,
   '0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA',
@@ -68,4 +70,9 @@ export const FUSD = new Token(
 
 export const BASES_TO_CHECK_TRADES_AGAINST = {
   [ChainId.FUSE]: [WFUSE, DAI, USDC, USDT, WBTC, WETH]
+}
+
+export const TOKEN_MAP = {
+  [ZERO_ADDRESS]: WFUSE_ADDRESSS,
+  '0x249be57637d8b013ad64785404b24aebae9b098b': '0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5'
 }

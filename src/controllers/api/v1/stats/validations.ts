@@ -8,7 +8,7 @@ export const getTokenStatsValidation = (
   next: NextFunction
 ) => {
   handleValidations([
-    param('tokenAddress').exists().isEthereumAddress(),
+    param('tokenAddress').exists().isEthereumAddress().toLowerCase(),
     query('limit').exists().isString()
   ], req, res, next)
 }

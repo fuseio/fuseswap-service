@@ -43,6 +43,43 @@ export default class SwapService {
     })[0]
   }
 
+  async getTrade (
+    currencyInAddress: string,
+    currencyOutAddress: string,
+    amountIn: string
+  ): Promise<any> {
+    const currencyIn = await this.tokenService.getToken(currencyInAddress)
+    const currencyOut = await this.tokenService.getToken(currencyOutAddress)
+    const parsedAmount = parseAmount(amountIn, currencyIn)
+    const pairs = await this.pairService.getPairs(currencyIn, currencyOut)
+
+    if (!currencyIn || !currencyOut || !parsedAmount || !pairs) return
+
+    let swap: BaseSwap
+    const swapType = this.getSwapType(currencyInAddress, currencyOutAddress)
+
+    switch (swapType) {
+      case SwapType.PEG_SWAP:
+        swap = new PegSwap(currencyIn, currencyOut, parsedAmount)
+        break
+      case SwapType.BASIC_SWAP:
+        swap = new FuseSwap(
+          currencyIn,
+          currencyOut,
+          parsedAmount,
+          pairs
+        )
+        break
+      default:
+        return
+    }
+
+    const trade = await swap.getTrade()
+    if (!trade) return
+
+    return trade
+  }
+
   async getSwapCallData (
     currencyInAddress: string,
     currencyOutAddress: string,
@@ -70,10 +107,10 @@ export default class SwapService {
           currencyIn,
           currencyOut,
           parsedAmount,
+          pairs,
           recipient,
           slippageTolerance,
-          deadline,
-          pairs
+          deadline
         )
         break
       default:
