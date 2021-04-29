@@ -52,7 +52,7 @@ export default {
       let data
 
       if (trade) {
-        data = { ...trade }
+        data = trade
       } else {
         data = { error: SWAP_FAILED_CREATE_TRADE }
       }

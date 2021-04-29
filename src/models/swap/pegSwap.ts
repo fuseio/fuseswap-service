@@ -67,7 +67,6 @@ export default class PegSwap extends BaseSwap {
 
   async getTrade () {
     const maxAmount = await this.getSwappableAmount()
-    console.log(maxAmount, this.formattedAmountIn)
     if (Number(this.formattedAmountIn) > Number(maxAmount)) {
       return
     }
