@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import SwapController from '@controllers/api/v1/swap'
 import {
-  swapCallParametersValidation,
-  tradeValidation
+  requestParametersValidation,
+  quoteValidation
 } from '@controllers/api/v1/swap/validations'
 
 const router = Router()
@@ -52,21 +52,21 @@ const router = Router()
  *
  */
 router.post(
-  '/swapcallparameters',
-  swapCallParametersValidation,
-  SwapController.swapCallParameters
+  '/requestparameters',
+  requestParametersValidation,
+  SwapController.requestParameters
 )
 
 /**
- * @api {post} /swap/trade Create a trade for a token pair
- * @apiName PostTrade
+ * @api {post} /swap/quote Create a quote for a token pair
+ * @apiName PostQuote
  * @apiGroup Swap
  *
  * @apiParam {String} currencyIn The currency to spend
  * @apiParam {String} currencyOut The desired currency out address
  * @apiParam {String} inputAmount The desired amount to spend
  *
- * @apiSuccess {Object} info Simplied trade object containing information about the trade
+ * @apiSuccess {Object} info Simplied quote object containing information about the trade
  * @apiSuccess {Object} trade The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price
  *
  * @apiSuccessExample {json} Success-Response:
@@ -503,6 +503,6 @@ router.post(
     }
 }
  */
-router.post('/trade', tradeValidation, SwapController.trade)
+router.post('/quote', quoteValidation, SwapController.quote)
 
 export default router
