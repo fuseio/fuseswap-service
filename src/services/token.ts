@@ -55,12 +55,9 @@ export default class TokenService {
 
   async getTokenPriceChange (tokenAddress: string): Promise<any> {
     const currentPrice = await this.getTokenPrice(tokenAddress)
-    if (!currentPrice) {
-      return null
-    }
     const openingStat = await this.getTokenStats(tokenAddress, 1)
     if (openingStat.length === 0) {
-      return null
+      return { priceChange: 0, currentPrice: 0, openingStat: new TokenStat(tokenAddress, '0', '0', Math.round(new Date().getTime() / 1000)) }
     }
     const openingPrice = openingStat[0].price
     const priceChange = ((Number(currentPrice) - Number(openingPrice)) / Number(openingPrice)).toString()
