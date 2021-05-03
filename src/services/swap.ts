@@ -75,8 +75,6 @@ export default class SwapService {
     }
 
     const trade = await swap.getTrade()
-    if (!trade) return
-
     return trade
   }
 

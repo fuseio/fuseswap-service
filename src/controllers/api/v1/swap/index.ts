@@ -5,7 +5,7 @@ import SwapService from '@services/swap'
 import { SWAP_FAILED_CREATE_TRADE, SWAP_FAILED_NO_LIQUIDITY } from '@constants/text'
 
 export default {
-  async swapCallParameters (req: Request, res: Response, next: NextFunction) {
+  async requestParameters (req: Request, res: Response, next: NextFunction) {
     const {
       currencyIn,
       currencyOut,
@@ -38,7 +38,7 @@ export default {
     }
   },
 
-  async trade (req: Request, res: Response, next: NextFunction) {
+  async quote (req: Request, res: Response, next: NextFunction) {
     const { currencyIn, currencyOut, amountIn } = req.body
     try {
       const swapService = Container.get(SwapService)

@@ -5,10 +5,10 @@ import app from '../../../src/app'
 import { DAI, FUSD, FUSE_ADDRESS, USDC } from '../../../src/constants'
 
 describe('/swap', () => {
-  describe('POST /swapcallparameters', () => {
+  describe('POST /requestparameters', () => {
     test('given params when successful returns 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: DAI.address,
           currencyOut: USDC.address,
@@ -27,7 +27,7 @@ describe('/swap', () => {
 
     test('given params (non checksummed) when successful returns 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: DAI.address.toLowerCase(),
           currencyOut: USDC.address.toLowerCase(),
@@ -46,7 +46,7 @@ describe('/swap', () => {
 
     test('when params not provided should return 400', async () => {
       const { status } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({})
 
       expect(status).toEqual(400)
@@ -54,7 +54,7 @@ describe('/swap', () => {
 
     test('given params when no liquidity returns 400 and message', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: '0x495d133B938596C9984d462F007B676bDc57eCEC',
           currencyOut: '0xbf0718762B7951D56C52Cc7f75e4fa665a7FF0E5',
@@ -70,7 +70,7 @@ describe('/swap', () => {
 
     test('given required params and no optionals params should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: DAI.address,
           currencyOut: USDC.address,
@@ -87,7 +87,7 @@ describe('/swap', () => {
 
     test('given peg tokens should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: FUSD.address,
           currencyOut: USDC.address,
@@ -104,7 +104,7 @@ describe('/swap', () => {
 
     test('given peg token (non checksummed) should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: FUSD.address.toLowerCase(),
           currencyOut: USDC.address.toLowerCase(),
@@ -121,7 +121,7 @@ describe('/swap', () => {
 
     test('given fusetoken (FUSE) and other token should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: FUSE.symbol,
           currencyOut: USDC.address.toLowerCase(),
@@ -138,7 +138,7 @@ describe('/swap', () => {
 
     test('given fusetoken (zeroAddress) and other token should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/swapcallparameters')
+        .post('/api/v1/swap/requestparameters')
         .send({
           currencyIn: FUSE_ADDRESS,
           currencyOut: USDC.address.toLowerCase(),
@@ -154,10 +154,10 @@ describe('/swap', () => {
     })
   })
 
-  describe('POST /trade', () => {
+  describe('POST /quote', () => {
     test('given params should return 200 and expected response', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/trade')
+        .post('/api/v1/swap/quote')
         .send({
           currencyIn: DAI.address,
           currencyOut: USDC.address,
@@ -171,7 +171,7 @@ describe('/swap', () => {
 
     test('given params (non checksummed) should return 200 and expected respose', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/trade')
+        .post('/api/v1/swap/quote')
         .send({
           currencyIn: DAI.address.toLowerCase(),
           currencyOut: USDC.address.toLowerCase(),
@@ -185,7 +185,7 @@ describe('/swap', () => {
 
     test('given peg tokens should return 200 and expected response (1-1)', async () => {
       const { status, body } = await request(app)
-        .post('/api/v1/swap/trade')
+        .post('/api/v1/swap/quote')
         .send({
           currencyIn: USDC.address.toLowerCase(),
           currencyOut: FUSD.address.toLowerCase(),
@@ -199,7 +199,7 @@ describe('/swap', () => {
 
     test('given params when not provided then return 400', async () => {
       const { status } = await request(app)
-        .post('/api/v1/swap/trade')
+        .post('/api/v1/swap/quote')
         .send({})
 
       expect(status).toEqual(400)
