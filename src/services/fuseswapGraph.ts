@@ -20,8 +20,8 @@ export default class FuseswapGraphService {
 
       const fusePrice = Number(result?.data?.bundle?.ethPrice)
       const derivedFuse = Number(result?.data?.token?.derivedETH)
-
-      return fusePrice * derivedFuse
+      const tokenPrice = fusePrice * derivedFuse
+      return isNaN(tokenPrice) ? 0 : tokenPrice
     }
 
     async getTokenStats (tokenAdress: string, limit: number) {
