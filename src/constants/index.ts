@@ -1,4 +1,5 @@
 import { Token, ChainId, WETH as WFUSE_MAP, JSBI } from '@fuseio/fuse-swap-sdk'
+import { getAddress } from '@ethersproject/address'
 
 export const CHAIN_ID = 122
 
@@ -34,35 +35,35 @@ export const DAI_ADDRESS = '0x94ba7a27c7a95863d1bdc7645ac2951e0cca06ba'
 
 export const DAI = new Token(
   CHAIN_ID,
-  DAI_ADDRESS,
+  getAddress(DAI_ADDRESS),
   18,
   'DAI',
   'Dai Stablecoin on Fuse'
 )
 export const USDC = new Token(
   CHAIN_ID,
-  USDC_ADDRESS,
+  getAddress(USDC_ADDRESS),
   6,
   'USDC',
   'USD Coin on Fuse'
 )
 export const USDT = new Token(
   CHAIN_ID,
-  USDT_ADDRESS,
+  getAddress(USDT_ADDRESS),
   6,
   'USDT',
   'Tether USD on Fuse'
 )
 export const WBTC = new Token(
   CHAIN_ID,
-  WBTC_ADDRESS,
+  getAddress(WBTC_ADDRESS),
   8,
   'WBTC',
   'Wrapped BTC on Fuse'
 )
 export const WETH = new Token(
   CHAIN_ID,
-  WETH_ADDRESS,
+  getAddress(WETH_ADDRESS),
   18,
   'WETH',
   'Wrapped Ether on Fuse'
@@ -70,7 +71,7 @@ export const WETH = new Token(
 
 export const FUSD = new Token(
   CHAIN_ID,
-  FUSD_ADDRESS,
+  getAddress(FUSD_ADDRESS),
   18,
   'fUSD',
   'Fuse Dollar'

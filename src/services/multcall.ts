@@ -18,12 +18,12 @@ export default class MulticallService {
     const callData = fragment && contractInterface.encodeFunctionData(fragment)
     const calls = fragment && addresses && addresses.length > 0
       ? addresses.map((address) => address && callData
-        ? {
-            address,
-            callData
-          }
-        : undefined
-      )
+          ? {
+              address,
+              callData
+            }
+          : undefined
+        )
       : []
 
     const contract = this.contractService.getMulticallContract(

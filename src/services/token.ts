@@ -6,9 +6,10 @@ import TokenStat from '@models/tokenStat'
 import ProviderService from './provider'
 import ContractService from './contract'
 import FuseswapGraphService from './fuseswapGraph'
+import BlockGraphService from './blockGraph'
 import get from 'lodash.get'
 import isFuse from '@utils/isFuse'
-
+import { getPercentChange } from '@utils/price'
 interface Stat {
   priceUSD: string
   dailyVolumeUSD: string
@@ -17,7 +18,7 @@ interface Stat {
 
 @Service()
 export default class TokenService {
-  constructor (private contractService: ContractService, private fuseswapGraphService: FuseswapGraphService) {}
+  constructor (private contractService: ContractService, private fuseswapGraphService: FuseswapGraphService, private blockGraphService: BlockGraphService) {}
 
   static getTokenAddressFromTokenMap (tokenAddress: string): string {
     return get(TOKEN_MAP, tokenAddress, tokenAddress)
@@ -47,21 +48,25 @@ export default class TokenService {
     }
   }
 
-  async getTokenPrice (tokenAddress: string): Promise<string | undefined> {
+  async getTokenPrice (tokenAddress: string): Promise<string> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
     const price = await this.fuseswapGraphService.getTokenPrice(address)
     return price.toString()
   }
 
+  async getTokenPriceDayBack (tokenAddress: string) : Promise<string> {
+    const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
+    const oneDayBlock = await this.blockGraphService.getBlockOneDayBack()
+    const [fusePriceDayBack, oneDayHistory] = await Promise.all([this.fuseswapGraphService.getFusePrice(oneDayBlock), this.fuseswapGraphService.getTokenData(address, oneDayBlock)])
+    const tokenPrice = oneDayHistory?.derivedETH ? oneDayHistory?.derivedETH * fusePriceDayBack : 0
+    return tokenPrice.toString()
+  }
+
   async getTokenPriceChange (tokenAddress: string): Promise<any> {
-    const currentPrice = await this.getTokenPrice(tokenAddress)
-    const openingStat = await this.getTokenStats(tokenAddress, 1)
-    if (openingStat.length === 0) {
-      return { priceChange: 0, currentPrice: 0, openingStat: new TokenStat(tokenAddress, '0', '0', Math.round(new Date().getTime() / 1000)) }
-    }
-    const openingPrice = openingStat[0].price
-    const priceChange = ((Number(currentPrice) - Number(openingPrice)) / Number(openingPrice)).toString()
-    return { priceChange, currentPrice, openingStat }
+    const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
+    const [currentPrice, priceDayBack] = await Promise.all([this.getTokenPrice(address), this.getTokenPriceDayBack(address)])
+    const priceChange = getPercentChange(currentPrice, priceDayBack)
+    return { priceChange: priceChange.toString(), currentPrice, priceDayBack }
   }
 
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {

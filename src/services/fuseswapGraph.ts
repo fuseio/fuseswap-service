@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-client'
 import { Service } from 'typedi'
-import { getTokenPriceQuery, getTokenDailyStatsQuery } from '../apollo/queries'
+import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery } from '../apollo/queries'
 import { fuseswapClient } from '../apollo/client'
 
 @Service()
@@ -32,5 +32,22 @@ export default class FuseswapGraphService {
       })
 
       return result?.data?.tokenDayDatas
+    }
+
+    async getFusePrice (blocknumber: number) {
+      const result = await this.client.query({
+        query: getFusePriceQuery(blocknumber)
+      })
+      const price = result?.data?.bundles[0]?.ethPrice
+      return price
+    }
+
+    async getTokenData (tokenAdress: string, blocknumber?: number) {
+      const normalizedAddress = tokenAdress.toLowerCase()
+
+      const result = await this.client.query({
+        query: getTokenDataQuery(normalizedAddress, blocknumber)
+      })
+      return result.data.tokens[0]
     }
 }

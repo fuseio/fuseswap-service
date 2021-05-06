@@ -2,11 +2,12 @@ import sinon from 'sinon'
 import TokenService from '../../../src/services/token'
 import ContractService from '../../../src/services/contract'
 import FuseswapGraphService from '../../../src/services/fuseswapGraph'
+import BlockGraphService from '../../../src/services/blockGraph'
 
 describe('TokenService', () => {
   let contractService: ContractService
   let fuseswapGraphService: FuseswapGraphService
-
+  let blockGraphService: BlockGraphService
   const mockContract = {
     async symbol(...args: any): Promise<any> {},
     async name(...args: any): Promise<any> {},
@@ -16,11 +17,12 @@ describe('TokenService', () => {
   beforeEach(() => {
     contractService = new ContractService()
     fuseswapGraphService = new FuseswapGraphService()
+    blockGraphService = new BlockGraphService()
   })
 
   describe('getToken', () => {
     test('given address should return token', async () => {
-      const tokenService = new TokenService(contractService, fuseswapGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
 
       const token = await tokenService?.getToken(
         '0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670'
@@ -37,7 +39,7 @@ describe('TokenService', () => {
       sinon.stub(mock, 'decimals').resolves(18)
       sinon.stub(contractService, 'getTokenContract').returns(mock)
 
-      const tokenService = new TokenService(contractService, fuseswapGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
       const token = await tokenService?.getToken(
         '0xb9bB65B958EA30752bb4b4745Ab0BEce2Ca9aDB8'
       )
@@ -54,7 +56,7 @@ describe('TokenService', () => {
       sinon.stub(mock, 'decimals').resolves(18)
       sinon.stub(contractService, 'getTokenContract').returns(mock)
 
-      const tokenService = new TokenService(contractService, fuseswapGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
       const token = await tokenService?.getToken('FUSE')
 
       expect(token?.symbol).toBe('FUSE')

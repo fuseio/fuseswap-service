@@ -14,3 +14,15 @@ export const fuseswapClient = new ApolloClient({
     }
   }
 })
+
+export const blockClient = new ApolloClient({
+  link: new HttpLink({
+    uri: 'https://graph.fuse.io/subgraphs/name/fuseio/fuse-blocks'
+  }),
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'no-cache'
+    }
+  }
+})
