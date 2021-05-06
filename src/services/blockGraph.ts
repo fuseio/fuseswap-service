@@ -16,7 +16,7 @@ export default class BlockGraphService {
     }
 
     async getBlockFromTimestamp(timestamp: number) {
-      let result = await this.client.query({
+      const result = await this.client.query({
         query: getBlockQuery,
         variables: {
           timestampFrom: timestamp,
