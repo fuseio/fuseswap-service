@@ -85,7 +85,7 @@ export const getTokenDataQuery = (tokenAddress: string, block?: number) => {
   const queryString = `
     ${TokenFields}
     query tokens {
-      tokens(${block ? `block : {number: ${block}}` : ``} where: {id:"${tokenAddress}"}) {
+      tokens(${block ? `block : {number: ${block}}` : ''} where: {id:"${tokenAddress}"}) {
         ...TokenFields
       }
       pairs0: pairs(where: {token0: "${tokenAddress}"}, first: 50, orderBy: reserveUSD, orderDirection: desc){
@@ -96,6 +96,6 @@ export const getTokenDataQuery = (tokenAddress: string, block?: number) => {
       }
     }
   `
-  
+
   return gql(queryString)
 }

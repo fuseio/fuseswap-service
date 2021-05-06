@@ -15,22 +15,22 @@ export default class BlockGraphService {
       this.client = blockClient
     }
 
-    async getBlockFromTimestamp(timestamp: number) {
+    async getBlockFromTimestamp (timestamp: number) {
       const result = await this.client.query({
         query: getBlockQuery,
         variables: {
           timestampFrom: timestamp,
-          timestampTo: timestamp + 600,
+          timestampTo: timestamp + 600
         },
-        fetchPolicy: 'cache-first',
+        fetchPolicy: 'cache-first'
       })
       return result?.data?.blocks?.[0]?.number
     }
 
-    async getBlockOneDayBack() {
+    async getBlockOneDayBack () {
       const utcCurrentTime = dayjs()
       const utcOneDayBack = utcCurrentTime.subtract(1, 'day').unix()
-      let oneDayBlock = await this.getBlockFromTimestamp(utcOneDayBack)
+      const oneDayBlock = await this.getBlockFromTimestamp(utcOneDayBack)
       return oneDayBlock
     }
 }
