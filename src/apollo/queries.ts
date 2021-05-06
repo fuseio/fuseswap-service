@@ -25,7 +25,6 @@ export function getTokenDailyStatsQuery (tokenAddress: string, numberOfEntries =
                 date
                 priceUSD
                 dailyVolumeUSD
-                derivedETH
             }
         }
       `
