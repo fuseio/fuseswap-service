@@ -73,7 +73,7 @@ router.get(
  * @apiParam {Object} duration The duration object to calculate the price change over the timeframe
  * duration should be passed as an object according to https://day.js.org/docs/en/durations/creating
  * for example duration of {days: 1} means a duration of one day
- * 
+ *
  * @apiSuccess {String} priceChange The price change ratio of the token
  * @apiSuccess {String} currentPrice The current price of the token
  * @apiSuccess {Object} previousPrice The previous price of the token
@@ -90,7 +90,7 @@ router.get(
  *
  *
  * */
- router.post(
+router.post(
   '/:tokenAddress',
   getTokenPriceValidation,
   PriceController.getPriceChange
