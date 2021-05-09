@@ -10,6 +10,7 @@ import BlockGraphService from './blockGraph'
 import get from 'lodash.get'
 import isFuse from '@utils/isFuse'
 import { getPercentChange } from '@utils/price'
+import { Duration } from 'dayjs/plugin/duration'
 
 interface Stat {
   priceUSD: string
@@ -55,7 +56,7 @@ export default class TokenService {
     return price.toString()
   }
 
-  async getPreviousTokenPrice (tokenAddress: string, duration: object) : Promise<string> {
+  async getPreviousTokenPrice (tokenAddress: string, duration: Duration) : Promise<string> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
     const previousBlock = await this.blockGraphService.getPreviousBlock(duration)
     const [fusePriceDayBack, oneDayHistory] = await Promise.all([this.fuseswapGraphService.getFusePrice(previousBlock), this.fuseswapGraphService.getTokenData(address, previousBlock)])
@@ -63,7 +64,7 @@ export default class TokenService {
     return tokenPrice.toString()
   }
 
-  async getTokenPriceChange (tokenAddress: string, duration: object): Promise<any> {
+  async getTokenPriceChange (tokenAddress: string, duration: Duration): Promise<any> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
     const [currentPrice, previousPrice] = await Promise.all([this.getTokenPrice(address), this.getPreviousTokenPrice(address, duration)])
     const priceChange = getPercentChange(currentPrice, previousPrice)
