@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 import Container from 'typedi'
 import TokenService from '@services/token'
+import dayjs from '@utils/dayjs'
+
+const oneDayDuration = dayjs.duration({ days: 1 })
 
 export default {
   async getPrice (req: Request, res: Response, next: NextFunction) {
@@ -20,10 +23,10 @@ export default {
   async getPriceChange (req: Request, res: Response, next: NextFunction) {
     try {
       const { tokenAddress } = req.params
-
       const tokenService = Container.get(TokenService)
 
-      const priceChange = await tokenService.getTokenPriceChange(tokenAddress)
+      const duration = req.body.duration ? dayjs.duration(req.body.duration) : oneDayDuration
+      const priceChange = await tokenService.getTokenPriceChange(tokenAddress, duration)
 
       res.send({ data: priceChange })
     } catch (e) {
