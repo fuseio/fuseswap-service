@@ -5,6 +5,7 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 
 - [PriceChange](#PriceChange)
 	- [Get price change for token over last 24 hours](#Get-price-change-for-token-over-last-24-hours)
+	- [Get price change stats of the token](#Get-price-change-stats-of-the-token)
 	- [Get price change for token over time duration](#Get-price-change-for-token-over-time-duration)
 	
 - [Price](#Price)
@@ -21,6 +22,40 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 # <a name='PriceChange'></a> PriceChange
 
 ## <a name='Get-price-change-for-token-over-last-24-hours'></a> Get price change for token over last 24 hours
+[Back to top](#top)
+
+
+
+```
+GET /pricechange
+```
+
+### Parameter Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| tokenAddress | `String` | <p>The currency address</p> |
+
+### Success Response
+Success-Response:
+
+```
+
+{
+    "data": {
+        "priceChange": "4.761727644165598",
+        "currentPrice": "3760.8426158182515",
+        "previousPrice": "3589.901293526158"
+    }
+}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| priceChange | `String` | <p>The price change ratio of the token</p> |
+| currentPrice | `String` | <p>The current price of the token</p> |
+| previousPrice | `String` | <p>The previous price of the token</p> |
+## <a name='Get-price-change-stats-of-the-token'></a> Get price change stats of the token
 [Back to top](#top)
 
 
@@ -88,6 +123,44 @@ Success-Response:
 |:---------|:-----------|:--------------------------------------|
 | priceChange | `String` | <p>The price change ratio of the token</p> |
 | currentPrice | `String` | <p>The current price of the token</p> |
+<<<<<<< HEAD
+=======
+| previousPrice | `String` | <p>The previous price of the token</p> |
+## <a name='Get-price-change-for-token-over-time-duration'></a> Get price change for token over time duration
+[Back to top](#top)
+
+
+
+```
+POST /pricechange
+```
+
+### Parameter Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| tokenAddress | `String` | <p>The currency address</p> |
+| duration | `Object` | <p>The duration object to calculate the price change over the timeframe duration should be passed as an object according to https://day.js.org/docs/en/durations/creating for example duration of {days: 1} means a duration of one day</p> |
+
+### Success Response
+Success-Response:
+
+```
+
+{
+    "data": {
+        "priceChange": "4.761727644165598",
+        "currentPrice": "3760.8426158182515",
+        "previousPrice": "3589.901293526158"
+    }
+}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| priceChange | `String` | <p>The price change ratio of the token</p> |
+| currentPrice | `String` | <p>The current price of the token</p> |
+>>>>>>> Adding docs
 | previousPrice | `Object` | <p>The previous price of the token</p> |
 # <a name='Price'></a> Price
 
