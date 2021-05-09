@@ -65,7 +65,7 @@ router.get(
  *
  * */
 /**
- * @api {get} /pricechange Get price change for token over time duration
+ * @api {post} /pricechange Get price change for token over time duration
  * @apiName GetTokenPriceChangeOverDuration
  * @apiGroup PriceChange
  *
