@@ -1,12 +1,8 @@
 import ApolloClient from 'apollo-client'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import { Service } from 'typedi'
+import dayjs from '@utils/dayjs'
 import { getBlockQuery } from '../apollo/queries'
 import { blockClient } from '../apollo/client'
-
-dayjs.extend(utc)
-
 @Service()
 export default class BlockGraphService {
     private readonly client: ApolloClient<any>
@@ -27,10 +23,10 @@ export default class BlockGraphService {
       return result?.data?.blocks?.[0]?.number
     }
 
-    async getBlockOneDayBack () {
-      const utcCurrentTime = dayjs()
-      const utcOneDayBack = utcCurrentTime.subtract(1, 'day').unix()
-      const oneDayBlock = await this.getBlockFromTimestamp(utcOneDayBack)
+    async getPreviousBlock (duration: any) {
+      const currentTime = dayjs()
+      const previousTime = currentTime.subtract(duration).unix()
+      const oneDayBlock = await this.getBlockFromTimestamp(previousTime)
       return oneDayBlock
     }
 }

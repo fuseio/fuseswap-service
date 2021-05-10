@@ -10,6 +10,8 @@ import BlockGraphService from './blockGraph'
 import get from 'lodash.get'
 import isFuse from '@utils/isFuse'
 import { getPercentChange } from '@utils/price'
+import { Duration } from 'dayjs/plugin/duration'
+
 interface Stat {
   priceUSD: string
   dailyVolumeUSD: string
@@ -54,19 +56,19 @@ export default class TokenService {
     return price.toString()
   }
 
-  async getTokenPriceDayBack (tokenAddress: string) : Promise<string> {
+  async getPreviousTokenPrice (tokenAddress: string, duration: Duration) : Promise<string> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
-    const oneDayBlock = await this.blockGraphService.getBlockOneDayBack()
-    const [fusePriceDayBack, oneDayHistory] = await Promise.all([this.fuseswapGraphService.getFusePrice(oneDayBlock), this.fuseswapGraphService.getTokenData(address, oneDayBlock)])
+    const previousBlock = await this.blockGraphService.getPreviousBlock(duration)
+    const [fusePriceDayBack, oneDayHistory] = await Promise.all([this.fuseswapGraphService.getFusePrice(previousBlock), this.fuseswapGraphService.getTokenData(address, previousBlock)])
     const tokenPrice = oneDayHistory?.derivedETH ? oneDayHistory?.derivedETH * fusePriceDayBack : 0
     return tokenPrice.toString()
   }
 
-  async getTokenPriceChange (tokenAddress: string): Promise<any> {
+  async getTokenPriceChange (tokenAddress: string, duration: Duration): Promise<any> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
-    const [currentPrice, priceDayBack] = await Promise.all([this.getTokenPrice(address), this.getTokenPriceDayBack(address)])
-    const priceChange = getPercentChange(currentPrice, priceDayBack)
-    return { priceChange: priceChange.toString(), currentPrice, priceDayBack }
+    const [currentPrice, previousPrice] = await Promise.all([this.getTokenPrice(address), this.getPreviousTokenPrice(address, duration)])
+    const priceChange = getPercentChange(currentPrice, previousPrice)
+    return { priceChange: priceChange.toString(), currentPrice, previousPrice }
   }
 
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
