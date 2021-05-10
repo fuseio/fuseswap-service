@@ -5,7 +5,6 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 
 - [PriceChange](#PriceChange)
 	- [Get price change for token over last 24 hours](#Get-price-change-for-token-over-last-24-hours)
-	- [Get price change stats of the token](#Get-price-change-stats-of-the-token)
 	- [Get price change for token over time duration](#Get-price-change-for-token-over-time-duration)
 	
 - [Price](#Price)
@@ -45,48 +44,6 @@ Success-Response:
         "priceChange": "4.761727644165598",
         "currentPrice": "3760.8426158182515",
         "previousPrice": "3589.901293526158"
-    }
-}
-```
-
-### Success 200
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| priceChange | `String` | <p>The price change ratio of the token</p> |
-| currentPrice | `String` | <p>The current price of the token</p> |
-| previousPrice | `String` | <p>The previous price of the token</p> |
-## <a name='Get-price-change-stats-of-the-token'></a> Get price change stats of the token
-[Back to top](#top)
-
-
-
-```
-GET /pricechange
-```
-
-### Parameter Parameters
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| tokenAddress | `String` | <p>The currency address</p> |
-
-### Success Response
-Success-Response:
-
-```
-
-{
-    "data": {
-        "priceChange": "-0.0007561320055728409",
-        "currentPrice": "2507.7926905931677",
-        "openingStat": [
-            {
-                "address": "0xa722c13135930332eb3d749b2f0906559d2c5b99",
-                "price": "2509.690347789208280724433142784366",
-                "volume": "2681.774272338948506536539339084855",
-                "timestamp": 1619481600,
-                "date": "2021-04-27T00:00:00.000Z"
-            }
-        ]
     }
 }
 ```
