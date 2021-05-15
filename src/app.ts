@@ -9,6 +9,7 @@ import config from 'config'
 import cors from 'cors'
 import routes from './routes'
 import RequestError from '@models/requestError'
+import NotFoundError from '@models/error/NotFoundError'
 
 const logger = morgan('combined')
 
@@ -32,34 +33,22 @@ app.use(routes)
 
 // catch 404 and forward to error handler
 app.use(function (req: Request, res: Response, next: NextFunction) {
-  const err = new RequestError(404, 'Not Found')
-  next(err)
+  next(new NotFoundError())
 })
 
 /// error handlers
-if (!isProduction) {
-  app.use(function (err: RequestError, req: Request, res: Response) {
-    console.log(err.stack)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use(function (err: RequestError, req: Request, res: Response, next: NextFunction) {
+  if (!isProduction) console.log(err.stack)
 
-    res.status(err.status || 500)
+  res.status(err?.status || 500)
 
-    res.json({
-      errors: {
-        message: err.message,
-        error: err
-      }
-    })
+  res.json({
+    error: {
+      code: err?.code,
+      message: err?.message
+    }
   })
-} else {
-  app.use(function (err: RequestError, req: Request, res: Response) {
-    res.status(err.status || 500)
-    res.json({
-      errors: {
-        message: err.message,
-        error: {}
-      }
-    })
-  })
-}
+})
 
 export default app

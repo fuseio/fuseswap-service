@@ -52,7 +52,7 @@ describe('/swap', () => {
       expect(status).toEqual(400)
     })
 
-    test('given params when no liquidity returns 400 and message', async () => {
+    test('given params when no liquidity returns 200 and message', async () => {
       const { status, body } = await request(app)
         .post('/api/v1/swap/requestparameters')
         .send({
@@ -65,7 +65,7 @@ describe('/swap', () => {
         })
 
       expect(status).toEqual(200)
-      expect(body.message).toBe('No Liquidity For Trade')
+      expect(body).toHaveProperty('error.message', 'Pool is out of liquidity')
     })
 
     test('given required params and no optionals params should return 200 and expected response', async () => {

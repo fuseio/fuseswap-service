@@ -2,7 +2,8 @@ import { Service } from 'typedi'
 import parseAmount from '@utils/parseAmount'
 import {
   INITIAL_ALLOWED_SLIPPAGE,
-  DEFAULT_DEADLINE_FROM_NOW
+  DEFAULT_DEADLINE_FROM_NOW,
+  ALLOWED_PRICE_IMPACT_HIGH
 } from '@constants/index'
 import TokenService from './token'
 import PairService from './pair'
@@ -11,6 +12,9 @@ import BaseSwap from '@models/swap/baseSwap'
 import PegSwap from '@models/swap/pegSwap'
 import FuseSwap from '@models/swap/fuseSwap'
 import { Trade } from '@fuseio/fuse-swap-sdk'
+import NoPoolLiquidityError from '@models/error/NoPoolLiquidityError'
+import calculatePriceImpact from '@utils/calculatePriceImpact'
+import HighPriceImpactError from '@models/error/HighPriceImpactError'
 
 enum SwapType {
   BASIC_SWAP = 'BASIC_SWAP',
@@ -53,7 +57,7 @@ export default class SwapService {
     const parsedAmount = parseAmount(amountIn, currencyIn)
     const pairs = await this.pairService.getPairs(currencyIn, currencyOut)
 
-    if (!currencyIn || !currencyOut || !parsedAmount || !pairs) return
+    if (!currencyIn || !currencyOut || !parsedAmount || !pairs) throw new NoPoolLiquidityError()
 
     let swap: BaseSwap
     const swapType = this.getSwapType(currencyInAddress, currencyOutAddress)
@@ -75,6 +79,14 @@ export default class SwapService {
     }
 
     const trade = await swap.getTrade()
+    if (!trade) throw new NoPoolLiquidityError()
+
+    if (swap instanceof FuseSwap) {
+      if (!calculatePriceImpact(trade.trade)?.lessThan(ALLOWED_PRICE_IMPACT_HIGH)) {
+        throw new HighPriceImpactError()
+      }
+    }
+
     return trade
   }
 
@@ -91,7 +103,7 @@ export default class SwapService {
     const parsedAmount = parseAmount(amountIn, currencyIn)
     const pairs = await this.pairService.getPairs(currencyIn, currencyOut)
 
-    if (!currencyIn || !currencyOut || !parsedAmount || !pairs) return
+    if (!currencyIn || !currencyOut || !parsedAmount || !pairs) throw new NoPoolLiquidityError()
 
     let swap: BaseSwap
     const swapType = this.getSwapType(currencyInAddress, currencyOutAddress)
@@ -120,13 +132,13 @@ export default class SwapService {
     const params = swap.getParams()
     const rawTxn = await swap.getUnsignedTransaction()
 
-    if (!params || !rawTxn) return
+    if (!params || !rawTxn) throw new NoPoolLiquidityError()
 
     return {
       address,
       contractName,
-      ...params,
-      rawTxn
+      rawTxn,
+      ...params
     }
   }
 
