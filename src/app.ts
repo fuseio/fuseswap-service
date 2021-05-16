@@ -9,7 +9,7 @@ import config from 'config'
 import cors from 'cors'
 import routes from './routes'
 import RequestError from '@models/requestError'
-import NotFoundError from '@models/error/NotFoundError'
+import { NotFoundError } from '@models/error'
 
 const logger = morgan('combined')
 

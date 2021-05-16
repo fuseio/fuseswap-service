@@ -12,9 +12,8 @@ import BaseSwap from '@models/swap/baseSwap'
 import PegSwap from '@models/swap/pegSwap'
 import FuseSwap from '@models/swap/fuseSwap'
 import { Trade } from '@fuseio/fuse-swap-sdk'
-import NoPoolLiquidityError from '@models/error/NoPoolLiquidityError'
 import calculatePriceImpact from '@utils/calculatePriceImpact'
-import HighPriceImpactError from '@models/error/HighPriceImpactError'
+import { NoPoolLiquidityError, HighPriceImpactError } from '@models/error'
 
 enum SwapType {
   BASIC_SWAP = 'BASIC_SWAP',

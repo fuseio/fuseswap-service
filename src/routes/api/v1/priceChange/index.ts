@@ -5,7 +5,7 @@ import { getTokenPriceValidation } from '@controllers/api/v1/price/validations'
 const router = Router()
 
 /**
- * @api {get} /pricechange Get price change for token over last 24 hours
+ * @api {get} /api/v1/pricechange Get price change for token over last 24 hours
  * @apiName GetTokenPriceChange
  * @apiGroup PriceChange
  *
@@ -34,30 +34,7 @@ router.get(
 )
 
 /**
- * @api {get} /pricechange Get price change stats of the token
- * @apiName GetTokenPriceChange
- * @apiGroup PriceChange
- *
- * @apiParam {String} tokenAddress The currency address
- *
- * @apiSuccess {String} priceChange The price change ratio of the token
- * @apiSuccess {String} currentPrice The current price of the token
- * @apiSuccess {String} previousPrice The previous price of the token
- *
- * @apiSuccessExample {json} Success-Response:
- *
- *  {
- *      "data": {
- *          "priceChange": "4.761727644165598",
- *          "currentPrice": "3760.8426158182515",
- *          "previousPrice": "3589.901293526158"
- *      }
- *  }
- *
- *
- * */
-/**
- * @api {post} /pricechange Get price change for token over time duration
+ * @api {post} /api/v1/pricechange Get price change for token over time duration
  * @apiName GetTokenPriceChangeOverDuration
  * @apiGroup PriceChange
  *
@@ -89,7 +66,7 @@ router.post(
 )
 
 /**
- * @api {post} /pricechange Get price change for token over time duration
+ * @api {post} /api/v1/pricechange Get price change for token over time duration
  * @apiName GetTokenPriceChangeOverDuration
  * @apiGroup PriceChange
  *

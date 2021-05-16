@@ -8,8 +8,8 @@ import {
 const router = Router()
 
 /**
- * @api {post} /swap/swapcallparameters Create swap parameters for a Trade
- * @apiName PostSwapCallParameters
+ * @api {post} /api/v1/swap/swapcallparameters Create swap parameters for a Trade
+ * @apiName PostRequestParameters
  * @apiGroup Swap
  *
  * @apiParam {String} currencyIn The currency to spend
@@ -50,6 +50,16 @@ const router = Router()
  *         }
  *    }
  *
+ * @apiError {Object} error Object with information about the error
+ *
+ * @apiErrorExample {json} Error-Response:
+ *  {
+ *      "error": {
+ *          "code": 1,
+ *          "message": "Pool is out of liquidity"
+ *      }
+ * }
+ *
  */
 router.post(
   '/requestparameters',
@@ -58,7 +68,7 @@ router.post(
 )
 
 /**
- * @api {post} /swap/quote Create a quote for a token pair
+ * @api {post} /api/v1/swap/quote Create a quote for a token pair
  * @apiName PostQuote
  * @apiGroup Swap
  *
@@ -502,6 +512,17 @@ router.post(
         }
     }
 }
+
+ * @apiError {Object} error Object with information about the error
+ *
+ * @apiErrorExample {json} Error-Response:
+ *  {
+ *      "error": {
+ *          "code": 1,
+ *          "message": "Pool is out of liquidity"
+ *      }
+ * }
+ *
  */
 router.post('/quote', quoteValidation, SwapController.quote)
 
