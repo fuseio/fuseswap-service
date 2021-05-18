@@ -5,7 +5,7 @@ import { getTokenPriceValidation } from '@controllers/api/v1/price/validations'
 const router = Router()
 
 /**
- * @api {get} /price Get latest price for a token
+ * @api {get} /api/v1/price Get latest price for a token
  * @apiName GetTokenPrice
  * @apiGroup Price
  *

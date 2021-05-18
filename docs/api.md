@@ -26,7 +26,7 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 
 
 ```
-GET /pricechange
+GET /api/v1/pricechange
 ```
 
 ### Parameter Parameters
@@ -60,7 +60,7 @@ Success-Response:
 
 
 ```
-POST /pricechange
+POST /api/v1/pricechange
 ```
 
 ### Parameter Parameters
@@ -97,7 +97,7 @@ Success-Response:
 
 
 ```
-GET /price
+GET /api/v1/price
 ```
 
 ### Parameter Parameters
@@ -129,7 +129,7 @@ Success-Response:
 
 
 ```
-GET /stats/:tokenAddress?=limit={limit}
+GET /api/v1/stats/:tokenAddress?=limit={limit}
 ```
 
 ### Parameter Parameters
@@ -167,7 +167,7 @@ Success-Response:
 
 
 ```
-POST /swap/quote
+POST /api/v1/swap/quote
 ```
 
 ### Parameter Parameters
@@ -620,13 +620,25 @@ Success-Response:
 |:---------|:-----------|:--------------------------------------|
 | info | `Object` | <p>Simplied quote object containing information about the trade</p> |
 | trade | `Object` | <p>The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price</p> |
+
+### Error Response
+Error-Response:
+
+```
+ {
+     "error": {
+         "code": 1,
+         "message": "Pool is out of liquidity"
+     }
+}
+```
 ## <a name='Create-swap-parameters-for-a-Trade'></a> Create swap parameters for a Trade
 [Back to top](#top)
 
 
 
 ```
-POST /swap/swapcallparameters
+POST /api/v1/swap/swapcallparameters
 ```
 
 ### Parameter Parameters
@@ -674,3 +686,15 @@ Success-Response:
 | args | `String[]` | <p>The arguments to pass to the method, all hex encoded</p> |
 | value | `String` | <p>The amount of wei to send in hex</p> |
 | rawTxn | `Object` | <p>Unsigned transaction which represents the transaction that needs to be signed and submitted to the network</p> |
+
+### Error Response
+Error-Response:
+
+```
+ {
+     "error": {
+         "code": 1,
+         "message": "Pool is out of liquidity"
+     }
+}
+```
