@@ -32,7 +32,7 @@ export const FUSD_ADDRESS = '0x249be57637d8b013ad64785404b24aebae9b098b'
 export const USDC_ADDRESS = '0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5'
 export const USDT_ADDRESS = '0xfadbbf8ce7d5b7041be672561bba99f79c532e10'
 export const WBTC_ADDRESS = '0x33284f95ccb7b948d9d352e1439561cf83d8d00d'
-export const WETH_ADDRESS = '0xd8bf72f3e163b9cf0c73dfdcc316417a5ac20670'
+export const WETH_ADDRESS = '0xa722c13135930332eb3d749b2f0906559d2c5b99'
 export const DAI_ADDRESS = '0x94ba7a27c7a95863d1bdc7645ac2951e0cca06ba'
 
 export const DAI = new Token(
