@@ -1,4 +1,4 @@
- [
+[
   [
     {
       "decimals": 18,
@@ -76,7 +76,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     }
   ],
   [
@@ -156,7 +156,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     }
   ],
   [
@@ -236,7 +236,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     }
   ],
   [
@@ -316,7 +316,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     }
   ],
   [
@@ -396,7 +396,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     }
   ],
   [
@@ -405,7 +405,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     },
     {
       "decimals": 18,
@@ -421,7 +421,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     },
     {
       "decimals": 18,
@@ -437,7 +437,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     },
     {
       "decimals": 6,
@@ -453,7 +453,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     },
     {
       "decimals": 6,
@@ -469,7 +469,7 @@
       "symbol": "WETH",
       "name": "Wrapped Ether on Fuse",
       "chainId": 122,
-      "address": "0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670"
+      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
     },
     {
       "decimals": 8,
