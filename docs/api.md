@@ -17,6 +17,9 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 	- [Create a quote for a token pair](#Create-a-quote-for-a-token-pair)
 	- [Create swap parameters for a Trade](#Create-swap-parameters-for-a-Trade)
 	
+- [Tokens](#Tokens)
+	- [Returns a list of tokens on fuse](#Returns-a-list-of-tokens-on-fuse)
+	
 
 # <a name='PriceChange'></a> PriceChange
 
@@ -698,3 +701,53 @@ Error-Response:
      }
 }
 ```
+# <a name='Tokens'></a> Tokens
+
+## <a name='Returns-a-list-of-tokens-on-fuse'></a> Returns a list of tokens on fuse
+[Back to top](#top)
+
+
+
+```
+GET /api/v1/tokens
+```
+
+
+### Success Response
+Success-Response
+
+```
+
+{
+   "data": {
+     "tokens": [
+         {
+              "name": "Fuse Dollar",
+              "symbol": "fUSD",
+              "decimals": 18,
+              "address": "0x249BE57637D8B013Ad64785404b24aeBaE9B098B",
+              "type": "misc"
+            },
+            {
+              "name": "Wrapped FUSE",
+              "symbol": "WFUSE",
+              "decimals": 18,
+              "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629",
+              "type": "misc"
+            },
+            {
+              "name": "Imagine UBI on Fuse",
+              "symbol": "IUBI",
+              "address": "0x002231dce05117dcd3f1d471c1ea4c08eb844ed2",
+              "decimals": 18,
+              "type": "bridged"
+            }
+     ]
+   }
+}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| tokens | `Object` | <p>Array of tokens</p> |

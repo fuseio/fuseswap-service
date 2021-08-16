@@ -4,7 +4,7 @@ import BridgeGraphService from './bridgeGraph'
 import FuseswapGraphService from './fuseswapGraph'
 
 @Service()
-export default class ListService {
+export default class TokensService {
   constructor (
     private bridgeGraphService: BridgeGraphService,
     private fuseswapGraphService: FuseswapGraphService
