@@ -26,3 +26,17 @@ export const blockClient = new ApolloClient({
     }
   }
 })
+
+export const bridgeClient = new ApolloClient({
+  link: new HttpLink({
+    uri: 'https://graph.fuse.io/subgraphs/name/fuseio/fuse-ethereum-bridge'
+  }),
+  cache: new InMemoryCache({
+    addTypename: false
+  }),
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'no-cache'
+    }
+  }
+})

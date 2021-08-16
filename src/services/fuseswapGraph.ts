@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-client'
 import { Service } from 'typedi'
-import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery } from '../apollo/queries'
+import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery, getLPTokensQuery } from '../apollo/queries'
 import { fuseswapClient } from '../apollo/client'
 
 @Service()
@@ -49,5 +49,18 @@ export default class FuseswapGraphService {
         query: getTokenDataQuery(normalizedAddress, blocknumber)
       })
       return result.data.tokens[0]
+    }
+
+    async getLPTokens () {
+      const result = await this.client.query({
+        query: getLPTokensQuery()
+      })
+
+      return result?.data?.pairs?.map((pair: any) => ({
+        address: pair.id,
+        symbol: 'UNI-V2',
+        decimals: 18,
+        name: 'Uniswap V2'
+      }))
     }
 }
