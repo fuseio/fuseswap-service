@@ -56,11 +56,6 @@ export default class FuseswapGraphService {
         query: getLPTokensQuery()
       })
 
-      return result?.data?.pairs?.map((pair: any) => ({
-        address: pair.id,
-        symbol: 'UNI-V2',
-        decimals: 18,
-        name: 'Uniswap V2'
-      }))
+      return result?.data?.pairs
     }
 }

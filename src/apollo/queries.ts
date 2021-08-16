@@ -118,6 +118,14 @@ export const getLPTokensQuery = () => {
     query {
       pairs {
         id
+        token0 {
+          id
+          symbol
+        }
+        token1 {
+          id
+          symbol
+        }
       }
     }
   `
