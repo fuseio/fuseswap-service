@@ -1,5 +1,4 @@
-import { Token } from '@fuseio/fuse-swap-sdk'
-import { FUSD, WFUSE } from '.'
+import { FUSD, WFUSE } from './index'
 
 export enum TokenType {
   MISC = 'misc',
@@ -13,21 +12,26 @@ interface TokenListItem {
     decimals: number;
     address: string;
     type: TokenType;
-}
-
-function getTokenListItem (token: Token): TokenListItem {
-  return {
-    name: token.name,
-    symbol: token.symbol,
-    decimals: token.decimals,
-    address: token.address,
-    type: TokenType.MISC
-  }
+    logoURI: string;
 }
 
 const tokenList: Array<TokenListItem> = [
-  getTokenListItem(FUSD),
-  getTokenListItem(WFUSE)
+  {
+    name: FUSD.name,
+    symbol: FUSD.symbol,
+    decimals: FUSD.decimals,
+    address: FUSD.address,
+    logoURI: 'https://fuselogo.s3.eu-central-1.amazonaws.com/fuse-dollar.png',
+    type: TokenType.MISC
+  },
+  {
+    name: WFUSE.name,
+    symbol: WFUSE.symbol,
+    decimals: WFUSE.decimals,
+    address: WFUSE.address,
+    logoURI: 'https://fuselogo.s3.eu-central-1.amazonaws.com/wfuse.png',
+    type: TokenType.MISC
+  }
 ]
 
 export default tokenList

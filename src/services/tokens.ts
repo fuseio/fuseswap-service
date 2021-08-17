@@ -2,6 +2,7 @@ import { Service } from 'typedi'
 import tokenList, { TokenType } from '@constants/tokenList'
 import BridgeGraphService from './bridgeGraph'
 import FuseswapGraphService from './fuseswapGraph'
+import { buildTokenLogoUri } from '@utils/index'
 
 @Service()
 export default class TokensService {
@@ -42,6 +43,7 @@ export default class TokensService {
     const tokens = await this.bridgeGraphService.getBridgedTokens()
     return tokens.map((token: any) => ({
       ...token,
+      logoURI: buildTokenLogoUri(token.foreignAddress),
       type: TokenType.BRIDGED
     }))
   }
