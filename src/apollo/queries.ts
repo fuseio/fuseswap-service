@@ -98,3 +98,36 @@ export const getTokenDataQuery = (tokenAddress: string, block?: number) => {
 
   return gql(queryString)
 }
+
+export const getBridgedTokensQuery = () => {
+  const queryString = `
+    query {
+      bridgedTokens {
+        name
+        symbol
+        address
+        decimals
+      }
+    }
+  `
+  return gql(queryString)
+}
+
+export const getLPTokensQuery = () => {
+  const queryString = `
+    query {
+      pairs {
+        id
+        token0 {
+          id
+          symbol
+        }
+        token1 {
+          id
+          symbol
+        }
+      }
+    }
+  `
+  return gql(queryString)
+}
