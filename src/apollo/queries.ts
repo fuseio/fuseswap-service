@@ -107,6 +107,7 @@ export const getBridgedTokensQuery = () => {
         symbol
         address
         decimals
+        foreignAddress
       }
     }
   `
