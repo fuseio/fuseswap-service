@@ -1,3 +1,4 @@
+import 'newrelic'
 import 'reflect-metadata'
 import 'module-alias/register'
 import 'express-async-errors'
