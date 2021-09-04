@@ -1,11 +1,11 @@
-import ApolloClient from 'apollo-client'
 import { Service } from 'typedi'
-import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery, getLPTokensQuery } from '../apollo/queries'
-import { fuseswapClient } from '../apollo/client'
+import { GraphQLClient } from 'graphql-request'
+import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery, getLPTokensQuery } from '../graphql/queries'
+import { fuseswapClient } from '../graphql/client'
 
 @Service()
 export default class FuseswapGraphService {
-    private readonly client: ApolloClient<any>
+    private readonly client: GraphQLClient
 
     constructor () {
       this.client = fuseswapClient
@@ -14,48 +14,33 @@ export default class FuseswapGraphService {
     async getTokenPrice (tokenAdress: string) {
       const normalizedAddress = tokenAdress.toLowerCase()
 
-      const result = await this.client.query({
-        query: getTokenPriceQuery(normalizedAddress)
-      })
+      const result = await this.client.request(getTokenPriceQuery(normalizedAddress))
 
-      const fusePrice = Number(result?.data?.bundle?.ethPrice)
-      const derivedFuse = Number(result?.data?.token?.derivedETH)
+      const fusePrice = Number(result?.bundle?.ethPrice)
+      const derivedFuse = Number(result?.token?.derivedETH)
       const tokenPrice = fusePrice * derivedFuse
       return isNaN(tokenPrice) ? 0 : tokenPrice
     }
 
     async getTokenStats (tokenAdress: string, limit: number) {
       const normalizedAddress = tokenAdress.toLowerCase()
-
-      const result = await this.client.query({
-        query: getTokenDailyStatsQuery(normalizedAddress, limit)
-      })
-
-      return result?.data?.tokenDayDatas
+      const result = await this.client.request(getTokenDailyStatsQuery(normalizedAddress, limit))
+      return result?.tokenDayDatas
     }
 
     async getFusePrice (blocknumber: number) {
-      const result = await this.client.query({
-        query: getFusePriceQuery(blocknumber)
-      })
-      const price = result?.data?.bundles[0]?.ethPrice
-      return price
+      const result = await this.client.request(getFusePriceQuery(blocknumber))
+      return result?.bundles[0]?.ethPrice
     }
 
     async getTokenData (tokenAdress: string, blocknumber?: number) {
       const normalizedAddress = tokenAdress.toLowerCase()
-
-      const result = await this.client.query({
-        query: getTokenDataQuery(normalizedAddress, blocknumber)
-      })
-      return result.data.tokens[0]
+      const result = await this.client.request(getTokenDataQuery(normalizedAddress, blocknumber))
+      return result?.tokens[0]
     }
 
     async getLPTokens () {
-      const result = await this.client.query({
-        query: getLPTokensQuery()
-      })
-
-      return result?.data?.pairs
+      const result = await this.client.request(getLPTokensQuery())
+      return result?.pairs
     }
 }

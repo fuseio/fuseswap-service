@@ -1,26 +1,23 @@
-import ApolloClient from 'apollo-client'
 import { Service } from 'typedi'
 import dayjs from '@utils/dayjs'
-import { getBlockQuery } from '../apollo/queries'
-import { blockClient } from '../apollo/client'
+import { getBlockQuery } from '../graphql/queries'
+import { blockClient } from '../graphql/client'
+import { GraphQLClient } from 'graphql-request'
+
 @Service()
 export default class BlockGraphService {
-    private readonly client: ApolloClient<any>
+    private readonly client: GraphQLClient
 
     constructor () {
       this.client = blockClient
     }
 
     async getBlockFromTimestamp (timestamp: number) {
-      const result = await this.client.query({
-        query: getBlockQuery,
-        variables: {
-          timestampFrom: timestamp,
-          timestampTo: timestamp + 600
-        },
-        fetchPolicy: 'cache-first'
+      const result = await this.client.request(getBlockQuery, {
+        timestampFrom: timestamp,
+        timestampTo: timestamp + 600
       })
-      return result?.data?.blocks?.[0]?.number
+      return result?.blocks?.[0]?.number
     }
 
     async getPreviousBlock (duration: any) {
