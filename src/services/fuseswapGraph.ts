@@ -1,6 +1,12 @@
 import { Service } from 'typedi'
 import { GraphQLClient } from 'graphql-request'
-import { getTokenPriceQuery, getTokenDailyStatsQuery, getFusePriceQuery, getTokenDataQuery, getLPTokensQuery } from '../graphql/queries'
+import {
+  getTokenPriceQuery,
+  getTokenDailyStatsQuery,
+  getFusePriceQuery,
+  getTokenDataQuery,
+  getLPTokensQuery
+} from '../graphql/queries'
 import { fuseswapClient } from '../graphql/client'
 
 @Service()

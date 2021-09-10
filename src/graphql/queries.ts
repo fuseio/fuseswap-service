@@ -136,3 +136,37 @@ export const getLPTokensQuery = () => {
   `
   return gql(queryString)
 }
+
+export const getBlocksQuery = (timestamps: Array<number>) => {
+  let queryString = 'query blocks {'
+  queryString += timestamps.map((timestamp) => {
+    return `t${timestamp}:blocks(first: 1, orderBy: timestamp, orderDirection: desc, where: { timestamp_gt: ${timestamp}, timestamp_lt: ${
+      timestamp + 600
+    } }) {
+      number
+    }`
+  })
+  queryString += '}'
+  return gql(queryString)
+}
+
+export const getPricesByBlockQuery = (tokenAddress: string, blocks: Array<any>) => {
+  let queryString = 'query blocks {'
+  queryString += blocks.map(
+    (block) => `
+      t${block.timestamp}:token(id:"${tokenAddress}", block: { number: ${block.number} }) { 
+        derivedETH
+      }
+    `
+  )
+  queryString += ','
+  queryString += blocks.map(
+    (block) => `
+      b${block.timestamp}: bundle(id:"1", block: { number: ${block.number} }) { 
+        ethPrice
+      }
+    `
+  )
+  queryString += '}'
+  return gql(queryString)
+}
