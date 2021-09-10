@@ -7,6 +7,9 @@ The Fuseswap Backend REST API is used for generating trading data for frontend c
 	- [Get price change for token over last 24 hours](#Get-price-change-for-token-over-last-24-hours)
 	- [Get price change for token over time duration](#Get-price-change-for-token-over-time-duration)
 	
+- [PriceChangeInterval](#PriceChangeInterval)
+	- [Get price changes over an interval for token](#Get-price-changes-over-an-interval-for-token)
+	
 - [Price](#Price)
 	- [Get latest price for a token](#Get-latest-price-for-a-token)
 	
@@ -92,6 +95,52 @@ Success-Response:
 | priceChange | `String` | <p>The price change ratio of the token</p> |
 | currentPrice | `String` | <p>The current price of the token</p> |
 | previousPrice | `Object` | <p>The previous price of the token</p> |
+# <a name='PriceChangeInterval'></a> PriceChangeInterval
+
+## <a name='Get-price-changes-over-an-interval-for-token'></a> Get price changes over an interval for token
+[Back to top](#top)
+
+
+
+```
+GET /api/v1/pricechange/interval/:tokenAddress
+```
+
+### Url Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| tokenAddress | `String` | <p>The address of the token</p> |
+### Query Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| interval | `Number` | **optional**<p>The chunk in seconds</p>_Default value: 3600_<br>_Allowed values: 3600,86000_ |
+| timeframe | `String` | **optional**<p>How far to look back</p>_Default value: MONTH_<br>_Allowed values: "ALL","WEEK","MONTH"_ |
+
+### Success Response
+Success-Response:
+
+```
+
+ {
+   "data": [
+     {
+       "timestamp": 1628542800,
+          "priceChange": 0,
+          "previousPrice": "43935.339297872226",
+          "currentPrice": "43935.339297872226"
+     }
+   ]
+}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| priceChanges | `Object[]` | <p>List of price changes</p> |
+| priceChanges.timestamp | `Number` | <p>The time in seconds at which the price change occurred</p> |
+| priceChanges.priceChange | `String` | <p>The price change ratio of the token at the specified timestamp</p> |
+| priceChanges.previousPrice | `String` | <p>The previous price at the specified timestamp</p> |
+| priceChanges.price | `String` | <p>The price at the specified timestamp</p> |
 # <a name='Price'></a> Price
 
 ## <a name='Get-latest-price-for-a-token'></a> Get latest price for a token

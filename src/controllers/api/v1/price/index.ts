@@ -31,5 +31,23 @@ export default {
     } catch (e) {
       next(e)
     }
+  },
+
+  async getPriceChangeInterval (req: Request, res: Response, next: NextFunction) {
+    try {
+      const { tokenAddress, timeframe, interval } : any = req.params
+
+      const tokenService = Container.get(TokenService)
+
+      const priceChanges = await tokenService.getTokenPriceChangeInterval(
+        tokenAddress,
+        timeframe,
+        interval
+      )
+
+      res.send({ data: priceChanges })
+    } catch (e) {
+      next(e)
+    }
   }
 }

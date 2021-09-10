@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import PriceController from '@controllers/api/v1/price'
-import { getTokenPriceValidation } from '@controllers/api/v1/price/validations'
+import { getPriceChangeIntervalValidation, getTokenPriceValidation } from '@controllers/api/v1/price/validations'
 
 const router = Router()
 
@@ -95,6 +95,40 @@ router.post(
   '/:tokenAddress',
   getTokenPriceValidation,
   PriceController.getPriceChange
+)
+
+/**
+ * @api {get} /api/v1/pricechange/interval/:tokenAddress Get price changes over an interval for token
+ * @apiName GetPriceChangeInterval
+ * @apiGroup PriceChangeInterval
+ *
+ * @apiParam (Url) {String} tokenAddress The address of the token
+ * @apiParam (Query) {Number=3600,86000} [interval=3600] The chunk in seconds
+ * @apiParam (Query) {String="ALL","WEEK","MONTH"} [timeframe="MONTH"] How far to look back
+ *
+ * @apiSuccess {Object[]} priceChanges List of price changes
+ * @apiSuccess {Number} priceChanges.timestamp The time in seconds at which the price change occurred
+ * @apiSuccess {String} priceChanges.priceChange The price change ratio of the token at the specified timestamp
+ * @apiSuccess {String} priceChanges.previousPrice The previous price at the specified timestamp
+ * @apiSuccess {String} priceChanges.price The price at the specified timestamp
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *
+ *  {
+ *    "data": [
+ *      {
+ *        "timestamp": 1628542800,
+          "priceChange": 0,
+          "previousPrice": "43935.339297872226",
+          "currentPrice": "43935.339297872226"
+ *      }
+ *    ]
+ * }
+ */
+router.get(
+  '/interval/:tokenAddress',
+  getPriceChangeIntervalValidation,
+  PriceController.getPriceChangeInterval
 )
 
 export default router
