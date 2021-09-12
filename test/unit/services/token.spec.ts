@@ -25,7 +25,7 @@ describe('TokenService', () => {
       const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
 
       const token = await tokenService?.getToken(
-        '0xd8Bf72f3e163B9CF0C73dFdCC316417A5ac20670'
+        '0xa722c13135930332Eb3d749B2F0906559D2C5b99'
       )
       expect(token?.symbol).toBe('WETH')
       expect(token?.name).toBe('Wrapped Ether on Fuse')

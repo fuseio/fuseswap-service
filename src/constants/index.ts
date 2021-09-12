@@ -25,7 +25,9 @@ export const WFUSE_ADDRESSS = WFUSE.address
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
-export const FUSE_ADDRESS = ZERO_ADDRESS
+export const NATIVE_ADDRESS = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+
+export const FUSE_ADDRESS = NATIVE_ADDRESS
 
 // lowercased token addresses
 export const FUSD_ADDRESS = '0x249be57637d8b013ad64785404b24aebae9b098b'
