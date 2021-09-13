@@ -773,4 +773,5 @@ Success-Response
 | token.underlyingTokens.address | `String` | **optional**<p>[lp only] The address of the underlying token</p> |
 | token.underlyingTokens.name | `String` | **optional**<p>[lp only] The name of the underlying token</p> |
 | token.underlyingToken.symbol | `String` | **optional**<p>[lp only] The symbol of the underlying token</p> |
+| tokens.logoURI | `String` | **optional**<p>The logo url for the token</p> |
 | tokens.type | `String` | <p>The type of token</p>_Allowed values: "misc","bridged","lp"_ |

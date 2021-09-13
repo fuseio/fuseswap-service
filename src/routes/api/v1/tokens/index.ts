@@ -16,6 +16,7 @@ const router = Router()
  * @apiSuccess {String} [token.underlyingTokens.address] [lp only] The address of the underlying token
  * @apiSuccess {String} [token.underlyingTokens.name] [lp only] The name of the underlying token
  * @apiSuccess {String} [token.underlyingToken.symbol] [lp only] The symbol of the underlying token
+ * @apiSuccess {String} [tokens.logoURI] The logo url for the token
  * @apiSuccess {String="misc","bridged","lp"} tokens.type The type of token
  *
  * @apiSuccessExample {json} Success-Response
