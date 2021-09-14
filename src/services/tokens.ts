@@ -32,8 +32,18 @@ export default class TokensService {
         name: `FuseSwap ${symbol}`,
         symbol: `FS ${symbol}`,
         decimals: 18,
-        token0: pair.token0.id,
-        token1: pair.token1.id,
+        underlyingTokens: [
+          {
+            address: pair.token0.id,
+            name: pair.token0.name,
+            symbol: pair.token0.symbol
+          },
+          {
+            address: pair.token1.id,
+            name: pair.token1.name,
+            symbol: pair.token1.symbol
+          }
+        ],
         type: TokenType.LP
       }
     })
