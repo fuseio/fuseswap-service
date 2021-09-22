@@ -36,12 +36,14 @@ export default class TokensService {
           {
             address: pair.token0.id,
             name: pair.token0.name,
-            symbol: pair.token0.symbol
+            symbol: pair.token0.symbol,
+            decimals: parseInt(pair.token0.decimals)
           },
           {
             address: pair.token1.id,
             name: pair.token1.name,
-            symbol: pair.token1.symbol
+            symbol: pair.token1.symbol,
+            decimals: parseInt(pair.token1.decimals)
           }
         ],
         type: TokenType.LP
