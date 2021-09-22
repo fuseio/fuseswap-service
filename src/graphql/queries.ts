@@ -123,11 +123,13 @@ export const getLPTokensQuery = () => {
           id
           name
           symbol
+          decimals
         }
         token1 {
           id
           name
           symbol
+          decimals
         }
       }
     }
