@@ -43,7 +43,7 @@ export default class TokensService {
             address: pair.token1.id,
             name: pair.token1.name,
             symbol: pair.token1.symbol,
-            decimals: parseInt(pair.token0.decimals),
+            decimals: parseInt(pair.token1.decimals),
           }
         ],
         type: TokenType.LP
