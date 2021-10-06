@@ -13,7 +13,8 @@ describe('parseAmount', () => {
   })
 
   test('should handle values that contain a fractional component that exceeds decimals', () => {
-    const parsedAmount = parseAmount('9.1234567', USDC)
-    expect(parsedAmount?.raw.toString()).toBe('9123456')
+    expect(parseAmount('9.1234567', USDC)?.raw.toString()).toBe('9123456')
+    expect(parseAmount('9.1234547', USDC)?.raw.toString()).toBe('9123454')
+    expect(parseAmount('9.12345555555555', USDC)?.raw.toString()).toBe('9123455')
   })
 })
