@@ -16,7 +16,8 @@ export default function parseAmount (
   }
 
   try {
-    const parsedValue = parseUnits(value, currency.decimals).toString()
+    const formattedValue = Number(value).toFixed(currency.decimals) // prevent 'fractional component exceeds decimals' error
+    const parsedValue = parseUnits(formattedValue, currency.decimals).toString()
     if (parsedValue !== '0') {
       return currency instanceof Token
         ? new TokenAmount(currency, JSBI.BigInt(parsedValue))
