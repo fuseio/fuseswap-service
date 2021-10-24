@@ -9,7 +9,7 @@ import TradeInfo from '@models/tradeInfo'
 import { currencyEquals, ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
 import toHex from '@utils/toHex'
 
-export class WrapSwap extends BaseSwap {
+export class Wrap extends BaseSwap {
   getSwapContract (): Contract {
     return getContract(this.getSwapContractAddress(), WFUSE_ABI, Provider.getProvider())
   }
