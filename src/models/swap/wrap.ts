@@ -1,5 +1,5 @@
 import { formatEther } from '@ethersproject/units'
-import { Contract, PopulatedTransaction } from '@ethersproject/contracts'
+import { Contract } from '@ethersproject/contracts'
 import { WFUSE, WFUSE_ADDRESSS } from '@constants/index'
 import getContract from '@utils/getContract'
 import Provider from '@services/provider'
@@ -38,7 +38,7 @@ export class Wrap extends BaseSwap {
     }
   }
 
-  async getUnsignedTransaction (): Promise<PopulatedTransaction | undefined> {
+  async getUnsignedTransaction (): Promise<any | undefined> {
     const params = this.getParams()
     if (!params) throw new Error(`Wrap not supported for ${this.currencyIn.symbol} -> ${this.currencyOut.symbol}`)
 
@@ -47,20 +47,23 @@ export class Wrap extends BaseSwap {
     const contract = this.getSwapContract()
     const txn = await contract.populateTransaction[methodName](...args, { value })
 
-    return txn
+    return {
+      ...txn,
+      value: txn.value?.toHexString()
+    }
   }
 
   getTrade () {
     const amountIn = formatEther(this.amountIn.raw.toString())
     return {
       info: new TradeInfo(
-        formatEther(amountIn),
-        formatEther(amountIn),
+        amountIn,
+        amountIn,
         [this.currencyIn.symbol, this.currencyOut.symbol],
         this.currencyIn.symbol,
         this.currencyOut.symbol,
-        formatEther(amountIn),
-        formatEther(amountIn),
+        amountIn,
+        amountIn,
         '0'
       ),
       trade: {}

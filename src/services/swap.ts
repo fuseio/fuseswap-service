@@ -151,12 +151,15 @@ export default class SwapService {
     }
   }
 
+  // TODO: need to refactor this function
   getSwapType (currencyInAddress: string, currencyOutAddress: string): SwapType {
     if (isFusdUsdcPair(currencyInAddress, currencyOutAddress)) {
       return SwapType.PEG_SWAP
     } else if (
-      (currencyInAddress === NATIVE_ADDRESS && currencyOutAddress === WFUSE_ADDRESSS) ||
-        (currencyInAddress === WFUSE_ADDRESSS && currencyOutAddress === NATIVE_ADDRESS)
+      (currencyInAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase() &&
+        currencyOutAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase()) ||
+      (currencyInAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase() &&
+        currencyOutAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase())
     ) {
       return SwapType.WRAP
     } else {
