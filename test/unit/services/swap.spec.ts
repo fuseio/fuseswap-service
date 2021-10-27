@@ -1,7 +1,7 @@
 import { ETHER as FUSE, Trade, Pair, TokenAmount } from '@fuseio/fuse-swap-sdk'
 import sinon from 'sinon'
 import SwapService from '../../../src/services/swap'
-import { DAI, FUSD, USDC, WETH, WFUSE } from '../../../src/constants'
+import { DAI, FUSD, NATIVE_ADDRESS, USDC, WETH, WFUSE, WFUSE_ADDRESSS } from '../../../src/constants'
 import TokenService from '../../../src/services/token'
 import PairService from '../../../src/services/pair'
 import ContractService from '../../../src/services/contract'
@@ -227,6 +227,47 @@ describe('SwapService', () => {
         expect(methodName).toEqual('swap')
         expect(amount).toBe('0xf4240')  
       })
+    })
+  })
+
+  describe('wrap', () => {
+    test('returns swapData for fuse to wfuse', async () => {
+      const swapService = new SwapService(
+        tokenService,
+        pairService
+      )
+
+      const data = await swapService.getSwapCallData(
+        NATIVE_ADDRESS,
+        WFUSE_ADDRESSS,
+        '1',
+        recipient
+      )
+
+      const { methodName, value} = data
+
+      expect(methodName).toEqual('deposit')
+      expect(value).toBe('0xde0b6b3a7640000')
+    })
+
+    test('returns swapData for wfuse to fuse', async () => {
+      const swapService = new SwapService(
+        tokenService,
+        pairService
+      )
+
+      const data = await swapService.getSwapCallData(
+        WFUSE_ADDRESSS,
+        NATIVE_ADDRESS,
+        '1',
+        recipient
+      )
+
+      const { methodName, args } = data
+      const [ amount ] = args
+
+      expect(methodName).toEqual('withdraw')
+      expect(amount).toBe('0xde0b6b3a7640000')
     })
   })
 })

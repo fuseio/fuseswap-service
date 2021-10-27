@@ -3,7 +3,9 @@ import parseAmount from '@utils/parseAmount'
 import {
   INITIAL_ALLOWED_SLIPPAGE,
   DEFAULT_DEADLINE_FROM_NOW,
-  ALLOWED_PRICE_IMPACT_HIGH
+  ALLOWED_PRICE_IMPACT_HIGH,
+  NATIVE_ADDRESS,
+  WFUSE_ADDRESSS
 } from '@constants/index'
 import TokenService from './token'
 import PairService from './pair'
@@ -14,10 +16,12 @@ import FuseSwap from '@models/swap/fuseSwap'
 import { Trade } from '@fuseio/fuse-swap-sdk'
 import calculatePriceImpact from '@utils/calculatePriceImpact'
 import { NoPoolLiquidityError, HighPriceImpactError } from '@models/error'
+import { Wrap } from '@models/swap/wrap'
 
 enum SwapType {
   BASIC_SWAP = 'BASIC_SWAP',
-  PEG_SWAP = 'PEG_SWAP'
+  PEG_SWAP = 'PEG_SWAP',
+  WRAP = 'WRAP'
 }
 
 @Service()
@@ -73,6 +77,9 @@ export default class SwapService {
           pairs
         )
         break
+      case SwapType.WRAP:
+        swap = new Wrap(currencyIn, currencyOut, parsedAmount)
+        break
       default:
         return
     }
@@ -122,6 +129,9 @@ export default class SwapService {
           deadline
         )
         break
+      case SwapType.WRAP:
+        swap = new Wrap(currencyIn, currencyOut, parsedAmount)
+        break
       default:
         return
     }
@@ -141,9 +151,17 @@ export default class SwapService {
     }
   }
 
+  // TODO: need to refactor this function
   getSwapType (currencyInAddress: string, currencyOutAddress: string): SwapType {
     if (isFusdUsdcPair(currencyInAddress, currencyOutAddress)) {
       return SwapType.PEG_SWAP
+    } else if (
+      (currencyInAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase() &&
+        currencyOutAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase()) ||
+      (currencyInAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase() &&
+        currencyOutAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase())
+    ) {
+      return SwapType.WRAP
     } else {
       return SwapType.BASIC_SWAP
     }
