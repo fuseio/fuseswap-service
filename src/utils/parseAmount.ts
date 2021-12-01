@@ -6,7 +6,7 @@ import {
   Token
 } from '@fuseio/fuse-swap-sdk'
 import { parseUnits } from '@ethersproject/units'
-import floor from 'lodash.floor'
+import formatDecimal from './formatDecimal'
 
 export default function parseAmount (
   value: string,
@@ -17,8 +17,7 @@ export default function parseAmount (
   }
 
   try {
-    const formattedValue = floor(Number(value), currency.decimals).toString() // prevent 'fractional component exceeds decimals' error
-    const parsedValue = parseUnits(formattedValue, currency.decimals).toString()
+    const parsedValue = parseUnits(formatDecimal(value, currency.decimals), currency.decimals).toString()
     if (parsedValue !== '0') {
       return currency instanceof Token
         ? new TokenAmount(currency, JSBI.BigInt(parsedValue))
