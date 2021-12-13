@@ -7,7 +7,7 @@
     "start": "nodemon ./src/server.ts",
     "debug": "node --inspect ./build/server.js",
     "build": "tsc",
-    "start-prod": "NODE_ENV=production npm run build && node ./build/server.js",
+    "start-prod": "NODE_ENV=production ts-node-transpile-only ./src/server.ts",
     "doc": "apidoc -i src/routes -o docs/api && apidoc-markdown -p docs/api -o docs/api.md",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
@@ -31,12 +31,12 @@
     ]
   },
   "_moduleAliases": {
-    "@constants": "build/constants",
-    "@models": "build/models",
-    "@routes": "build/routes",
-    "@utils": "build/utils",
-    "@services": "build/services",
-    "@controllers": "build/controllers"
+    "@constants": "./src/constants",
+    "@models": "./src/models",
+    "@routes": "./src/routes",
+    "@utils": "./src/utils",
+    "@services": "./src/services",
+    "@controllers": "./src/controllers"
   },
   "license": "MIT",
   "dependencies": {
