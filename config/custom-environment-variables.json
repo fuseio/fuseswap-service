@@ -3,7 +3,8 @@
     "allowCors": "FUSESWAP_API_ALLOW_CORS",
     "secret": "FUSESWAP_API_SECRET",
     "tokenExpiresIn": "FUSESWAP_TOKEN_EXPIRES_IN",
-    "port": "FUSESWAP_PORT"
+    "port": "FUSESWAP_PORT",
+    "timeout": "FUSESWAP_API_TIMEOUT"
   },
   "aws": {
     "secrets": {

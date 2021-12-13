@@ -4,6 +4,7 @@ module.exports = {
     secret: 'secret',
     tokenExpiresIn: '7d',
     port: 3000,
+    timeout: 5000
   },
   mongo: {
     debug: true,
