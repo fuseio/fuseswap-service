@@ -3,7 +3,7 @@ import { getAddress } from '@ethersproject/address'
 
 export const CHAIN_ID = 122
 
-export const ROUTER_ADDRESS = '0xFB76e9E7d88E308aB530330eD90e84a952570319'
+export const ROUTER_ADDRESS = '0xE3F85aAd0c8DD7337427B9dF5d0fB741d65EEEB5'
 
 export const PEGSWAP_ADDRESS = '0xdfE016328E7BcD6FA06614fE3AF3877E931F7e0a'
 

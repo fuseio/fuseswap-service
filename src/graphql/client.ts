@@ -3,7 +3,7 @@ import config from 'config'
 
 const timeout = parseInt(config.get('api.timeout'))
 
-export const fuseswapClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/fuseio/fuseswap', {
+export const fuseswapClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/voltfinance/voltage-exchange', {
   timeout
 })
 
