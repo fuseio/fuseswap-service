@@ -1,4 +1,4 @@
-import { Token, ChainId, WETH as WFUSE_MAP, JSBI, Percent } from '@fuseio/fuse-swap-sdk'
+import { Token, ChainId, WETH as WFUSE_MAP, JSBI, Percent } from '@voltage-finance/sdk'
 import { getAddress } from '@ethersproject/address'
 
 export const CHAIN_ID = 122

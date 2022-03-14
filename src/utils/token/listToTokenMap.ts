@@ -1,4 +1,4 @@
-import { ChainId } from '@fuseio/fuse-swap-sdk'
+import { ChainId } from '@voltage-finance/sdk'
 import { TokenList, TokenInfo } from '@uniswap/token-lists'
 import WrappedTokenData, { TagInfo } from '@models/wrappedTokenData'
 

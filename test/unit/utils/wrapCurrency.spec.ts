@@ -1,4 +1,4 @@
-import { ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE } from '@voltage-finance/sdk'
 import { WFUSE, CHAIN_ID, DAI } from '../../../src/constants'
 import wrapCurrency from '../../../src/utils/wrapCurrency'
 

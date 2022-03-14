@@ -1,4 +1,4 @@
-import { ETHER as FUSE, Trade, Pair, TokenAmount } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE, Trade, Pair, TokenAmount } from '@voltage-finance/sdk'
 import sinon from 'sinon'
 import SwapService from '../../../src/services/swap'
 import { DAI, FUSD, NATIVE_ADDRESS, USDC, WETH, WFUSE, WFUSE_ADDRESSS } from '../../../src/constants'

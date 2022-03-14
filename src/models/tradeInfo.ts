@@ -1,4 +1,4 @@
-import { Trade } from '@fuseio/fuse-swap-sdk'
+import { Trade } from '@voltage-finance/sdk'
 
 export default class TradeInfo {
   readonly inputAmount: string

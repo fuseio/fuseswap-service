@@ -1,4 +1,4 @@
-import { ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE } from '@voltage-finance/sdk'
 import 'reflect-metadata'
 import request from 'supertest'
 import app from '../../../src/app'

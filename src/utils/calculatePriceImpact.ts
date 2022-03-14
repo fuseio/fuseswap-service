@@ -1,4 +1,4 @@
-import { Fraction, JSBI, Percent, Trade } from '@fuseio/fuse-swap-sdk'
+import { Fraction, JSBI, Percent, Trade } from '@voltage-finance/sdk'
 
 // TODO: Research fuse lp fee
 const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000))

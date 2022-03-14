@@ -1,4 +1,4 @@
-import { ETHER, CurrencyAmount } from '@fuseio/fuse-swap-sdk'
+import { ETHER, CurrencyAmount } from '@voltage-finance/sdk'
 import parseAmount from '../../../src/utils/parseAmount'
 import { USDC } from '../../../src/constants'
 

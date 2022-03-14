@@ -1,5 +1,5 @@
 import { Service } from 'typedi'
-import { ETHER as FUSE, Token, Currency } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE, Token, Currency } from '@voltage-finance/sdk'
 import getTokens from '@utils/token/getTokens'
 import { CHAIN_ID, TOKEN_MAP } from '@constants/index'
 import TokenStat from '@models/tokenStat'

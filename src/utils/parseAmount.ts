@@ -4,7 +4,7 @@ import {
   JSBI,
   CurrencyAmount,
   Token
-} from '@fuseio/fuse-swap-sdk'
+} from '@voltage-finance/sdk'
 import { parseUnits } from '@ethersproject/units'
 import formatDecimal from './formatDecimal'
 

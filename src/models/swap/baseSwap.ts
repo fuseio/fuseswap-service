@@ -1,5 +1,5 @@
 import { Contract, PopulatedTransaction } from '@ethersproject/contracts'
-import { Currency, CurrencyAmount } from '@fuseio/fuse-swap-sdk'
+import { Currency, CurrencyAmount } from '@voltage-finance/sdk'
 
 export default abstract class BaseSwap {
     protected readonly currencyIn: Currency
