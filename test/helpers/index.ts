@@ -1,4 +1,4 @@
-import { Pair, TokenAmount, Token } from '@fuseio/fuse-swap-sdk'
+import { Pair, TokenAmount, Token } from '@voltage-finance/sdk'
 
 export function generatePair(tokenA: Token, tokenB: Token) {
   return new Pair(

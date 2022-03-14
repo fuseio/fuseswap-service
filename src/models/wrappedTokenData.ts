@@ -1,4 +1,4 @@
-import { Token } from '@fuseio/fuse-swap-sdk'
+import { Token } from '@voltage-finance/sdk'
 import { TokenInfo, Tags } from '@uniswap/token-lists'
 
 type TagDetails = Tags[keyof Tags]

@@ -4,7 +4,7 @@ import {
   ETHER as FUSE,
   WETH,
   Token
-} from '@fuseio/fuse-swap-sdk'
+} from '@voltage-finance/sdk'
 
 export default function wrapCurrency (
   currency: Currency,

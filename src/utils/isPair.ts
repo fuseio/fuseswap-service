@@ -1,4 +1,4 @@
-import { Currency, Token } from '@fuseio/fuse-swap-sdk'
+import { Currency, Token } from '@voltage-finance/sdk'
 import { USDC, FUSD } from '@constants/index'
 import isStringEqual from './isStringEqual'
 

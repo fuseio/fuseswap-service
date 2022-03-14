@@ -6,7 +6,7 @@ import Provider from '@services/provider'
 import WFUSE_ABI from '@constants/abis/wfuse.json'
 import BaseSwap from './baseSwap'
 import TradeInfo from '@models/tradeInfo'
-import { currencyEquals, ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
+import { currencyEquals, ETHER as FUSE } from '@voltage-finance/sdk'
 import toHex from '@utils/toHex'
 
 export class Wrap extends BaseSwap {

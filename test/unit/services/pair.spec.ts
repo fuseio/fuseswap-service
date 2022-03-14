@@ -37,7 +37,7 @@ describe('PairService', () => {
     test('given tokens then return Pair addresses for tokens', () => {
       const service = new PairService(multicallService)
       expect(service.getPairAddresses([[DAI, WFUSE]])).toEqual([
-        '0x6cF952247f270BDd28d96200D8F97eF0f8F8E090'
+        '0x7E6e52B4CB8320e63E30ee9D5c8752474E5A9627'
       ])
     })
   })

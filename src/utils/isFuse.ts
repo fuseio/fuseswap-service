@@ -1,4 +1,4 @@
-import { ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE } from '@voltage-finance/sdk'
 import { FUSE_ADDRESS } from '@constants/index'
 import isStringEqual from './isStringEqual'
 

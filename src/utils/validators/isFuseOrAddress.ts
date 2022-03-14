@@ -1,4 +1,4 @@
-import { ETHER as FUSE } from '@fuseio/fuse-swap-sdk'
+import { ETHER as FUSE } from '@voltage-finance/sdk'
 import isEthereumAddress from '@utils/isEthereumAddress'
 
 export default function (value: string): boolean {

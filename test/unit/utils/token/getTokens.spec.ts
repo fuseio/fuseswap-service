@@ -1,5 +1,5 @@
-import tokenList from '@fuseswap/default-token-list'
-import { ChainId } from '@fuseio/fuse-swap-sdk'
+import tokenList from '@voltage-finance/swap-default-token-list'
+import { ChainId } from '@voltage-finance/sdk'
 import listToTokenMap from '../../../../src/utils/token/listToTokenMap'
 import getTokens from '../../../../src/utils/token/getTokens'
 

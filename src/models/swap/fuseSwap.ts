@@ -4,7 +4,7 @@ import getContract from '@utils/getContract'
 import { abi as ROUTERV2_ABI } from '@constants/abis/IUniswapV2Router02.json'
 import BaseSwap from './baseSwap'
 import { ROUTER_ADDRESS, BIPS_BASE } from '@constants/index'
-import { Currency, CurrencyAmount, JSBI, Percent, Router, Trade } from '@fuseio/fuse-swap-sdk'
+import { Currency, CurrencyAmount, JSBI, Percent, Router, Trade } from '@voltage-finance/sdk'
 import TradeInfo from '@models/tradeInfo'
 
 export default class FuseSwap extends BaseSwap {
