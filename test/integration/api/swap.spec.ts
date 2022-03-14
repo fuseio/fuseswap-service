@@ -165,8 +165,7 @@ describe('/swap', () => {
         })
 
       expect(status).toEqual(200)
-      expect(body).toHaveProperty('data.info')
-      expect(body).toHaveProperty('data.trade')
+      expect(body).toBeDefined()
     })
 
     test('given params (non checksummed) should return 200 and expected respose', async () => {
@@ -179,8 +178,7 @@ describe('/swap', () => {
         })
 
       expect(status).toEqual(200)
-      expect(body).toHaveProperty('data.info')
-      expect(body).toHaveProperty('data.trade')
+      expect(body).toBeDefined()
     })
 
     test('given peg tokens should return 200 and expected response (1-1)', async () => {
