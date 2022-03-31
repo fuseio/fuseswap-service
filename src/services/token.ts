@@ -1,7 +1,7 @@
 import { Service } from 'typedi'
 import { ETHER as FUSE, Token, Currency } from '@voltage-finance/sdk'
 import getTokens from '@utils/token/getTokens'
-import { CHAIN_ID, TOKEN_MAP } from '@constants/index'
+import { CHAIN_ID, TOKEN_MAP, VOLTAGE_DEPLOYMENT_TIMESTAMP } from '@constants/index'
 import TokenStat from '@models/tokenStat'
 import ProviderService from './provider'
 import ContractService from './contract'
@@ -104,7 +104,7 @@ export default class TokenService {
     const currentTime = dayjs.utc()
     const windowSize = timeframe === Timeframe.MONTH ? 'month' : 'week'
     const time = timeframe === Timeframe.ALL
-      ? 1601463660 // deployment of fuseswap contracts
+      ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
 
     const timestamps = getTimestamps(time, interval)
