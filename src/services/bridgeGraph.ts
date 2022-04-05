@@ -5,14 +5,14 @@ import { getBridgedTokensQuery } from '../graphql/queries'
 
 @Service()
 export default class BridgeGraphService {
-    private readonly client: GraphQLClient
+  private readonly client: GraphQLClient
 
-    constructor () {
-      this.client = bridgeClient
-    }
+  constructor () {
+    this.client = bridgeClient
+  }
 
-    async getBridgedTokens () {
-      const result = await this.client.request(getBridgedTokensQuery())
-      return result?.bridgedTokens
-    }
+  async getBridgedTokens () {
+    const result = await this.client.request(getBridgedTokensQuery())
+    return result?.bridgedTokens
+  }
 }

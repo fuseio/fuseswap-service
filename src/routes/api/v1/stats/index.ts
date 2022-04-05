@@ -5,12 +5,12 @@ import { getTokenStatsValidation } from '@controllers/api/v1/stats/validations'
 const router = Router()
 
 /**
- * @api {get} /api/v1/stats/:tokenAddress?=limit={limit} Get historical statistics of the token
+ * @api {get} /api/v1/stats/:tokenAddress Get historical statistics of the token
  * @apiName GetTokenStats
  * @apiGroup Stats
  *
  * @apiParam {String} tokenAddress The currency address
- * @apiParam {String} limit The number of days to return statistics for (query param)
+ * @apiQuery {String} limit The number of days to return statistics for (query param)
  *
  * @apiSuccess {Object[]} array of token stats objects, see example below
  *

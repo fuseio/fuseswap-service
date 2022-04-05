@@ -35,7 +35,8 @@ export default {
 
   async getPriceChangeInterval (req: Request, res: Response, next: NextFunction) {
     try {
-      const { tokenAddress, timeframe, interval } : any = req.params
+      const { tokenAddress } : any = req.params
+      const { timeframe, interval } : any = req.query
 
       const tokenService = Container.get(TokenService)
 

@@ -25,12 +25,13 @@ interface Stat {
 export enum Timeframe {
   ALL = 'ALL',
   WEEK = 'WEEK',
-  MONTH = 'MONTH'
+  MONTH = 'MONTH',
+  DAY = 'DAY',
 }
 
 export enum Interval {
   HOUR = 3600,
-  DAY = 86000
+  DAY = 86400
 }
 
 @Service()
@@ -102,12 +103,12 @@ export default class TokenService {
 
   async getTokenPriceChangeInterval (tokenAddress: string, timeframe = Timeframe.MONTH, interval = Interval.HOUR) {
     const currentTime = dayjs.utc()
-    const windowSize = timeframe === Timeframe.MONTH ? 'month' : 'week'
+    const windowSize = timeframe.toLowerCase()
     const time = timeframe === Timeframe.ALL
       ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
 
-    const timestamps = getTimestamps(time, interval)
+    const timestamps = getTimestamps(time, parseInt(interval.toString()))
 
     if (timestamps.length === 0) {
       return []
@@ -137,14 +138,14 @@ export default class TokenService {
 
       let values: Array<any> = []
       for (const row in result) {
-        const timestamp = parseFloat(row.split('t')[1])
-        const derivedETH = parseFloat(result[row].derivedETH)
+        const timestamp = row.split('t')[1]
+        const derivedETH = parseFloat(result[row]?.derivedETH)
         const blockPrice = result['b' + timestamp]
-        if (timestamp && blockPrice) {
+        if (timestamp) {
           values.push({
             timestamp,
             derivedETH,
-            priceUSD: derivedETH * blockPrice.ethPrice
+            priceUSD: derivedETH * blockPrice?.ethPrice
           })
         }
       }
@@ -153,13 +154,13 @@ export default class TokenService {
 
       const formattedHistory = []
       for (let i = 0; i < values.length - 1; i++) {
-        const previousPrice = parseFloat(values[i].priceUSD).toString()
-        const currentPrice = parseFloat(values[i + 1].priceUSD).toString()
+        const previousPrice = parseFloat(values[i].priceUSD) || 0
+        const currentPrice = parseFloat(values[i + 1].priceUSD) || 0
         formattedHistory.push({
           timestamp: values[i].timestamp,
-          priceChange: getPercentChange(currentPrice, previousPrice),
-          previousPrice,
-          currentPrice
+          priceChange: getPercentChange(currentPrice.toString(), previousPrice.toString()),
+          previousPrice: previousPrice.toString(),
+          currentPrice: currentPrice.toString()
         })
       }
 

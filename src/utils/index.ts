@@ -47,10 +47,10 @@ export const splitQuery = async (
 
 export const getTimestamps = (startTime: number, interval = 3600) => {
   const timestamps: Array<number> = []
-  const currentTime = dayjs.utc()
+  const utcEndTime = dayjs.utc()
   let time = startTime
 
-  while (time < currentTime.unix()) {
+  while (time < utcEndTime.unix()) {
     timestamps.push(time)
     time += interval
   }
