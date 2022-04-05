@@ -35,7 +35,7 @@ export default class BlockGraphService {
         if (fetchedData[t].length > 0) {
           blocks.push({
             timestamp: t.split('t')[1],
-            number: fetchedData[t][0].number,
+            number: fetchedData[t][0].number
           })
         }
       }
@@ -43,7 +43,7 @@ export default class BlockGraphService {
     return blocks
   }
 
-  async getPreviousBlock(duration: any) {
+  async getPreviousBlock (duration: any) {
     const currentTime = dayjs()
     const previousTime = currentTime.subtract(duration).unix()
     const oneDayBlock = await this.getBlockFromTimestamp(previousTime)
