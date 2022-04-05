@@ -138,7 +138,7 @@ export default class TokenService {
 
       let values: Array<any> = []
       for (const row in result) {
-        const timestamp = row.split('t')[1]
+        const timestamp = parseFloat(row.split('t')[1])
         const derivedETH = parseFloat(result[row]?.derivedETH)
         const blockPrice = result['b' + timestamp]
         if (timestamp) {
