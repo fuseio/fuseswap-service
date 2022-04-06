@@ -1,6 +1,8 @@
 import { Token, ChainId, WETH as WFUSE_MAP, JSBI, Percent } from '@voltage-finance/sdk'
 import { getAddress } from '@ethersproject/address'
 
+export const VOLTAGE_DEPLOYMENT_TIMESTAMP = 1645617935
+
 export const CHAIN_ID = 122
 
 export const ROUTER_ADDRESS = '0xE3F85aAd0c8DD7337427B9dF5d0fB741d65EEEB5'

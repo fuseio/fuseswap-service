@@ -12,13 +12,13 @@ const router = Router()
  * @apiName PostRequestParameters
  * @apiGroup Swap
  *
- * @apiParam {String} currencyIn The currency to spend
- * @apiParam {String} currencyOut The desired currency out address
- * @apiParam {String} inputAmount The desired amount to spend
- * @apiParam {string} recipient The address that should receive the output of the swap
- * @apiParam {Number} [allowedSlippage=50] How much the execution price is allowed to move unfavorably
+ * @apiBody {String} currencyIn The currency to spend
+ * @apiBody {String} currencyOut The desired currency out address
+ * @apiBody {String} inputAmount The desired amount to spend
+ * @apiBody {string} recipient The address that should receive the output of the swap
+ * @apiBody {Number} [allowedSlippage=50] How much the execution price is allowed to move unfavorably
  *  from the trade execution price in Basis Points(BIPS)
- * @apiParam {Number} [ttl=1200] How long the swap is valid until it expires in seconds
+ * @apiBody {Number} [ttl=1200] How long the swap is valid until it expires in seconds
  *
  * @apiSuccess {String} methodName The method to call on Fuseswap RouterV2
  * @apiSuccess {String[]} args The arguments to pass to the method, all hex encoded
@@ -72,9 +72,9 @@ router.post(
  * @apiName PostQuote
  * @apiGroup Swap
  *
- * @apiParam {String} currencyIn The currency to spend
- * @apiParam {String} currencyOut The desired currency out address
- * @apiParam {String} inputAmount The desired amount to spend
+ * @apiBody {String} currencyIn The currency to spend
+ * @apiBody {String} currencyOut The desired currency out address
+ * @apiBody {String} inputAmount The desired amount to spend
  *
  * @apiSuccess {Object} info Simplied quote object containing information about the trade
  * @apiSuccess {Object} trade The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price
