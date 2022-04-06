@@ -71,14 +71,14 @@ router.post(
  * @apiGroup PriceChangeInterval
  *
  * @apiParam {String} tokenAddress The address of the token
- * @apiQuery (Query) {Number=3600,86400} [interval=3600] The chunk in seconds
- * @apiQuery (Query) {String="ALL","WEEK","MONTH","DAY"} [timeframe="MONTH"] How far to look back
+ * @apiQuery (Query) {Number=60,300,1800,3600,86400} [interval=3600] The chunk in seconds
+ * @apiQuery (Query) {String="ALL","MONTH","WEEK","DAY","HOUR"} [timeframe="MONTH"] How far to look back
  *
  * @apiSuccess {Object[]} priceChanges List of price changes
  * @apiSuccess {Number} priceChanges.timestamp The time in seconds at which the price change occurred
- * @apiSuccess {String} priceChanges.priceChange The price change ratio of the token at the specified timestamp
- * @apiSuccess {String} priceChanges.previousPrice The previous price at the specified timestamp
- * @apiSuccess {String} priceChanges.price The price at the specified timestamp
+ * @apiSuccess {Number} priceChanges.priceChange The price change ratio of the token at the specified timestamp
+ * @apiSuccess {Number} priceChanges.previousPrice The previous price at the specified timestamp
+ * @apiSuccess {Number} priceChanges.price The price at the specified timestamp
  *
  * @apiSuccessExample {json} Success-Response:
  *

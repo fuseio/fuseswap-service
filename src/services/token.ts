@@ -24,12 +24,16 @@ interface Stat {
 
 export enum Timeframe {
   ALL = 'ALL',
-  WEEK = 'WEEK',
   MONTH = 'MONTH',
+  WEEK = 'WEEK',
   DAY = 'DAY',
+  HOUR = 'HOUR',
 }
 
 export enum Interval {
+  MINUTE = 60,
+  FIVE_MINUTES = 300,
+  HALF_HOUR = 1800,
   HOUR = 3600,
   DAY = 86400
 }
@@ -159,8 +163,8 @@ export default class TokenService {
         formattedHistory.push({
           timestamp: values[i].timestamp,
           priceChange: getPercentChange(currentPrice.toString(), previousPrice.toString()),
-          previousPrice: previousPrice.toString(),
-          currentPrice: currentPrice.toString()
+          previousPrice,
+          currentPrice
         })
       }
 
