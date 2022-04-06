@@ -118,61 +118,54 @@ export default class TokenService {
       return []
     }
 
-    let blocks
-    try {
-      blocks = await this.blockGraphService.getBlocksFromTimestamp(timestamps, 100)
+    let blocks = await this.blockGraphService.getBlocksFromTimestamp(timestamps, 100)
 
-      if (!blocks || blocks.length === 0) {
-        return []
-      }
-
-      const latestBlock = await ProviderService.getProvider().getBlockNumber()
-
-      if (latestBlock) {
-        blocks = blocks.filter(b => parseFloat(b.number) <= latestBlock)
-      }
-
-      const result: any = await splitQuery(
-        getPricesByBlockQuery,
-        fuseswapClient,
-        [tokenAddress],
-        blocks,
-        50
-      )
-
-      let values: Array<any> = []
-      for (const row in result) {
-        const timestamp = parseFloat(row.split('t')[1])
-        const derivedETH = parseFloat(result[row]?.derivedETH)
-        const blockPrice = result['b' + timestamp]
-        if (timestamp) {
-          values.push({
-            timestamp,
-            derivedETH,
-            priceUSD: derivedETH * blockPrice?.ethPrice
-          })
-        }
-      }
-
-      values = values.sort((a, b) => a.timestamp - b.timestamp)
-
-      const formattedHistory = []
-      for (let i = 0; i < values.length - 1; i++) {
-        const previousPrice = parseFloat(values[i].priceUSD) || 0
-        const currentPrice = parseFloat(values[i + 1].priceUSD) || 0
-        formattedHistory.push({
-          timestamp: values[i].timestamp,
-          priceChange: getPercentChange(currentPrice.toString(), previousPrice.toString()),
-          previousPrice,
-          currentPrice
-        })
-      }
-
-      return formattedHistory
-    } catch (e) {
-      console.log(e)
-      console.log('error fetching blocks')
+    if (!blocks || blocks.length === 0) {
       return []
     }
+
+    const latestBlock = await ProviderService.getProvider().getBlockNumber()
+
+    if (latestBlock) {
+      blocks = blocks.filter(b => parseFloat(b.number) <= latestBlock)
+    }
+
+    const result: any = await splitQuery(
+      getPricesByBlockQuery,
+      fuseswapClient,
+      [tokenAddress],
+      blocks,
+      50
+    )
+
+    let values: Array<any> = []
+    for (const row in result) {
+      const timestamp = parseFloat(row.split('t')[1])
+      const derivedETH = parseFloat(result[row]?.derivedETH)
+      const blockPrice = result['b' + timestamp]
+      if (timestamp) {
+        values.push({
+          timestamp,
+          derivedETH,
+          priceUSD: derivedETH * blockPrice?.ethPrice
+        })
+      }
+    }
+
+    values = values.sort((a, b) => a.timestamp - b.timestamp)
+
+    const formattedHistory = []
+    for (let i = 0; i < values.length - 1; i++) {
+      const previousPrice = parseFloat(values[i].priceUSD) || 0
+      const currentPrice = parseFloat(values[i + 1].priceUSD) || 0
+      formattedHistory.push({
+        timestamp: values[i].timestamp,
+        priceChange: getPercentChange(currentPrice.toString(), previousPrice.toString()),
+        previousPrice,
+        currentPrice
+      })
+    }
+
+    return formattedHistory
   }
 }

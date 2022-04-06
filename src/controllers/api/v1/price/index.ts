@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import Container from 'typedi'
 import TokenService from '@services/token'
 import dayjs from '@utils/dayjs'
+import { NATIVE_ADDRESS, WFUSE_ADDRESSS } from '@constants/index'
 
 export default {
   async getPrice (req: Request, res: Response, next: NextFunction) {
@@ -41,13 +42,16 @@ export default {
       const tokenService = Container.get(TokenService)
 
       const priceChanges = await tokenService.getTokenPriceChangeInterval(
-        tokenAddress,
+        // temporary workaround to get native data, if FUSE use WFUSE data
+        tokenAddress === NATIVE_ADDRESS ? WFUSE_ADDRESSS.toLowerCase() : tokenAddress,
         timeframe,
         interval
       )
 
       res.send({ data: priceChanges })
     } catch (e) {
+      console.log(e)
+      console.log('error fetching blocks')
       next(e)
     }
   }
