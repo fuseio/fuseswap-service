@@ -3,11 +3,13 @@ import TokenService from '../../../src/services/token'
 import ContractService from '../../../src/services/contract'
 import FuseswapGraphService from '../../../src/services/fuseswapGraph'
 import BlockGraphService from '../../../src/services/blockGraph'
+import HealthGraphService from '../../../src/services/healthGraph'
 
 describe('TokenService', () => {
   let contractService: ContractService
   let fuseswapGraphService: FuseswapGraphService
   let blockGraphService: BlockGraphService
+  let healthGraphService: HealthGraphService
   const mockContract = {
     async symbol(...args: any): Promise<any> {},
     async name(...args: any): Promise<any> {},
@@ -18,11 +20,12 @@ describe('TokenService', () => {
     contractService = new ContractService()
     fuseswapGraphService = new FuseswapGraphService()
     blockGraphService = new BlockGraphService()
+    healthGraphService = new HealthGraphService()
   })
 
   describe('getToken', () => {
     test('given address should return token', async () => {
-      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService, healthGraphService)
 
       const token = await tokenService?.getToken(
         '0xa722c13135930332Eb3d749B2F0906559D2C5b99'
@@ -39,7 +42,7 @@ describe('TokenService', () => {
       sinon.stub(mock, 'decimals').resolves(18)
       sinon.stub(contractService, 'getTokenContract').returns(mock)
 
-      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService, healthGraphService)
       const token = await tokenService?.getToken(
         '0xb9bB65B958EA30752bb4b4745Ab0BEce2Ca9aDB8'
       )
@@ -56,7 +59,7 @@ describe('TokenService', () => {
       sinon.stub(mock, 'decimals').resolves(18)
       sinon.stub(contractService, 'getTokenContract').returns(mock)
 
-      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService)
+      const tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService, healthGraphService)
       const token = await tokenService?.getToken('FUSE')
 
       expect(token?.symbol).toBe('FUSE')
