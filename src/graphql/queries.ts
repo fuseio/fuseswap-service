@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client/core'
 import { BUNDLE_ID } from '@constants/index'
 
 export function getTokenPriceQuery (tokenAddress: string) {
@@ -170,3 +170,20 @@ export const getPricesByBlockQuery = (tokenAddress: string, blocks: Array<any>) 
   queryString += '}'
   return gql(queryString)
 }
+
+export const getSubgraphHealth = gql`
+  query health {
+    indexingStatusForCurrentVersion(subgraphName: "voltfinance/voltage-exchange") {
+      synced
+      health
+      chains {
+        chainHeadBlock {
+          number
+        }
+        latestBlock {
+          number
+        }
+      }
+    }
+  }
+`

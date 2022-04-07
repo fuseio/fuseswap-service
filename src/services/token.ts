@@ -7,6 +7,7 @@ import ProviderService from './provider'
 import ContractService from './contract'
 import FuseswapGraphService from './fuseswapGraph'
 import BlockGraphService from './blockGraph'
+import HealthGraphService from './healthGraph'
 import get from 'lodash.get'
 import isFuse from '@utils/isFuse'
 import { getPercentChange } from '@utils/price'
@@ -43,7 +44,8 @@ export default class TokenService {
   constructor (
     private contractService: ContractService,
     private fuseswapGraphService: FuseswapGraphService,
-    private blockGraphService: BlockGraphService
+    private blockGraphService: BlockGraphService,
+    private healthGraphService: HealthGraphService
   ) {}
 
   static getTokenAddressFromTokenMap (tokenAddress: string): string {
@@ -124,19 +126,21 @@ export default class TokenService {
       return []
     }
 
-    const latestBlock = await ProviderService.getProvider().getBlockNumber()
+    const { latestBlock } = await this.healthGraphService.getLatestBlocks()
 
     if (latestBlock) {
-      blocks = blocks.filter(b => parseFloat(b.number) <= latestBlock)
+      blocks = blocks.filter(b => parseFloat(b.number) <= parseFloat(latestBlock))
     }
 
-    const result: any = await splitQuery(
+    const response: any = await splitQuery(
       getPricesByBlockQuery,
       fuseswapClient,
       [tokenAddress],
       blocks,
       50
     )
+
+    const result = response?.data
 
     let values: Array<any> = []
     for (const row in result) {
