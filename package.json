@@ -7,7 +7,7 @@
     "start": "nodemon ./src/server.ts",
     "debug": "node --inspect ./build/server.js",
     "build": "tsc",
-    "start-prod": "NODE_ENV=production ts-node-transpile-only ./src/server.ts",
+    "start-prod": "NODE_ENV=production ts-node-transpile-only --max_old_space_size=4096 ./src/server.ts",
     "doc": "apidoc -i src/routes -o docs/api && apidoc-markdown -p docs/api -o docs/api.md",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
