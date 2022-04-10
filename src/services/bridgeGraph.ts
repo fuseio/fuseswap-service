@@ -1,21 +1,18 @@
 import { Service } from 'typedi'
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client/core'
+import { GraphQLClient } from 'graphql-request'
 import { bridgeClient } from '../graphql/client'
 import { getBridgedTokensQuery } from '../graphql/queries'
 
 @Service()
 export default class BridgeGraphService {
-  private readonly client: ApolloClient<NormalizedCacheObject>
+  private readonly client: GraphQLClient
 
   constructor () {
     this.client = bridgeClient
   }
 
   async getBridgedTokens () {
-    const result = await this.client.query({
-      query: getBridgedTokensQuery(),
-      fetchPolicy: 'cache-first'
-    })
-    return result?.data?.bridgedTokens
+    const result = await this.client.request(getBridgedTokensQuery())
+    return result?.bridgedTokens
   }
 }

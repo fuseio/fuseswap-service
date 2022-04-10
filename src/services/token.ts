@@ -23,7 +23,7 @@ interface Stat {
   date: number
 }
 
-export enum Timeframe {
+export enum TimeFrame {
   ALL = 'ALL',
   MONTH = 'MONTH',
   WEEK = 'WEEK',
@@ -100,17 +100,15 @@ export default class TokenService {
   async getTokenStats (tokenAddress: string, limit: number): Promise<any> {
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
     const response = await this.fuseswapGraphService.getTokenStats(address, limit)
-    const stats = response.map(
-      ({ priceUSD, dailyVolumeUSD, date }: Stat) =>
-        new TokenStat(tokenAddress, priceUSD, dailyVolumeUSD, date)
+    return response.map(({ priceUSD, dailyVolumeUSD, date }: Stat) =>
+      new TokenStat(tokenAddress, priceUSD, dailyVolumeUSD, date)
     )
-    return stats
   }
 
-  async getTokenPriceChangeInterval (tokenAddress: string, timeframe = Timeframe.MONTH, interval = Interval.HOUR) {
+  async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH, interval = Interval.HOUR) {
     const currentTime = dayjs.utc()
-    const windowSize = timeframe.toLowerCase()
-    const time = timeframe === Timeframe.ALL
+    const windowSize = timeFrame.toLowerCase()
+    const time = timeFrame === TimeFrame.ALL
       ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
 
@@ -132,15 +130,13 @@ export default class TokenService {
       blocks = blocks.filter(b => parseFloat(b.number) <= parseFloat(latestBlock))
     }
 
-    const response: any = await splitQuery(
+    const result: any = await splitQuery(
       getPricesByBlockQuery,
       fuseswapClient,
       [tokenAddress],
       blocks,
       50
     )
-
-    const result = response?.data
 
     let values: Array<any> = []
     for (const row in result) {

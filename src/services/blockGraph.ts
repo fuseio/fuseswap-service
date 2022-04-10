@@ -2,27 +2,23 @@ import { Service } from 'typedi'
 import dayjs from '@utils/dayjs'
 import { getBlockQuery, getBlocksQuery } from '../graphql/queries'
 import { blockClient } from '../graphql/client'
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client/core'
+import { GraphQLClient } from 'graphql-request'
 import { splitQuery } from '@utils/index'
 
 @Service()
 export default class BlockGraphService {
-  private readonly client: ApolloClient<NormalizedCacheObject>
+  private readonly client: GraphQLClient
 
   constructor () {
     this.client = blockClient
   }
 
   async getBlockFromTimestamp (timestamp: number) {
-    const result = await this.client.query({
-      query: getBlockQuery,
-      variables: {
-        timestampFrom: timestamp,
-        timestampTo: timestamp + 600
-      },
-      fetchPolicy: 'cache-first'
+    const result = await this.client.request(getBlockQuery, {
+      timestampFrom: timestamp,
+      timestampTo: timestamp + 600
     })
-    return result?.data?.blocks?.[0]?.number
+    return result?.blocks?.[0]?.number
   }
 
   async getBlocksFromTimestamp (timestamps: Array<number>, skipCount = 500) {
@@ -30,8 +26,7 @@ export default class BlockGraphService {
       return []
     }
 
-    const response: any = await splitQuery(getBlocksQuery, blockClient, [], timestamps, skipCount)
-    const fetchedData = response?.data
+    const fetchedData: any = await splitQuery(getBlocksQuery, blockClient, [], timestamps, skipCount)
 
     const blocks = []
 
@@ -51,7 +46,6 @@ export default class BlockGraphService {
   async getPreviousBlock (duration: any) {
     const currentTime = dayjs()
     const previousTime = currentTime.subtract(duration).unix()
-    const oneDayBlock = await this.getBlockFromTimestamp(previousTime)
-    return oneDayBlock
+    return this.getBlockFromTimestamp(previousTime)
   }
 }

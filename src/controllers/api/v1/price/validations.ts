@@ -1,4 +1,4 @@
-import { Interval, Timeframe } from '@services/token'
+import { Interval, TimeFrame } from '@services/token'
 import { handleValidations } from '@utils/handleValidations'
 import { NextFunction, Request, Response } from 'express'
 import { param, query } from 'express-validator'
@@ -20,7 +20,7 @@ export const getPriceChangeIntervalValidation = (
 ) => {
   handleValidations([
     param('tokenAddress').exists().isEthereumAddress().toLowerCase(),
-    query('timeframe').isIn(Object.values(Timeframe)),
+    query('timeframe').isIn(Object.values(TimeFrame)),
     query('interval').isIn(Object.values(Interval))
   ], req, res, next)
 }
