@@ -1,6 +1,6 @@
 import { getAddress } from '@ethersproject/address'
 import dayjs from 'dayjs'
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client/core'
+import { GraphQLClient } from 'graphql-request'
 
 export const buildTokenLogoUri = (address: string) => {
   try {
@@ -12,7 +12,7 @@ export const buildTokenLogoUri = (address: string) => {
 
 export const splitQuery = async (
   query: any,
-  localClient: ApolloClient<NormalizedCacheObject>,
+  localClient: GraphQLClient,
   vars: Array<any>,
   list: Array<any>,
   skipCount = 100
@@ -28,10 +28,7 @@ export const splitQuery = async (
     }
 
     const sliced = list.slice(skip, end)
-    const result = await localClient.query({
-      query: query(...vars, sliced),
-      fetchPolicy: 'cache-first'
-    })
+    const result = await localClient.request(query(...vars, sliced))
 
     fetchedData = {
       ...fetchedData,

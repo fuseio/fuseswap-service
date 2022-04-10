@@ -1,34 +1,20 @@
-import fetch from 'cross-fetch'
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core'
+import { GraphQLClient } from 'graphql-request'
+import config from 'config'
 
-export const fuseswapClient = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/voltfinance/voltage-exchange',
-    fetch
-  }),
-  cache: new InMemoryCache()
+const timeout = parseInt(config.get('api.timeout'))
+
+export const fuseswapClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/voltfinance/voltage-exchange', {
+  timeout
 })
 
-export const healthClient = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://api.thegraph.com/index-node/graphql',
-    fetch
-  }),
-  cache: new InMemoryCache()
+export const blockClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/fuseio/fuse-blocks', {
+  timeout
 })
 
-export const bridgeClient = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/fuseio/fuse-ethereum-bridged-tokens',
-    fetch
-  }),
-  cache: new InMemoryCache()
+export const bridgeClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/fuseio/fuse-ethereum-bridged-tokens', {
+  timeout
 })
 
-export const blockClient = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/fuseio/fuse-blocks',
-    fetch
-  }),
-  cache: new InMemoryCache()
+export const healthClient = new GraphQLClient('https://api.thegraph.com/index-node/graphql', {
+  timeout
 })

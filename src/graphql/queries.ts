@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core'
+import gql from 'graphql-tag'
 import { BUNDLE_ID } from '@constants/index'
 
 export function getTokenPriceQuery (tokenAddress: string) {
