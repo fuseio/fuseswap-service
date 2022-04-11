@@ -20,7 +20,7 @@ export const getPriceChangeIntervalValidation = (
 ) => {
   handleValidations([
     param('tokenAddress').exists().isEthereumAddress().toLowerCase(),
-    query('timeframe').isIn(Object.values(TimeFrame)),
+    param('timeFrame').isIn(Object.values(TimeFrame)),
     query('interval').isIn(Object.values(Interval))
   ], req, res, next)
 }

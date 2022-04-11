@@ -36,15 +36,15 @@ export default {
 
   async getPriceChangeInterval (req: Request, res: Response, next: NextFunction) {
     try {
-      const { tokenAddress } : any = req.params
-      const { timeframe, interval } : any = req.query
+      const { tokenAddress, timeFrame } : any = req.params
+      const { interval } : any = req.query
 
       const tokenService = Container.get(TokenService)
 
       const priceChanges = await tokenService.getTokenPriceChangeInterval(
         // temporary workaround to get native data, if FUSE use WFUSE data
         tokenAddress === NATIVE_ADDRESS ? WFUSE_ADDRESSS.toLowerCase() : tokenAddress,
-        timeframe,
+        timeFrame,
         interval
       )
 
