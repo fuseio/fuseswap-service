@@ -39,7 +39,7 @@ router.get(
  * @apiGroup PriceChange
  *
  * @apiParam {String} tokenAddress The currency address
- * @apiBody {Object} duration The duration object to calculate the price change over the timeframe
+ * @apiBody {Object} duration The duration object to calculate the price change over the timeFrame
  * duration should be passed as an object according to https://day.js.org/docs/en/durations/creating
  * for example duration of {days: 1} means a duration of one day
  *
@@ -66,13 +66,13 @@ router.post(
 )
 
 /**
- * @api {get} /api/v1/pricechange/interval/:tokenAddress Get price changes over an interval for token
+ * @api {get} /api/v1/pricechange/interval/:timeFrame/:tokenAddress Get price changes over an interval for token
  * @apiName GetPriceChangeInterval
  * @apiGroup PriceChangeInterval
  *
  * @apiParam {String} tokenAddress The address of the token
- * @apiQuery (Query) {Number=60,300,1800,3600,86400} [interval=3600] The chunk in seconds
- * @apiQuery (Query) {String="ALL","MONTH","WEEK","DAY","HOUR"} [timeframe="MONTH"] How far to look back
+ * @apiParam {string="ALL","MONTH","WEEK","DAY","HOUR"} timeFrame How far to look back
+ * @apiQuery (Query) {number=60,300,1800,3600,86400} [interval=3600] The chunk in seconds
  *
  * @apiSuccess {Object[]} priceChanges List of price changes
  * @apiSuccess {Number} priceChanges.timestamp The time in seconds at which the price change occurred
@@ -94,7 +94,7 @@ router.post(
  * }
  */
 router.get(
-  '/interval/:tokenAddress',
+  '/interval/:timeFrame/:tokenAddress',
   getPriceChangeIntervalValidation,
   PriceController.getPriceChangeInterval
 )
