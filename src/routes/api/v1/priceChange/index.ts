@@ -86,9 +86,9 @@ router.post(
  *    "data": [
  *      {
  *        "timestamp": 1628542800,
-          "priceChange": 0,
-          "previousPrice": "43935.339297872226",
-          "currentPrice": "43935.339297872226"
+ *        "priceChange": 0,
+ *        "previousPrice": "43935.339297872226",
+ *        "currentPrice": "43935.339297872226"
  *      }
  *    ]
  * }
