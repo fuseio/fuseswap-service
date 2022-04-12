@@ -10,7 +10,7 @@ const router = Router()
  * @apiGroup Stats
  *
  * @apiParam {String} tokenAddress The currency address
- * @apiQuery {String} limit The number of days to return statistics for (query param)
+ * @apiQuery {String} limit The number of days to return statistics for
  *
  * @apiSuccess {Object[]} array of token stats objects, see example below
  *

@@ -3,27 +3,60 @@
 
 The Fuseswap Backend REST API is used for generating trading data for frontend clients
 
-- [PriceChange](#PriceChange)
-	- [Get price change for token over last 24 hours](#Get-price-change-for-token-over-last-24-hours)
-	- [Get price change for token over time duration](#Get-price-change-for-token-over-time-duration)
-	
-- [PriceChangeInterval](#PriceChangeInterval)
-	- [Get price changes over an interval for token](#Get-price-changes-over-an-interval-for-token)
-	
-- [Price](#Price)
-	- [Get latest price for a token](#Get-latest-price-for-a-token)
-	
-- [Stats](#Stats)
-	- [Get historical statistics of the token](#Get-historical-statistics-of-the-token)
-	
-- [Swap](#Swap)
-	- [Create a quote for a token pair](#Create-a-quote-for-a-token-pair)
-	- [Create swap parameters for a Trade](#Create-swap-parameters-for-a-Trade)
-	
-- [Tokens](#Tokens)
-	- [Returns a list of tokens on fuse](#Returns-a-list-of-tokens-on-fuse)
-	
+# Table of contents
 
+- [Price](#Price)
+  - [Get latest price for a token](#Get-latest-price-for-a-token)
+- [PriceChange](#PriceChange)
+  - [Get price change for token over last 24 hours](#Get-price-change-for-token-over-last-24-hours)
+  - [Get price change for token over time duration](#Get-price-change-for-token-over-time-duration)
+- [PriceChangeInterval](#PriceChangeInterval)
+  - [Get price changes over an interval for token](#Get-price-changes-over-an-interval-for-token)
+- [Stats](#Stats)
+  - [Get historical statistics of the token](#Get-historical-statistics-of-the-token)
+- [Swap](#Swap)
+  - [Create a quote for a token pair](#Create-a-quote-for-a-token-pair)
+  - [Create swap parameters for a Trade](#Create-swap-parameters-for-a-Trade)
+- [Tokens](#Tokens)
+  - [Returns a list of tokens on fuse](#Returns-a-list-of-tokens-on-fuse)
+
+___
+
+
+# <a name='Price'></a> Price
+
+## <a name='Get-latest-price-for-a-token'></a> Get latest price for a token
+[Back to top](#top)
+
+```
+GET /api/v1/price/:tokenAddress
+```
+
+### Parameters - `Parameter`
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| tokenAddress | `String` | <p>The currency address</p> |
+### Success response
+
+#### Success response - `Success 200`
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| price | `Number` | <p>The price of the token</p> |
+
+### Success response example
+
+#### Success response example - `Success-Response:`
+
+```json
+
+{
+ "data": {
+     "price":1.009884197756788
+  }
+}
+```
 
 # <a name='PriceChange'></a> PriceChange
 
@@ -35,15 +68,16 @@ GET /api/v1/pricechange/:tokenAddress
 ```
 
 ### Parameters - `Parameter`
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| tokenAddress | `String` | <p>The currency address</p> |
 
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| tokenAddress | `String` | <p>The currency address</p> |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | priceChange | `String` | <p>The price change ratio of the token</p> |
 | currentPrice | `String` | <p>The current price of the token</p> |
 | previousPrice | `String` | <p>The previous price of the token</p> |
@@ -52,7 +86,7 @@ GET /api/v1/pricechange/:tokenAddress
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 
 {
     "data": {
@@ -71,15 +105,22 @@ POST /api/v1/pricechange/:tokenAddress
 ```
 
 ### Parameters - `Parameter`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | tokenAddress | `String` | <p>The currency address</p> |
 
+### Request Body
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| duration | `Object` | <p>The duration object to calculate the price change over the timeFrame duration should be passed as an object according to https://day.js.org/docs/en/durations/creating for example duration of {days: 1} means a duration of one day</p> |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | priceChange | `String` | <p>The price change ratio of the token</p> |
 | currentPrice | `String` | <p>The current price of the token</p> |
 | previousPrice | `Object` | <p>The previous price of the token</p> |
@@ -88,7 +129,7 @@ POST /api/v1/pricechange/:tokenAddress
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 
 {
     "data": {
@@ -105,30 +146,38 @@ POST /api/v1/pricechange/:tokenAddress
 [Back to top](#top)
 
 ```
-GET /api/v1/pricechange/interval
+GET /api/v1/pricechange/interval/:timeFrame/:tokenAddress
 ```
 
-### Parameters - `Url`
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| tokenAddress | `String` | <p>The address of the token</p> |
+### Parameters - `Parameter`
 
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| tokenAddress | `String` | <p>The address of the token</p> |
+| timeFrame | `string` | <p>How far to look back</p>_Allowed values: "ALL","MONTH","WEEK","DAY","HOUR"_ |
+
+### Query Parameters
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| interval | `number` | **optional** <p>The chunk in seconds</p>_Default value: 3600_<br>_Allowed values: 60,300,1800,3600,86400_ |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | priceChanges | `Object[]` | <p>List of price changes</p> |
 | priceChanges.timestamp | `Number` | <p>The time in seconds at which the price change occurred</p> |
-| priceChanges.priceChange | `String` | <p>The price change ratio of the token at the specified timestamp</p> |
-| priceChanges.previousPrice | `String` | <p>The previous price at the specified timestamp</p> |
-| priceChanges.price | `String` | <p>The price at the specified timestamp</p> |
+| priceChanges.priceChange | `Number` | <p>The price change ratio of the token at the specified timestamp</p> |
+| priceChanges.previousPrice | `Number` | <p>The previous price at the specified timestamp</p> |
+| priceChanges.price | `Number` | <p>The price at the specified timestamp</p> |
 
 ### Success response example
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 
  {
    "data": [
@@ -142,40 +191,6 @@ GET /api/v1/pricechange/interval
 }
 ```
 
-# <a name='Price'></a> Price
-
-## <a name='Get-latest-price-for-a-token'></a> Get latest price for a token
-[Back to top](#top)
-
-```
-GET /api/v1/price/:tokenAddress
-```
-
-### Parameters - `Parameter`
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| tokenAddress | `String` | <p>The currency address</p> |
-
-### Success response
-
-#### Success response - `Success 200`
-| Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
-| price | `Number` | <p>The price of the token</p> |
-
-### Success response example
-
-#### Success response example - `Success-Response:`
-
-```
-
-{
- "data": {
-     "price":1.009884197756788
-  }
-}
-```
-
 # <a name='Stats'></a> Stats
 
 ## <a name='Get-historical-statistics-of-the-token'></a> Get historical statistics of the token
@@ -186,22 +201,29 @@ GET /api/v1/stats/:tokenAddress
 ```
 
 ### Parameters - `Parameter`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | tokenAddress | `String` | <p>The currency address</p> |
 
+### Query Parameters
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| limit | `String` | <p>The number of days to return statistics for</p> |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | array | `Object[]` | <p>of token stats objects, see example below</p> |
 
 ### Success response example
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 
 {
  "data": [
@@ -224,11 +246,19 @@ GET /api/v1/stats/:tokenAddress
 POST /api/v1/swap/quote
 ```
 
+### Request Body
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| currencyIn | `String` | <p>The currency to spend</p> |
+| currencyOut | `String` | <p>The desired currency out address</p> |
+| inputAmount | `String` | <p>The desired amount to spend</p> |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | info | `Object` | <p>Simplied quote object containing information about the trade</p> |
 | trade | `Object` | <p>The trade object containing information about the <a href="https://uniswap.org/docs/v2/SDK/trade">trade</a> e.g price</p> |
 
@@ -236,7 +266,7 @@ POST /api/v1/swap/quote
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 
 {
     "data": {
@@ -674,15 +704,16 @@ POST /api/v1/swap/quote
 ### Error response
 
 #### Error response - `Error 4xx`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | error | `Object` | <p>Object with information about the error</p> |
 
 ### Error response example
 
 #### Error response example - `Error-Response:`
 
-```
+```json
  {
      "error": {
          "code": 1,
@@ -698,11 +729,22 @@ POST /api/v1/swap/quote
 POST /api/v1/swap/swapcallparameters
 ```
 
+### Request Body
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| currencyIn | `String` | <p>The currency to spend</p> |
+| currencyOut | `String` | <p>The desired currency out address</p> |
+| inputAmount | `String` | <p>The desired amount to spend</p> |
+| recipient | `string` | <p>The address that should receive the output of the swap</p> |
+| allowedSlippage | `Number` | **optional** <p>How much the execution price is allowed to move unfavorably from the trade execution price in Basis Points(BIPS)</p>_Default value: 50_<br> |
+| ttl | `Number` | **optional** <p>How long the swap is valid until it expires in seconds</p>_Default value: 1200_<br> |
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | methodName | `String` | <p>The method to call on Fuseswap RouterV2</p> |
 | args | `String[]` | <p>The arguments to pass to the method, all hex encoded</p> |
 | value | `String` | <p>The amount of wei to send in hex</p> |
@@ -712,7 +754,7 @@ POST /api/v1/swap/swapcallparameters
 
 #### Success response example - `Success-Response:`
 
-```
+```json
 {
      "methodName": "swapExactETHForTokens",
      "args": [
@@ -740,15 +782,16 @@ POST /api/v1/swap/swapcallparameters
 ### Error response
 
 #### Error response - `Error 4xx`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | error | `Object` | <p>Object with information about the error</p> |
 
 ### Error response example
 
 #### Error response example - `Error-Response:`
 
-```
+```json
  {
      "error": {
          "code": 1,
@@ -765,12 +808,12 @@ POST /api/v1/swap/swapcallparameters
 ```
 GET /api/v1/tokens
 ```
-
 ### Success response
 
 #### Success response - `Success 200`
+
 | Name     | Type       | Description                           |
-|:---------|:-----------|:--------------------------------------|
+|----------|------------|---------------------------------------|
 | tokens | `Object[]` | <p>List of tokens</p> |
 | tokens.name | `String` | <p>The name of the token</p> |
 | tokens.symbol | `String` | <p>The symbol of the token</p> |
@@ -787,7 +830,7 @@ GET /api/v1/tokens
 
 #### Success response example - `Success-Response`
 
-```
+```json
 
 {
    "data": {
@@ -831,3 +874,4 @@ GET /api/v1/tokens
    }
 }
 ```
+
