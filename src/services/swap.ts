@@ -5,7 +5,7 @@ import {
   DEFAULT_DEADLINE_FROM_NOW,
   ALLOWED_PRICE_IMPACT_HIGH,
   NATIVE_ADDRESS,
-  WFUSE_ADDRESSS
+  WFUSE_ADDRESS
 } from '@constants/index'
 import TokenService from './token'
 import PairService from './pair'
@@ -157,8 +157,8 @@ export default class SwapService {
       return SwapType.PEG_SWAP
     } else if (
       (currencyInAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase() &&
-        currencyOutAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase()) ||
-      (currencyInAddress.toLowerCase() === WFUSE_ADDRESSS.toLowerCase() &&
+        currencyOutAddress.toLowerCase() === WFUSE_ADDRESS.toLowerCase()) ||
+      (currencyInAddress.toLowerCase() === WFUSE_ADDRESS.toLowerCase() &&
         currencyOutAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase())
     ) {
       return SwapType.WRAP

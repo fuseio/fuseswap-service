@@ -155,12 +155,6 @@ GET /api/v1/pricechange/interval/:timeFrame/:tokenAddress
 |----------|------------|---------------------------------------|
 | tokenAddress | `String` | <p>The address of the token</p> |
 | timeFrame | `string` | <p>How far to look back</p>_Allowed values: "ALL","MONTH","WEEK","DAY","HOUR"_ |
-
-### Query Parameters
-
-| Name     | Type       | Description                           |
-|----------|------------|---------------------------------------|
-| interval | `number` | **optional** <p>The chunk in seconds</p>_Default value: 3600_<br>_Allowed values: 60,300,1800,3600,86400_ |
 ### Success response
 
 #### Success response - `Success 200`

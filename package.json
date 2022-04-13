@@ -19,7 +19,8 @@
     "type": "git",
     "url": "git+https://github.com/leonprou/node-skeleton.git"
   },
-  "standard": {
+  "ts-standard": {
+    "project": "./tsconfig.json",
     "env": [
       "mocha"
     ],
@@ -29,9 +30,6 @@
     "ignore": [
       "docs"
     ]
-  },
-  "ts-standard": {
-    "project": "./tsconfig.json"
   },
   "_moduleAliases": {
     "@constants": "./src/constants",

@@ -8,12 +8,13 @@ module.exports = {
   },
   mongo: {
     debug: true,
-    uri: 'mongodb://localhost/test',
+    uri: 'mongodb://localhost/test'
   },
   mail: {
     sendgrid: {
-      templates: {},
-    },
+      templates: {}
+    }
   },
   rpcUrl: 'https://rpc.fuse.io',
+  maxResultSize: 50
 }
