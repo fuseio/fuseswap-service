@@ -1,4 +1,5 @@
 import { Service } from 'typedi'
+import config from 'config'
 import { ETHER as FUSE, Token, Currency } from '@voltage-finance/sdk'
 import getTokens from '@utils/token/getTokens'
 import { CHAIN_ID, TOKEN_MAP, VOLTAGE_DEPLOYMENT_TIMESTAMP } from '@constants/index'
@@ -98,7 +99,7 @@ export default class TokenService {
   }
 
   async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH) {
-    const MAX_RESULT_SIZE = 50
+    const MAX_RESULT_SIZE: number = config.get('maxResultSize')
     const currentTime = dayjs.utc()
     const windowSize = timeFrame.toLowerCase()
     const time = timeFrame === TimeFrame.ALL
