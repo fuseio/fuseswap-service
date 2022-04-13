@@ -1,6 +1,6 @@
 import { formatEther } from '@ethersproject/units'
 import { Contract } from '@ethersproject/contracts'
-import { WFUSE, WFUSE_ADDRESSS } from '@constants/index'
+import { WFUSE, WFUSE_ADDRESS } from '@constants/index'
 import getContract from '@utils/getContract'
 import Provider from '@services/provider'
 import WFUSE_ABI from '@constants/abis/wfuse.json'
@@ -19,7 +19,7 @@ export class Wrap extends BaseSwap {
   }
 
   getSwapContractAddress (): string {
-    return WFUSE_ADDRESSS
+    return WFUSE_ADDRESS
   }
 
   getParams () {

@@ -1,7 +1,7 @@
 import { ETHER as FUSE, Trade, Pair, TokenAmount } from '@voltage-finance/sdk'
 import sinon from 'sinon'
 import SwapService from '../../../src/services/swap'
-import { DAI, FUSD, NATIVE_ADDRESS, USDC, WETH, WFUSE, WFUSE_ADDRESSS } from '../../../src/constants'
+import { DAI, FUSD, NATIVE_ADDRESS, USDC, WETH, WFUSE, WFUSE_ADDRESS } from '../../../src/constants'
 import TokenService from '../../../src/services/token'
 import PairService from '../../../src/services/pair'
 import ContractService from '../../../src/services/contract'
@@ -241,7 +241,7 @@ describe('SwapService', () => {
 
       const data = await swapService.getSwapCallData(
         NATIVE_ADDRESS,
-        WFUSE_ADDRESSS,
+        WFUSE_ADDRESS,
         '1',
         recipient
       )
@@ -259,7 +259,7 @@ describe('SwapService', () => {
       )
 
       const data = await swapService.getSwapCallData(
-        WFUSE_ADDRESSS,
+        WFUSE_ADDRESS,
         NATIVE_ADDRESS,
         '1',
         recipient

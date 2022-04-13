@@ -19,6 +19,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/indent": "off", // this is handled by standard
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "node/no-unsupported-features/es-syntax": "off",
+    "@typescript-eslint/no-use-before-define": "off"
   }
 }

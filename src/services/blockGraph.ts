@@ -46,6 +46,6 @@ export default class BlockGraphService {
   async getPreviousBlock (duration: any) {
     const currentTime = dayjs()
     const previousTime = currentTime.subtract(duration).unix()
-    return this.getBlockFromTimestamp(previousTime)
+    return await this.getBlockFromTimestamp(previousTime)
   }
 }

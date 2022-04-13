@@ -72,7 +72,6 @@ router.post(
  *
  * @apiParam {String} tokenAddress The address of the token
  * @apiParam {string="ALL","MONTH","WEEK","DAY","HOUR"} timeFrame How far to look back
- * @apiQuery (Query) {number=60,300,1800,3600,86400} [interval=3600] The chunk in seconds
  *
  * @apiSuccess {Object[]} priceChanges List of price changes
  * @apiSuccess {Number} priceChanges.timestamp The time in seconds at which the price change occurred

@@ -31,14 +31,6 @@ export enum TimeFrame {
   HOUR = 'HOUR',
 }
 
-export enum Interval {
-  MINUTE = 60,
-  FIVE_MINUTES = 300,
-  HALF_HOUR = 1800,
-  HOUR = 3600,
-  DAY = 86400
-}
-
 @Service()
 export default class TokenService {
   constructor (
@@ -105,14 +97,16 @@ export default class TokenService {
     )
   }
 
-  async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH, interval = Interval.HOUR) {
+  async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH) {
+    const MAX_RESULT_SIZE = 50
     const currentTime = dayjs.utc()
     const windowSize = timeFrame.toLowerCase()
     const time = timeFrame === TimeFrame.ALL
       ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
-
-    const timestamps = getTimestamps(time, parseInt(interval.toString()))
+    const secondsInTimeFrame = currentTime.unix() - time
+    const interval = parseInt((secondsInTimeFrame / MAX_RESULT_SIZE).toString())
+    const timestamps = getTimestamps(time, interval)
 
     if (timestamps.length === 0) {
       return []
@@ -134,8 +128,7 @@ export default class TokenService {
       getPricesByBlockQuery,
       fuseswapClient,
       [tokenAddress],
-      blocks,
-      50
+      blocks
     )
 
     let values: Array<any> = []

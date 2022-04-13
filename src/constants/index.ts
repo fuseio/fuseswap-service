@@ -23,7 +23,7 @@ export const BUNDLE_ID = 1
 
 export const WFUSE = WFUSE_MAP[CHAIN_ID]
 
-export const WFUSE_ADDRESSS = WFUSE.address
+export const WFUSE_ADDRESS = WFUSE.address
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -88,5 +88,5 @@ export const BASES_TO_CHECK_TRADES_AGAINST = {
 }
 
 export const TOKEN_MAP = {
-  [FUSE_ADDRESS]: WFUSE_ADDRESSS
+  [FUSE_ADDRESS]: WFUSE_ADDRESS
 }
