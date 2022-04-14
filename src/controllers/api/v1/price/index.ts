@@ -24,8 +24,9 @@ export default {
       const { tokenAddress } = req.params
       const tokenService = Container.get(TokenService)
 
-      const oneDayDuration = dayjs.duration({ days: 1 })
-      const duration = req.body.duration ? dayjs.duration(req.body.duration) : oneDayDuration
+      const duration = req.body.duration
+        ? dayjs.duration(req.body.duration)
+        : dayjs.duration({ days: 1 })
       const priceChange = await tokenService.getTokenPriceChange(tokenAddress, duration)
 
       res.send({ data: priceChange })
