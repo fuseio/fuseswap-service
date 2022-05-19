@@ -1,11 +1,11 @@
 import { Service } from 'typedi'
 import ContractService from './contract'
-import { MULTICALL_ADDRESS } from '@constants/index'
+import { MULTI_CALL_ADDRESS } from '@constants/index'
 import ProviderService from './provider'
 import { Interface } from '@ethersproject/abi'
 
 @Service()
-export default class MulticallService {
+export default class MultiCallService {
   constructor (private readonly contractService: ContractService) { }
 
   async call (
@@ -26,8 +26,8 @@ export default class MulticallService {
       )
       : []
 
-    const contract = this.contractService.getMulticallContract(
-      MULTICALL_ADDRESS,
+    const contract = this.contractService.getMultiCallContract(
+      MULTI_CALL_ADDRESS,
       ProviderService.getProvider()
     )
 

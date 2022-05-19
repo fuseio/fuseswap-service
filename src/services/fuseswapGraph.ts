@@ -17,8 +17,8 @@ export default class FuseswapGraphService {
     this.client = fuseswapClient
   }
 
-  async getTokenPrice (tokenAdress: string) {
-    const normalizedAddress = tokenAdress.toLowerCase()
+  async getTokenPrice (tokenAddress: string) {
+    const normalizedAddress = tokenAddress.toLowerCase()
 
     const result = await this.client.request(getTokenPriceQuery(normalizedAddress))
 
@@ -28,8 +28,8 @@ export default class FuseswapGraphService {
     return isNaN(tokenPrice) ? 0 : tokenPrice
   }
 
-  async getTokenStats (tokenAdress: string, limit: number) {
-    const normalizedAddress = tokenAdress.toLowerCase()
+  async getTokenStats (tokenAddress: string, limit: number) {
+    const normalizedAddress = tokenAddress.toLowerCase()
     const result = await this.client.request(getTokenDailyStatsQuery(normalizedAddress, limit))
     return result?.tokenDayDatas
   }
@@ -39,8 +39,8 @@ export default class FuseswapGraphService {
     return result?.bundles[0]?.ethPrice
   }
 
-  async getTokenData (tokenAdress: string, blocknumber?: number) {
-    const normalizedAddress = tokenAdress.toLowerCase()
+  async getTokenData (tokenAddress: string, blocknumber?: number) {
+    const normalizedAddress = tokenAddress.toLowerCase()
     const result = await this.client.request(getTokenDataQuery(normalizedAddress, blocknumber))
     return result?.tokens[0]
   }

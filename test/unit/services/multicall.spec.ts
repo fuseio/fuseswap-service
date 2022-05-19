@@ -36,7 +36,7 @@ describe('MulticallService', () => {
   test('given params when contract call successful should successfully return results', async () => {
     const mock: any = Object.assign({}, mockContract)
     sinon.stub(mock, 'aggregate').resolves([, mockResults])
-    sinon.stub(contractService, 'getMulticallContract').returns(mock)
+    sinon.stub(contractService, 'getMultiCallContract').returns(mock)
 
     const contract = new MulticallService(contractService)
 
@@ -52,7 +52,7 @@ describe('MulticallService', () => {
   test('given params when result contains insuccessful contract calls should successfully return results', async () => {
     const mock: any = Object.assign({}, mockContract)
     sinon.stub(mock, 'aggregate').resolves([, [...mockResults, '0x']])
-    sinon.stub(contractService, 'getMulticallContract').returns(mock)
+    sinon.stub(contractService, 'getMultiCallContract').returns(mock)
 
     const contract = new MulticallService(contractService)
 
