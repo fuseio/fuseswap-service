@@ -8,7 +8,7 @@ import {
 const router = Router()
 
 /**
- * @api {post} /api/v1/swap/swapcallparameters Create swap parameters for a Trade
+ * @api {post} /api/v1/swap/requestparameters Create swap parameters for a Trade
  * @apiName PostRequestParameters
  * @apiGroup Swap
  *

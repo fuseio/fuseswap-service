@@ -720,7 +720,7 @@ POST /api/v1/swap/quote
 [Back to top](#top)
 
 ```
-POST /api/v1/swap/swapcallparameters
+POST /api/v1/swap/requestparameters
 ```
 
 ### Request Body
