@@ -246,7 +246,7 @@ POST /api/v1/swap/quote
 |----------|------------|---------------------------------------|
 | currencyIn | `String` | <p>The currency to spend</p> |
 | currencyOut | `String` | <p>The desired currency out address</p> |
-| inputAmount | `String` | <p>The desired amount to spend</p> |
+| amountIn | `String` | <p>The desired amount to spend</p> |
 ### Success response
 
 #### Success response - `Success 200`
