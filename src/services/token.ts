@@ -101,7 +101,7 @@ export default class TokenService {
   async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH) {
     const MAX_RESULT_SIZE: number = config.get('maxResultSize')
     const currentTime = dayjs.utc()
-    const windowSize = timeFrame.toLowerCase()
+    const windowSize: any = timeFrame.toLowerCase()
     const time = timeFrame === TimeFrame.ALL
       ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
