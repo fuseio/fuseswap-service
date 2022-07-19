@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { uniqBy } from 'lodash'
 import { Service } from 'typedi'
 import tokenList, { TokenType } from '@constants/tokenList'
 import BridgeGraphService from './bridgeGraph'
@@ -9,17 +11,22 @@ export default class TokensService {
   constructor (
     private bridgeGraphService: BridgeGraphService,
     private fuseswapGraphService: FuseswapGraphService
-  ) {}
+  ) { }
 
   async getTokenList () {
     const list: Array<any> = []
 
+    const swapTokens = await this.getSwapTokens()
     const bridgedTokens = await this.getBridgedTokens()
     const lpTokens = await this.getLPTokens()
 
-    return list.concat(tokenList)
-      .concat(bridgedTokens)
-      .concat(lpTokens)
+    return uniqBy(
+      list.concat(tokenList)
+        .concat(bridgedTokens)
+        .concat(lpTokens)
+        .concat(swapTokens),
+      'address'
+    )
   }
 
   async getLPTokens () {
@@ -58,5 +65,26 @@ export default class TokensService {
       logoURI: buildTokenLogoUri(token.foreignAddress),
       type: TokenType.BRIDGED
     }))
+  }
+
+  async getSwapTokens () {
+    const { data } = await axios.get('https://raw.githubusercontent.com/voltfinance/swap-default-token-list/master/build/voltage-swap-default.tokenlist.json')
+    return data.tokens.map((item: any) => {
+      const {
+        name,
+        address,
+        symbol,
+        decimals,
+        logoURI
+      } = item
+      return {
+        name,
+        symbol,
+        decimals,
+        address,
+        logoURI,
+        type: name.includes('on') ? TokenType.BRIDGED : TokenType.MISC
+      }
+    })
   }
 }

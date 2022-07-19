@@ -9,7 +9,7 @@ import ContractService from './contract'
 import FuseswapGraphService from './fuseswapGraph'
 import BlockGraphService from './blockGraph'
 import HealthGraphService from './healthGraph'
-import get from 'lodash.get'
+import { get } from 'lodash'
 import isFuse from '@utils/isFuse'
 import { getPercentChange } from '@utils/price'
 import { Duration } from 'dayjs/plugin/duration'
@@ -101,7 +101,7 @@ export default class TokenService {
   async getTokenPriceChangeInterval (tokenAddress: string, timeFrame = TimeFrame.MONTH) {
     const MAX_RESULT_SIZE: number = config.get('maxResultSize')
     const currentTime = dayjs.utc()
-    const windowSize = timeFrame.toLowerCase()
+    const windowSize: any = timeFrame.toLowerCase()
     const time = timeFrame === TimeFrame.ALL
       ? VOLTAGE_DEPLOYMENT_TIMESTAMP
       : currentTime.subtract(1, windowSize).startOf('hour').unix()
