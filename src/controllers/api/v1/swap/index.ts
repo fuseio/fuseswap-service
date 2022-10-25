@@ -19,7 +19,7 @@ export default {
       const slippage = currencyIn.toLowerCase() === CNS_TOKEN_ADDRESS.toLowerCase()
         ? 2000
         : currencyOut.toLowerCase() === CNS_TOKEN_ADDRESS.toLowerCase()
-          ? 1000
+          ? 1100
           : allowedSlippage
       const swapCallData = await swapService.getSwapCallData(
         currencyIn,
