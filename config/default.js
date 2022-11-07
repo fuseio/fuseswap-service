@@ -15,6 +15,6 @@ module.exports = {
       templates: {}
     }
   },
-  rpcUrl: 'https://rpc.fuse.io',
+  rpcUrl: 'https://nd-942-551-550.p2pify.com/29d9adc81d097da8de657a5c8c773586',
   maxResultSize: 50
 }
