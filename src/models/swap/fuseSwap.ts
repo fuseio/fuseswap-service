@@ -11,6 +11,7 @@ export default class FuseSwap extends BaseSwap {
   private readonly slippageTolerance: Percent
   private readonly deadline?: number
   private readonly pairs: any
+  private readonly isInputFeeToken?: boolean
 
   swapContractName = 'UniswapV2Router'
 
@@ -21,12 +22,14 @@ export default class FuseSwap extends BaseSwap {
     pairs: any,
     recipient?: string,
     slippageTolerance?: number,
-    deadline?: number
+    deadline?: number,
+    feeToken?: boolean
   ) {
     super(currencyIn, currencyOut, amountIn, recipient)
     this.slippageTolerance = new Percent(JSBI.BigInt(slippageTolerance ?? 0), BIPS_BASE)
     this.deadline = deadline
     this.pairs = pairs
+    this.isInputFeeToken = feeToken
   }
 
   getSwapContract (): Contract {
@@ -46,7 +49,7 @@ export default class FuseSwap extends BaseSwap {
     if (!trade || !this.recipient || !this.deadline) return
 
     return Router.swapCallParameters(trade, {
-      feeOnTransfer: false,
+      feeOnTransfer: this.isInputFeeToken,
       allowedSlippage: this.slippageTolerance,
       ttl: this.deadline,
       recipient: this.recipient

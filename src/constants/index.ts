@@ -5,7 +5,7 @@ export const VOLTAGE_DEPLOYMENT_TIMESTAMP = 1645617935
 
 export const CHAIN_ID = 122
 
-export const CNS_TOKEN_ADDRESS = '0xc2E299b47398963c618De5b05C6BdeCd4cc64022'
+export const CNS_TOKEN_ADDRESS = '0xc2e299b47398963c618de5b05c6bdecd4cc64022'
 
 export const ROUTER_ADDRESS = '0xE3F85aAd0c8DD7337427B9dF5d0fB741d65EEEB5'
 
@@ -19,7 +19,9 @@ export const INITIAL_ALLOWED_SLIPPAGE = 50
 
 export const BIPS_BASE = JSBI.BigInt(10000)
 
-export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(500), BIPS_BASE) // 5%
+export const FEE_TOKEN_SLIPPAGE = 2100
+
+export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(FEE_TOKEN_SLIPPAGE), BIPS_BASE) // 5%
 
 export const BUNDLE_ID = 1
 
@@ -92,3 +94,5 @@ export const BASES_TO_CHECK_TRADES_AGAINST = {
 export const TOKEN_MAP = {
   [FUSE_ADDRESS]: WFUSE_ADDRESS
 }
+
+export const FEE_TOKENS = [CNS_TOKEN_ADDRESS]

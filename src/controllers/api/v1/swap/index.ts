@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { Container } from 'typedi'
 import SwapService from '@services/swap'
-import { CNS_TOKEN_ADDRESS } from '@constants/index'
+import { FEE_TOKENS, FEE_TOKEN_SLIPPAGE } from '@constants/index'
 
 export default {
   async requestParameters (req: Request, res: Response, next: NextFunction) {
@@ -16,18 +16,20 @@ export default {
         recipient
       } = req.body
       const swapService = Container.get(SwapService)
-      const slippage = currencyIn.toLowerCase() === CNS_TOKEN_ADDRESS.toLowerCase()
-        ? 2000
-        : currencyOut.toLowerCase() === CNS_TOKEN_ADDRESS.toLowerCase()
-          ? 1100
-          : allowedSlippage
+
+      const isInputFeeToken = FEE_TOKENS.includes(currencyIn.toLowerCase())
+      const isOutputFeeToken = FEE_TOKENS.includes(currencyOut.toLowerCase())
+
+      const slippage = isInputFeeToken || isOutputFeeToken ? FEE_TOKEN_SLIPPAGE : allowedSlippage
+
       const swapCallData = await swapService.getSwapCallData(
         currencyIn,
         currencyOut,
         amountIn,
         recipient,
         slippage,
-        ttl
+        ttl,
+        isOutputFeeToken
       )
 
       res.send(swapCallData)

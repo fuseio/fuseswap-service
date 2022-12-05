@@ -102,7 +102,8 @@ export default class SwapService {
     amountIn: string,
     recipient: string,
     slippageTolerance = INITIAL_ALLOWED_SLIPPAGE,
-    deadline = DEFAULT_DEADLINE_FROM_NOW
+    deadline = DEFAULT_DEADLINE_FROM_NOW,
+    isInputFeeToken?: boolean
   ) {
     const currencyIn = await this.tokenService.getToken(currencyInAddress)
     const currencyOut = await this.tokenService.getToken(currencyOutAddress)
@@ -126,7 +127,8 @@ export default class SwapService {
           pairs,
           recipient,
           slippageTolerance,
-          deadline
+          deadline,
+          isInputFeeToken
         )
         break
       case SwapType.WRAP:
