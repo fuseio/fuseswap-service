@@ -29,7 +29,7 @@ export default {
         recipient,
         slippage,
         ttl,
-        isOutputFeeToken
+        isInputFeeToken
       )
 
       res.send(swapCallData)

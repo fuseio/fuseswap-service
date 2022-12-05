@@ -21,7 +21,7 @@ export const BIPS_BASE = JSBI.BigInt(10000)
 
 export const FEE_TOKEN_SLIPPAGE = 2100
 
-export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(FEE_TOKEN_SLIPPAGE), BIPS_BASE) // 5%
+export const ALLOWED_PRICE_IMPACT_HIGH: Percent = new Percent(JSBI.BigInt(FEE_TOKEN_SLIPPAGE), BIPS_BASE)
 
 export const BUNDLE_ID = 1
 
