@@ -5,11 +5,11 @@ const secret: string = config.get('api.secret')
 
 const auth = {
   required: jwt({
-    secret: secret,
+    secret,
     credentialsRequired: true
   }),
   optional: jwt({
-    secret: secret,
+    secret,
     credentialsRequired: false
   })
 }
