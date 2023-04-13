@@ -18,3 +18,9 @@ export const bridgeClient = new GraphQLClient('https://api.thegraph.com/subgraph
 export const healthClient = new GraphQLClient('https://api.thegraph.com/index-node/graphql', {
   timeout
 })
+
+export const barClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/voltfinance/volt-bar', {
+  timeout
+})
+
+export const liquidStakingClient = new GraphQLClient('https://api.thegraph.com/subgraphs/name/voltfinance/fuse-liquid-staking', { timeout })

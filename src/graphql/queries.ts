@@ -187,3 +187,19 @@ export const getSubgraphHealth = gql`
     }
   }
 `
+
+export const getBarsQuery = gql`
+  query ratio {
+    bars {
+      ratio
+    }
+  }
+`
+
+export const getLiquidStakingsQuery = gql`
+  query ratio {
+    liquidStakings {
+      ratio
+    }
+  }
+`

@@ -42,6 +42,9 @@ export const USDT_ADDRESS = '0xfadbbf8ce7d5b7041be672561bba99f79c532e10'
 export const WBTC_ADDRESS = '0x33284f95ccb7b948d9d352e1439561cf83d8d00d'
 export const WETH_ADDRESS = '0xa722c13135930332eb3d749b2f0906559d2c5b99'
 export const DAI_ADDRESS = '0x94ba7a27c7a95863d1bdc7645ac2951e0cca06ba'
+export const XVOLT_ADDRESS = '0x97a6e78c9208c21afada67e7e61d7ad27688efd1'
+export const VOLT_ADDRESS = '0x34ef2cc892a88415e9f02b91bfa9c91fc0be6bd4'
+export const SFUSE_ADDRESS = '0xb1dd0b683d9a56525cc096fbf5eec6e60fe79871'
 
 export const DAI = new Token(
   CHAIN_ID,
