@@ -2,7 +2,7 @@ import { Service } from 'typedi'
 import config from 'config'
 import { ETHER as FUSE, Token, Currency } from '@voltage-finance/sdk'
 import getTokens from '@utils/token/getTokens'
-import { CHAIN_ID, TOKEN_MAP, VOLTAGE_DEPLOYMENT_TIMESTAMP } from '@constants/index'
+import { CHAIN_ID, SFUSE_ADDRESS, TOKEN_MAP, VOLTAGE_DEPLOYMENT_TIMESTAMP, VOLT_ADDRESS, WFUSE_ADDRESS, XVOLT_ADDRESS } from '@constants/index'
 import TokenStat from '@models/tokenStat'
 import ProviderService from './provider'
 import ContractService from './contract'
@@ -17,6 +17,9 @@ import dayjs from '@utils/dayjs'
 import { getTimestamps, splitQuery } from '@utils/index'
 import { getPricesByBlockQuery } from '../graphql/queries'
 import { fuseswapClient } from '../graphql/client'
+import BarGraphService from './barGraph'
+import isStringEqual from '@utils/isStringEqual'
+import LiquidStakingGraphService from './liquidStakingGraph'
 
 interface Stat {
   priceUSD: string
@@ -38,7 +41,9 @@ export default class TokenService {
     private contractService: ContractService,
     private fuseswapGraphService: FuseswapGraphService,
     private blockGraphService: BlockGraphService,
-    private healthGraphService: HealthGraphService
+    private healthGraphService: HealthGraphService,
+    private barGraphService: BarGraphService,
+    private liquidStakingGraphService: LiquidStakingGraphService
   ) {}
 
   static getTokenAddressFromTokenMap (tokenAddress: string): string {
@@ -70,8 +75,22 @@ export default class TokenService {
   }
 
   async getTokenPrice (tokenAddress: string): Promise<string> {
+    let price: number
+
     const address = TokenService.getTokenAddressFromTokenMap(tokenAddress)
-    const price = await this.fuseswapGraphService.getTokenPrice(address)
+
+    if (isStringEqual(address, SFUSE_ADDRESS)) {
+      const ratio = await this.liquidStakingGraphService.getRatio()
+      const fusePrice = await this.fuseswapGraphService.getTokenPrice(WFUSE_ADDRESS)
+      price = ratio * fusePrice
+    } else if (isStringEqual(address, XVOLT_ADDRESS)) {
+      const ratio = await this.barGraphService.getRatio()
+      const voltPrice = await this.fuseswapGraphService.getTokenPrice(VOLT_ADDRESS)
+      price = ratio * voltPrice
+    } else {
+      price = await this.fuseswapGraphService.getTokenPrice(address)
+    }
+
     return price.toString()
   }
 

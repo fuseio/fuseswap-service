@@ -10,6 +10,8 @@ import MulticallService from '../../../src/services/multcall'
 import FuseswapGraphService from '../../../src/services/fuseswapGraph'
 import BlockGraphService from '../../../src/services/blockGraph'
 import HealthGraphService from '../../../src/services/healthGraph'
+import BarGraphService from '../../../src/services/barGraph'
+import LiquidStakingGraphService from '../../../src/services/liquidStakingGraph'
 
 describe('SwapService', () => {
   let tokenService: TokenService
@@ -30,8 +32,10 @@ describe('SwapService', () => {
     const fuseswapGraphService = new FuseswapGraphService()
     const blockGraphService = new BlockGraphService()
     const healthGraphService = new HealthGraphService()
+    const barGraphService = new BarGraphService()
+    const liquidStakingGraphService = new LiquidStakingGraphService()
 
-    tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService, healthGraphService)
+    tokenService = new TokenService(contractService, fuseswapGraphService, blockGraphService, healthGraphService, barGraphService, liquidStakingGraphService)
     pairService = new PairService(multicallService)
   })
 
