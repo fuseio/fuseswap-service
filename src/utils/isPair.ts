@@ -1,9 +1,17 @@
 import { Currency, Token } from '@voltage-finance/sdk'
-import { USDC, FUSD } from '@constants/index'
+import { USDC, FUSD, WETH, USDCV2, WETHV2 } from '@constants/index'
 import isStringEqual from './isStringEqual'
 
 export function isFusdUsdcPair (currencyInAddress: string, currencyOutAddress: string) {
   return isPair(currencyInAddress, currencyOutAddress, USDC, FUSD)
+}
+
+export function isUsdcV2UsdcV1Pair (currencyInAddress: string, currencyOutAddress: string) {
+  return isPair(currencyInAddress, currencyOutAddress, USDC, USDCV2)
+}
+
+export function isWethV2WethV1Pair (currencyInAddress: string, currencyOutAddress: string) {
+  return isPair(currencyInAddress, currencyOutAddress, WETH, WETHV2)
 }
 
 export default function isPair (

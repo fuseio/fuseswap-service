@@ -9,7 +9,7 @@ import {
 } from '@constants/index'
 import TokenService from './token'
 import PairService from './pair'
-import { isFusdUsdcPair } from '@utils/isPair'
+import { isFusdUsdcPair, isUsdcV2UsdcV1Pair, isWethV2WethV1Pair } from '@utils/isPair'
 import BaseSwap from '@models/swap/baseSwap'
 import PegSwap from '@models/swap/pegSwap'
 import FuseSwap from '@models/swap/fuseSwap'
@@ -155,7 +155,7 @@ export default class SwapService {
 
   // TODO: need to refactor this function
   getSwapType (currencyInAddress: string, currencyOutAddress: string): SwapType {
-    if (isFusdUsdcPair(currencyInAddress, currencyOutAddress)) {
+    if (isFusdUsdcPair(currencyInAddress, currencyOutAddress) || isWethV2WethV1Pair(currencyInAddress, currencyOutAddress) || isUsdcV2UsdcV1Pair(currencyInAddress, currencyOutAddress)) {
       return SwapType.PEG_SWAP
     } else if (
       (currencyInAddress.toLowerCase() === NATIVE_ADDRESS.toLowerCase() &&

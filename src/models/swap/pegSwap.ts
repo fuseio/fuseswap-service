@@ -1,6 +1,6 @@
 import { Contract } from '@ethersproject/contracts'
 import getContract from '@utils/getContract'
-import { PEGSWAP_ADDRESS } from '@constants/index'
+import { PEGSWAP_ADDRESS, PEGSWAP_V2_ADDRESS } from '@constants/index'
 import PEGSWAP_ABI from '@constants/abis/pegSwap.json'
 import Provider from '@services/provider'
 import BaseSwap from './baseSwap'
@@ -8,6 +8,7 @@ import { Token } from '@voltage-finance/sdk'
 import toHex from '@utils/toHex'
 import TradeInfo from '@models/tradeInfo'
 import { formatUnits } from '@ethersproject/units'
+import { isUsdcV2UsdcV1Pair, isWethV2WethV1Pair } from '@utils/isPair'
 
 export default class PegSwap extends BaseSwap {
   swapContractName = 'PegSwap'
@@ -21,7 +22,9 @@ export default class PegSwap extends BaseSwap {
   }
 
   getSwapContractAddress (): string {
-    return PEGSWAP_ADDRESS
+    const tokenIn = this.currencyIn as Token
+    const tokenOut = this.currencyOut as Token
+    return isWethV2WethV1Pair(tokenIn.address, tokenOut.address) || isUsdcV2UsdcV1Pair(tokenIn.address, tokenOut.address) ? PEGSWAP_V2_ADDRESS : PEGSWAP_ADDRESS
   }
 
   getParams () {

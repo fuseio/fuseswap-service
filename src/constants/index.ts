@@ -11,6 +11,8 @@ export const ROUTER_ADDRESS = '0xE3F85aAd0c8DD7337427B9dF5d0fB741d65EEEB5'
 
 export const PEGSWAP_ADDRESS = '0xdfE016328E7BcD6FA06614fE3AF3877E931F7e0a'
 
+export const PEGSWAP_V2_ADDRESS = '0x56eE525bB9056BeD23A6055E60b2A2C5C225D1db'
+
 export const MULTI_CALL_ADDRESS = '0x3CE6158b7278Bf6792e014FA7B4f3c6c46fe9410'
 // 20 minutes from now in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 20
@@ -45,6 +47,8 @@ export const DAI_ADDRESS = '0x94ba7a27c7a95863d1bdc7645ac2951e0cca06ba'
 export const XVOLT_ADDRESS = '0x97a6e78c9208c21afada67e7e61d7ad27688efd1'
 export const VOLT_ADDRESS = '0x34ef2cc892a88415e9f02b91bfa9c91fc0be6bd4'
 export const SFUSE_ADDRESS = '0xb1dd0b683d9a56525cc096fbf5eec6e60fe79871'
+export const USDC_V2_ADDRESS = '0x28c3d1cd466ba22f6cae51b1a4692a831696391a'
+export const WETH_V2_ADDRESS = '0x5622f6dc93e08a8b717b149677930c38d5d50682'
 
 export const DAI = new Token(
   CHAIN_ID,
@@ -56,6 +60,13 @@ export const DAI = new Token(
 export const USDC = new Token(
   CHAIN_ID,
   getAddress(USDC_ADDRESS),
+  6,
+  'USDC',
+  'USD Coin on Fuse'
+)
+export const USDCV2 = new Token(
+  CHAIN_ID,
+  getAddress(USDC_V2_ADDRESS),
   6,
   'USDC',
   'USD Coin on Fuse'
@@ -80,6 +91,13 @@ export const WETH = new Token(
   18,
   'WETH',
   'Wrapped Ether on Fuse'
+)
+export const WETHV2 = new Token(
+  CHAIN_ID,
+  getAddress(WETH_V2_ADDRESS),
+  18,
+  'WETHV2',
+  'Wrapped Ether'
 )
 
 export const FUSD = new Token(
