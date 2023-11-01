@@ -109,7 +109,7 @@ export const FUSD = new Token(
 )
 
 export const BASES_TO_CHECK_TRADES_AGAINST = {
-  [ChainId.FUSE]: [WFUSE, DAI, USDC, USDT, WBTC, WETH]
+  [ChainId.FUSE]: [WFUSE, USDC, USDT, WBTC, WETH]
 }
 
 export const TOKEN_MAP = {

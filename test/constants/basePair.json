@@ -8,22 +8,6 @@
       "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629"
     },
     {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "WFUSE",
-      "name": "Wrapped FUSE",
-      "chainId": 122,
-      "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629"
-    },
-    {
       "decimals": 6,
       "symbol": "USDC",
       "name": "USD Coin on Fuse",
@@ -81,86 +65,6 @@
   ],
   [
     {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    },
-    {
-      "decimals": 18,
-      "symbol": "WFUSE",
-      "name": "Wrapped FUSE",
-      "chainId": 122,
-      "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    },
-    {
-      "decimals": 6,
-      "symbol": "USDC",
-      "name": "USD Coin on Fuse",
-      "chainId": 122,
-      "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    },
-    {
-      "decimals": 6,
-      "symbol": "USDT",
-      "name": "Tether USD on Fuse",
-      "chainId": 122,
-      "address": "0xFaDbBF8Ce7D5b7041bE672561bbA99f79c532e10"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    },
-    {
-      "decimals": 8,
-      "symbol": "WBTC",
-      "name": "Wrapped BTC on Fuse",
-      "chainId": 122,
-      "address": "0x33284f95ccb7B948d9D352e1439561CF83d8d00d"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    },
-    {
-      "decimals": 18,
-      "symbol": "WETH",
-      "name": "Wrapped Ether on Fuse",
-      "chainId": 122,
-      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
-    }
-  ],
-  [
-    {
       "decimals": 6,
       "symbol": "USDC",
       "name": "USD Coin on Fuse",
@@ -173,22 +77,6 @@
       "name": "Wrapped FUSE",
       "chainId": 122,
       "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629"
-    }
-  ],
-  [
-    {
-      "decimals": 6,
-      "symbol": "USDC",
-      "name": "USD Coin on Fuse",
-      "chainId": 122,
-      "address": "0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5"
-    },
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
     }
   ],
   [
@@ -264,22 +152,6 @@
       "address": "0xFaDbBF8Ce7D5b7041bE672561bbA99f79c532e10"
     },
     {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    }
-  ],
-  [
-    {
-      "decimals": 6,
-      "symbol": "USDT",
-      "name": "Tether USD on Fuse",
-      "chainId": 122,
-      "address": "0xFaDbBF8Ce7D5b7041bE672561bbA99f79c532e10"
-    },
-    {
       "decimals": 6,
       "symbol": "USDC",
       "name": "USD Coin on Fuse",
@@ -344,22 +216,6 @@
       "address": "0x33284f95ccb7B948d9D352e1439561CF83d8d00d"
     },
     {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
-    }
-  ],
-  [
-    {
-      "decimals": 8,
-      "symbol": "WBTC",
-      "name": "Wrapped BTC on Fuse",
-      "chainId": 122,
-      "address": "0x33284f95ccb7B948d9D352e1439561CF83d8d00d"
-    },
-    {
       "decimals": 6,
       "symbol": "USDC",
       "name": "USD Coin on Fuse",
@@ -413,22 +269,6 @@
       "name": "Wrapped FUSE",
       "chainId": 122,
       "address": "0x0BE9e53fd7EDaC9F859882AfdDa116645287C629"
-    }
-  ],
-  [
-    {
-      "decimals": 18,
-      "symbol": "WETH",
-      "name": "Wrapped Ether on Fuse",
-      "chainId": 122,
-      "address": "0xa722c13135930332Eb3d749B2F0906559D2C5b99"
-    },
-    {
-      "decimals": 18,
-      "symbol": "DAI",
-      "name": "Dai Stablecoin on Fuse",
-      "chainId": 122,
-      "address": "0x94Ba7A27c7A95863d1bdC7645AC2951E0cca06bA"
     }
   ],
   [
