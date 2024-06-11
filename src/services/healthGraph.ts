@@ -12,7 +12,8 @@ export default class HealthGraphService {
   }
 
   async getLatestBlocks () {
-    const res = await this.client.request(getSubgraphHealth)
+    const resArr = await this.client.request(getSubgraphHealth)
+    const res = resArr[0]
     const latestBlock = res.indexingStatusForCurrentVersion.chains[0].latestBlock.number
     const headBlock = res.indexingStatusForCurrentVersion.chains[0].chainHeadBlock.number
     return { latestBlock, headBlock }
